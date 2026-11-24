@@ -1,4 +1,4 @@
-# HA.TVLGPilot 1.0.6 — tylko naprawa szerokości kafelków; joystick bez zmian.
+# HA.TVLGPilot 1.0.7 — zwężona sekcja i wyrównane szerokości; joystick i akcje bez zmian.
 views:
 - title: TV Control
   path: overview
@@ -22,7 +22,7 @@ views:
         - box-shadow: none
         - padding: '0'
       grid_options:
-        columns: 5
+        columns: 6
         rows: 1
     - type: vertical-stack
       cards:
@@ -46,13 +46,13 @@ views:
             - height: 96px
             - padding: '0'
             - border-radius: 18px
-            - margin: 7px
+            - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #7195b7'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
-            - width: 406px
+            - width: 502px
             icon:
             - width: 33px
             - height: 33px
@@ -86,14 +86,14 @@ views:
             - height: 96px
             - padding: '0'
             - border-radius: 18px
-            - margin: 7px
+            - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #7195b7'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
-            - width: 126px
+            - width: 156px
             icon:
             - width: 28px
             - height: 28px
@@ -140,14 +140,14 @@ views:
             - height: 96px
             - padding: '0'
             - border-radius: 18px
-            - margin: 7px
+            - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #7195b7'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
-            - width: 126px
+            - width: 156px
             icon:
             - width: 29px
             - height: 29px
@@ -185,14 +185,14 @@ views:
             - height: 96px
             - padding: '0'
             - border-radius: 18px
-            - margin: 7px
+            - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #7195b7'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
-            - width: 126px
+            - width: 156px
             icon:
             - width: 28px
             - height: 28px
@@ -242,14 +242,14 @@ views:
             - height: 96px
             - padding: '0'
             - border-radius: 18px
-            - margin: 7px
+            - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #7195b7'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
-            - width: 126px
+            - width: 156px
             icon:
             - width: 33px
             - height: 33px
@@ -286,14 +286,14 @@ views:
             - height: 96px
             - padding: '0'
             - border-radius: 18px
-            - margin: 7px
+            - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #7195b7'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
-            - width: 126px
+            - width: 156px
             icon:
             - width: 28px
             - height: 28px
@@ -340,14 +340,14 @@ views:
             - height: 96px
             - padding: '0'
             - border-radius: 18px
-            - margin: 7px
+            - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #7195b7'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
-            - width: 126px
+            - width: 156px
             icon:
             - width: 28px
             - height: 28px
@@ -537,13 +537,13 @@ views:
             - height: 82px
             - padding: '0'
             - border-radius: 18px
-            - margin: 7px
+            - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #7195b7'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
-            - width: 126px
+            - width: 156px
             icon:
             - width: 23px
             - height: 23px
@@ -570,13 +570,13 @@ views:
             - height: 82px
             - padding: '0'
             - border-radius: 18px
-            - margin: 7px
+            - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #7195b7'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
-            - width: 126px
+            - width: 156px
             icon:
             - width: 23px
             - height: 23px
@@ -607,13 +607,13 @@ views:
             - height: 82px
             - padding: '0'
             - border-radius: 18px
-            - margin: 7px
+            - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #7195b7'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
-            - width: 126px
+            - width: 156px
             icon:
             - width: 23px
             - height: 23px
@@ -665,7 +665,7 @@ views:
                   - height: 82px
                   - padding: 5px
                   - border-radius: 18px
-                  - width: 264px
+                  - width: 325px
                   - margin: '0'
                   - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
                   - border: '1px solid #7195b7'
@@ -702,7 +702,7 @@ views:
                   - height: 82px
                   - padding: 5px
                   - border-radius: 18px
-                  - width: 126px
+                  - width: 163px
                   - margin: '0'
                   - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
                   - border: '1px solid #7195b7'
@@ -720,15 +720,15 @@ views:
             card:
             - height: 82px
             - padding: '0'
-            - margin: 7px
+            - margin: 7px 4px
             - background: transparent
             - border: none
             - box-shadow: none
             - border-radius: '0'
-            - width: 406px
+            - width: 502px
             grid:
             - grid-template-areas: '"play screen"'
-            - grid-template-columns: 264px 126px
+            - grid-template-columns: 325px 163px
             - grid-template-rows: 82px
             - column-gap: 14px
             - align-items: stretch
@@ -740,7 +740,7 @@ views:
               - min-width: '0'
               - width: 100%
       grid_options:
-        columns: 14
+        columns: 12
         rows: auto
     - type: custom:button-card
       color_type: blank-card
@@ -754,6 +754,6 @@ views:
         - box-shadow: none
         - padding: '0'
       grid_options:
-        columns: 5
+        columns: 6
         rows: 1
   cards: []
