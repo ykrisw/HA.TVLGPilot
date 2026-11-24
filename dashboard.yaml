@@ -1,4 +1,4 @@
-# HA.TVLGPilot 1.1.0 — korekty logotypów i tła joysticka; zachowana struktura oraz sterowanie.
+# HA.TVLGPilot 1.1.1 — logotyp Prime Video zmniejszony o 6%; pozostałe elementy bez zmian.
 views:
 - title: TV Control
   path: overview
@@ -235,8 +235,8 @@ views:
               - overflow: hidden
           custom_fields:
             brand: '[[[ const active = states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon''; return `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;color:${active
-              ? "#ffd000" : "#f2f5fa"};font-family:Arial,sans-serif;line-height:1"><div style="font-size:14.55px;font-weight:700;white-space:nowrap"><span style="color:#23adf2">prime</span>
-              video</div><svg viewBox="0 0 130 24" width="70.16" height="15.4" aria-hidden="true" style="margin-top:2px"><path d="M15 4 Q58 34 110 5" stroke="#21b6f6"
+              ? "#ffd000" : "#f2f5fa"};font-family:Arial,sans-serif;line-height:1"><div style="font-size:13.677px;font-weight:700;white-space:nowrap"><span style="color:#23adf2">prime</span>
+              video</div><svg viewBox="0 0 130 24" width="65.9504" height="14.476" aria-hidden="true" style="margin-top:2px"><path d="M15 4 Q58 34 110 5" stroke="#21b6f6"
               stroke-width="5" fill="none" stroke-linecap="round"/><path d="M98 5 L111 4 L107 15" stroke="#21b6f6" stroke-width="4" fill="none" stroke-linecap="round"/></svg></div>`;
               ]]]'
         - type: custom:button-card
