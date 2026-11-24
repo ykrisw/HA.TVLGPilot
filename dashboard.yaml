@@ -1,4 +1,4 @@
-# HA.TVLGPilot 1.1.4 — app tile glow, yellow Play/Pause + Screen Off pulse, 6s POWER pulse on confirmed state, 3% mobile reduction; shared 2.5s / 38%.
+# HA.TVLGPilot 1.1.5 — power ON/OFF status, app glow -10%, state-aware highlights, orange-red functional press feedback, screen-off 6s tail. Layout sizes retained.
 views:
 - title: TV Control
   path: overview
@@ -47,6 +47,8 @@ views:
             action: perform-action
             perform_action: script.lg_tv_power_on_off_glasshouse_mqtt
             target: {}
+          custom_fields:
+            status: '[[[ const value=states[''binary_sensor.lg_49nano816na_56ba_power'']?.state; const on=value===''on''; const off=value===''off''; return on || off ? `<span style="font-family:Arial,sans-serif;font-size:16px;font-weight:800;letter-spacing:0.2px;color:${on ? ''#13cb42'' : ''#ff2136''};text-shadow:0 0 7px ${on ? ''rgba(19,203,66,0.7)'' : ''rgba(255,33,54,0.45)''}">${on ? ''ON'' : ''OFF''}</span>` : ''''; ]]]'
           triggers_update:
           - binary_sensor.lg_49nano816na_56ba_power
           styles:
@@ -71,6 +73,12 @@ views:
                     if(this._tvPilotPowerLast===undefined) { this._tvPilotPowerLast=value; return 'none'; }
                     if(this._tvPilotPowerLast!==value) { this._tvPilotPowerLast=value; this._tvPilotPowerUntil=Date.now()+6000; }
                     return Date.now() < (this._tvPilotPowerUntil||0) ? 'tv-power-soft 2.5s ease-in-out 2.4' : 'none'; ]]]
+            custom_fields:
+              status:
+              - position: absolute
+              - top: 9px
+              - right: 14px
+              - z-index: 3
             name:
             - font-size: 14px
             - font-weight: '500'
@@ -96,15 +104,16 @@ views:
           show_state: false
           triggers_update:
           - sensor.lg_49nano816na_56ba_active_app
+          - binary_sensor.lg_49nano816na_56ba_power
           styles:
             card:
             - height: 101px
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
-            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
@@ -149,15 +158,16 @@ views:
           show_state: false
           triggers_update:
           - sensor.lg_49nano816na_56ba_active_app
+          - binary_sensor.lg_49nano816na_56ba_power
           styles:
             card:
             - height: 101px
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
-            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
@@ -211,15 +221,16 @@ views:
           show_state: false
           triggers_update:
           - sensor.lg_49nano816na_56ba_active_app
+          - binary_sensor.lg_49nano816na_56ba_power
           styles:
             card:
             - height: 101px
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
-            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
@@ -267,15 +278,16 @@ views:
           show_state: false
           triggers_update:
           - sensor.lg_49nano816na_56ba_active_app
+          - binary_sensor.lg_49nano816na_56ba_power
           styles:
             card:
             - height: 101px
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
-            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
@@ -310,15 +322,16 @@ views:
           show_state: false
           triggers_update:
           - sensor.lg_49nano816na_56ba_active_app
+          - binary_sensor.lg_49nano816na_56ba_power
           styles:
             card:
             - height: 101px
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
-            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
@@ -363,15 +376,16 @@ views:
           show_state: false
           triggers_update:
           - sensor.lg_49nano816na_56ba_active_app
+          - binary_sensor.lg_49nano816na_56ba_power
           styles:
             card:
             - height: 101px
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
-            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
@@ -404,9 +418,11 @@ views:
       - type: picture-elements
         image: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MjAiIGhlaWdodD0iMzE1IiB2aWV3Qm94PSIwIDAgNDIwIDMxNSI+PHJlY3Qgd2lkdGg9IjQyMCIgaGVpZ2h0PSIzMTUiIGZpbGw9IiMxMTExMTEiLz48L3N2Zz4=
         elements:
-        - type: icon
+        - type: custom:button-card
+          entity: button.lg_49nano816na_56ba_remote_left
+          show_icon: true
+          show_name: false
           icon: mdi:chevron-left
-          title: Left
           tap_action:
             action: perform-action
             perform_action: button.press
@@ -419,22 +435,33 @@ views:
             top: 50%
             width: 18%
             height: 80%
-            display: flex
-            align-items: center
-            justify-content: center
-            box-sizing: border-box
             padding: '0'
-            overflow: hidden
-            border-radius: 18px
-            border: '1px solid #7195b7'
-            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
-            --mdc-icon-size: 23px
-            color: '#f4f7fa'
-            cursor: pointer
-        - type: icon
+          styles:
+            card:
+            - width: 100%
+            - height: 100%
+            - padding: '0'
+            - border-radius: 18px
+            - border: '1px solid #7195b7'
+            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - overflow: hidden
+            - box-sizing: border-box
+            icon:
+            - width: 23px
+            - height: 23px
+            - color: '#f4f7fa'
+            name:
+            - font-family: Arial,sans-serif
+            - font-size: 23px
+            - font-weight: '700'
+            - color: '#f4f7fa'
+          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d,#382016 60%,#211713) !important; border:1px solid #ff7436 !important; box-shadow:0 0 15px rgba(255,116,54,0.8) !important; }'
+        - type: custom:button-card
+          entity: button.lg_49nano816na_56ba_remote_up
+          show_icon: true
+          show_name: false
           icon: mdi:chevron-up
-          title: Up
           tap_action:
             action: perform-action
             perform_action: button.press
@@ -447,21 +474,33 @@ views:
             top: 16.7%
             width: 50%
             height: 28%
-            display: flex
-            align-items: center
-            justify-content: center
-            box-sizing: border-box
             padding: '0'
-            overflow: hidden
-            border-radius: 18px
-            border: '1px solid #7195b7'
-            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
-            --mdc-icon-size: 23px
-            color: '#f4f7fa'
-            cursor: pointer
-        - type: image
-          title: OK
+          styles:
+            card:
+            - width: 100%
+            - height: 100%
+            - padding: '0'
+            - border-radius: 18px
+            - border: '1px solid #7195b7'
+            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - overflow: hidden
+            - box-sizing: border-box
+            icon:
+            - width: 23px
+            - height: 23px
+            - color: '#f4f7fa'
+            name:
+            - font-family: Arial,sans-serif
+            - font-size: 23px
+            - font-weight: '700'
+            - color: '#f4f7fa'
+          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d,#382016 60%,#211713) !important; border:1px solid #ff7436 !important; box-shadow:0 0 15px rgba(255,116,54,0.8) !important; }'
+        - type: custom:button-card
+          entity: button.lg_49nano816na_56ba_remote_ok
+          show_icon: false
+          show_name: true
+          name: OK
           tap_action:
             action: perform-action
             perform_action: button.press
@@ -474,24 +513,33 @@ views:
             top: 50%
             width: 50%
             height: 28%
-            display: flex
-            align-items: center
-            justify-content: center
-            box-sizing: border-box
             padding: '0'
-            overflow: hidden
-            border-radius: 18px
-            border: '1px solid #7195b7'
-            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
-            --mdc-icon-size: 23px
-            color: '#f4f7fa'
-            cursor: pointer
-            object-fit: contain
-          image: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMTAiIGhlaWdodD0iODQiIHZpZXdCb3g9IjAgMCAyMTAgODQiPjx0ZXh0IHg9IjEwNSIgeT0iNTEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmNGY3ZmEiIGZvbnQtc2l6ZT0iMjMiIGZvbnQtd2VpZ2h0PSI3MDAiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIj5PSzwvdGV4dD48L3N2Zz4=
-        - type: icon
+          styles:
+            card:
+            - width: 100%
+            - height: 100%
+            - padding: '0'
+            - border-radius: 18px
+            - border: '1px solid #7195b7'
+            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - overflow: hidden
+            - box-sizing: border-box
+            icon:
+            - width: 23px
+            - height: 23px
+            - color: '#f4f7fa'
+            name:
+            - font-family: Arial,sans-serif
+            - font-size: 23px
+            - font-weight: '700'
+            - color: '#f4f7fa'
+          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d,#382016 60%,#211713) !important; border:1px solid #ff7436 !important; box-shadow:0 0 15px rgba(255,116,54,0.8) !important; }'
+        - type: custom:button-card
+          entity: button.lg_49nano816na_56ba_remote_down
+          show_icon: true
+          show_name: false
           icon: mdi:chevron-down
-          title: Down
           tap_action:
             action: perform-action
             perform_action: button.press
@@ -504,22 +552,33 @@ views:
             top: 83.3%
             width: 50%
             height: 28%
-            display: flex
-            align-items: center
-            justify-content: center
-            box-sizing: border-box
             padding: '0'
-            overflow: hidden
-            border-radius: 18px
-            border: '1px solid #7195b7'
-            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
-            --mdc-icon-size: 23px
-            color: '#f4f7fa'
-            cursor: pointer
-        - type: icon
+          styles:
+            card:
+            - width: 100%
+            - height: 100%
+            - padding: '0'
+            - border-radius: 18px
+            - border: '1px solid #7195b7'
+            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - overflow: hidden
+            - box-sizing: border-box
+            icon:
+            - width: 23px
+            - height: 23px
+            - color: '#f4f7fa'
+            name:
+            - font-family: Arial,sans-serif
+            - font-size: 23px
+            - font-weight: '700'
+            - color: '#f4f7fa'
+          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d,#382016 60%,#211713) !important; border:1px solid #ff7436 !important; box-shadow:0 0 15px rgba(255,116,54,0.8) !important; }'
+        - type: custom:button-card
+          entity: button.lg_49nano816na_56ba_remote_right
+          show_icon: true
+          show_name: false
           icon: mdi:chevron-right
-          title: Right
           tap_action:
             action: perform-action
             perform_action: button.press
@@ -532,19 +591,28 @@ views:
             top: 50%
             width: 18%
             height: 80%
-            display: flex
-            align-items: center
-            justify-content: center
-            box-sizing: border-box
             padding: '0'
-            overflow: hidden
-            border-radius: 18px
-            border: '1px solid #7195b7'
-            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
-            --mdc-icon-size: 23px
-            color: '#f4f7fa'
-            cursor: pointer
+          styles:
+            card:
+            - width: 100%
+            - height: 100%
+            - padding: '0'
+            - border-radius: 18px
+            - border: '1px solid #7195b7'
+            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - overflow: hidden
+            - box-sizing: border-box
+            icon:
+            - width: 23px
+            - height: 23px
+            - color: '#f4f7fa'
+            name:
+            - font-family: Arial,sans-serif
+            - font-size: 23px
+            - font-weight: '700'
+            - color: '#f4f7fa'
+          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d,#382016 60%,#211713) !important; border:1px solid #ff7436 !important; box-shadow:0 0 15px rgba(255,116,54,0.8) !important; }'
       - type: grid
         columns: 3
         square: false
@@ -582,6 +650,7 @@ views:
             grid:
             - grid-template-areas: '"i" "n"'
             - grid-template-rows: 1fr min-content
+          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
         - type: custom:button-card
           entity: button.lg_49nano816na_56ba_remote_home
           name: Home
@@ -615,6 +684,7 @@ views:
             grid:
             - grid-template-areas: '"i" "n"'
             - grid-template-rows: 1fr min-content
+          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
         - type: custom:button-card
           entity: sensor.lg_49nano816na_56ba_active_app
           name: INPUT
@@ -657,7 +727,7 @@ views:
             - grid-template-rows: 1fr min-content
           triggers_update:
           - sensor.lg_49nano816na_56ba_active_app
-          extra_styles: '@keyframes tv-input-flash { 0%,55.5556% { color:#ffd000; } 100% { color:#4b8bbe; } }'
+          extra_styles: '@keyframes tv-input-flash { 0%,55.5556% { color:#ff7436; } 100% { color:#4b8bbe; } } ha-card:active { background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
       - type: grid
         columns: 1
         square: false
@@ -688,6 +758,7 @@ views:
                 show_state: false
                 triggers_update:
                 - sensor.lg_49nano816na_56ba_play_state
+                - binary_sensor.lg_49nano816na_56ba_power
                 styles:
                   card:
                   - height: 86px
@@ -703,8 +774,8 @@ views:
                   icon:
                   - width: 25px
                   - height: 25px
-                  - color: '[[[ const p=states[''sensor.lg_49nano816na_56ba_play_state'']?.state; return p===''playing'' || p===''paused'' ? ''#ffd000'' : ''#f4f7fa''; ]]]'
-                  - animation: '[[[ return states[''sensor.lg_49nano816na_56ba_play_state'']?.state === ''paused'' ? ''tv-pause-soft 2.5s ease-in-out infinite'' :
+                  - color: '[[[ const p=states[''sensor.lg_49nano816na_56ba_play_state'']?.state; return (states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && (p===''playing'' || p===''paused'')) ? ''#ff7436'' : ''#f4f7fa''; ]]]'
+                  - animation: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_play_state'']?.state === ''paused'' ? ''tv-pause-soft 2.5s ease-in-out infinite'' :
                       ''none''; ]]]'
                   name:
                   - font-size: 15px
@@ -712,7 +783,7 @@ views:
                   grid:
                   - grid-template-areas: '"i" "n"'
                   - grid-template-rows: 1fr min-content
-                extra_styles: '@keyframes tv-pause-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} }'
+                extra_styles: '@keyframes tv-pause-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } ha-card:active { background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
             screen:
               card:
                 type: custom:button-card
@@ -726,6 +797,7 @@ views:
                   action: toggle
                 triggers_update:
                 - switch.lg_49nano816na_56ba_display_panel
+                - binary_sensor.lg_49nano816na_56ba_power
                 styles:
                   card:
                   - height: 86px
@@ -741,12 +813,19 @@ views:
                   icon:
                   - width: 21.85px
                   - height: 21.85px
-                  - color: '[[[ return states[''switch.lg_49nano816na_56ba_display_panel'']?.state === ''off'' ? ''#ffd000'' : ''#f4f7fa''; ]]]'
-                  - animation: '[[[ return states[''switch.lg_49nano816na_56ba_display_panel'']?.state === ''off'' ? ''tv-screen-soft 2.5s ease-in-out infinite'' : ''none''; ]]]'
+                  - color: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''switch.lg_49nano816na_56ba_display_panel'']?.state === ''off'' ? ''#ff7436'' : ''#f4f7fa''; ]]]'
+                  - animation: >-
+                      [[[ const pw=states['binary_sensor.lg_49nano816na_56ba_power']?.state;
+                          const sw=states['switch.lg_49nano816na_56ba_display_panel']?.state;
+                          const ent=states['binary_sensor.lg_49nano816na_56ba_power'];
+                          const age=ent?.last_changed ? (Date.now()-new Date(ent.last_changed).getTime())/1000 : 999;
+                          if(pw==='on' && sw==='off') return 'tv-screen-soft 2.5s ease-in-out infinite';
+                          if(pw==='off' && age>=0 && age<6) return `tv-screen-tail 2.5s ease-in-out 2.4`;
+                          return 'none'; ]]]
                   name:
                   - font-size: 15px
                   - font-weight: '500'
-                extra_styles: '@keyframes tv-screen-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} }'
+                extra_styles: '@keyframes tv-screen-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } @keyframes tv-screen-tail { 0%,100% {opacity:1;color:#ff7436;} 50% {opacity:0.38;color:#ff7436;} } ha-card:active { background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
           styles:
             card:
             - height: 86px
@@ -793,6 +872,8 @@ views:
             action: perform-action
             perform_action: script.lg_tv_power_on_off_glasshouse_mqtt
             target: {}
+          custom_fields:
+            status: '[[[ const value=states[''binary_sensor.lg_49nano816na_56ba_power'']?.state; const on=value===''on''; const off=value===''off''; return on || off ? `<span style="font-family:Arial,sans-serif;font-size:16px;font-weight:800;letter-spacing:0.2px;color:${on ? ''#13cb42'' : ''#ff2136''};text-shadow:0 0 7px ${on ? ''rgba(19,203,66,0.7)'' : ''rgba(255,33,54,0.45)''}">${on ? ''ON'' : ''OFF''}</span>` : ''''; ]]]'
           triggers_update:
           - binary_sensor.lg_49nano816na_56ba_power
           styles:
@@ -817,6 +898,12 @@ views:
                     if(this._tvPilotPowerLast===undefined) { this._tvPilotPowerLast=value; return 'none'; }
                     if(this._tvPilotPowerLast!==value) { this._tvPilotPowerLast=value; this._tvPilotPowerUntil=Date.now()+6000; }
                     return Date.now() < (this._tvPilotPowerUntil||0) ? 'tv-power-soft 2.5s ease-in-out 2.4' : 'none'; ]]]
+            custom_fields:
+              status:
+              - position: absolute
+              - top: 9px
+              - right: 14px
+              - z-index: 3
             name:
             - font-size: 14px
             - font-weight: '500'
@@ -842,15 +929,16 @@ views:
           show_state: false
           triggers_update:
           - sensor.lg_49nano816na_56ba_active_app
+          - binary_sensor.lg_49nano816na_56ba_power
           styles:
             card:
             - height: min(101px, calc(19.72vw - 9.75px))
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
-            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
@@ -895,15 +983,16 @@ views:
           show_state: false
           triggers_update:
           - sensor.lg_49nano816na_56ba_active_app
+          - binary_sensor.lg_49nano816na_56ba_power
           styles:
             card:
             - height: min(101px, calc(19.72vw - 9.75px))
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
-            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
@@ -957,15 +1046,16 @@ views:
           show_state: false
           triggers_update:
           - sensor.lg_49nano816na_56ba_active_app
+          - binary_sensor.lg_49nano816na_56ba_power
           styles:
             card:
             - height: min(101px, calc(19.72vw - 9.75px))
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
-            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
@@ -1013,15 +1103,16 @@ views:
           show_state: false
           triggers_update:
           - sensor.lg_49nano816na_56ba_active_app
+          - binary_sensor.lg_49nano816na_56ba_power
           styles:
             card:
             - height: min(101px, calc(19.72vw - 9.75px))
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
-            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
@@ -1056,15 +1147,16 @@ views:
           show_state: false
           triggers_update:
           - sensor.lg_49nano816na_56ba_active_app
+          - binary_sensor.lg_49nano816na_56ba_power
           styles:
             card:
             - height: min(101px, calc(19.72vw - 9.75px))
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
-            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
@@ -1109,15 +1201,16 @@ views:
           show_state: false
           triggers_update:
           - sensor.lg_49nano816na_56ba_active_app
+          - binary_sensor.lg_49nano816na_56ba_power
           styles:
             card:
             - height: min(101px, calc(19.72vw - 9.75px))
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
-            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
@@ -1150,9 +1243,11 @@ views:
       - type: picture-elements
         image: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MjAiIGhlaWdodD0iMzE1IiB2aWV3Qm94PSIwIDAgNDIwIDMxNSI+PHJlY3Qgd2lkdGg9IjQyMCIgaGVpZ2h0PSIzMTUiIGZpbGw9IiMxMTExMTEiLz48L3N2Zz4=
         elements:
-        - type: icon
+        - type: custom:button-card
+          entity: button.lg_49nano816na_56ba_remote_left
+          show_icon: true
+          show_name: false
           icon: mdi:chevron-left
-          title: Left
           tap_action:
             action: perform-action
             perform_action: button.press
@@ -1165,22 +1260,33 @@ views:
             top: 50%
             width: 18%
             height: 80%
-            display: flex
-            align-items: center
-            justify-content: center
-            box-sizing: border-box
             padding: '0'
-            overflow: hidden
-            border-radius: 18px
-            border: '1px solid #7195b7'
-            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
-            --mdc-icon-size: 23px
-            color: '#f4f7fa'
-            cursor: pointer
-        - type: icon
+          styles:
+            card:
+            - width: 100%
+            - height: 100%
+            - padding: '0'
+            - border-radius: 18px
+            - border: '1px solid #7195b7'
+            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - overflow: hidden
+            - box-sizing: border-box
+            icon:
+            - width: 23px
+            - height: 23px
+            - color: '#f4f7fa'
+            name:
+            - font-family: Arial,sans-serif
+            - font-size: 23px
+            - font-weight: '700'
+            - color: '#f4f7fa'
+          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d,#382016 60%,#211713) !important; border:1px solid #ff7436 !important; box-shadow:0 0 15px rgba(255,116,54,0.8) !important; }'
+        - type: custom:button-card
+          entity: button.lg_49nano816na_56ba_remote_up
+          show_icon: true
+          show_name: false
           icon: mdi:chevron-up
-          title: Up
           tap_action:
             action: perform-action
             perform_action: button.press
@@ -1193,21 +1299,33 @@ views:
             top: 16.7%
             width: 50%
             height: 28%
-            display: flex
-            align-items: center
-            justify-content: center
-            box-sizing: border-box
             padding: '0'
-            overflow: hidden
-            border-radius: 18px
-            border: '1px solid #7195b7'
-            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
-            --mdc-icon-size: 23px
-            color: '#f4f7fa'
-            cursor: pointer
-        - type: image
-          title: OK
+          styles:
+            card:
+            - width: 100%
+            - height: 100%
+            - padding: '0'
+            - border-radius: 18px
+            - border: '1px solid #7195b7'
+            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - overflow: hidden
+            - box-sizing: border-box
+            icon:
+            - width: 23px
+            - height: 23px
+            - color: '#f4f7fa'
+            name:
+            - font-family: Arial,sans-serif
+            - font-size: 23px
+            - font-weight: '700'
+            - color: '#f4f7fa'
+          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d,#382016 60%,#211713) !important; border:1px solid #ff7436 !important; box-shadow:0 0 15px rgba(255,116,54,0.8) !important; }'
+        - type: custom:button-card
+          entity: button.lg_49nano816na_56ba_remote_ok
+          show_icon: false
+          show_name: true
+          name: OK
           tap_action:
             action: perform-action
             perform_action: button.press
@@ -1220,24 +1338,33 @@ views:
             top: 50%
             width: 50%
             height: 28%
-            display: flex
-            align-items: center
-            justify-content: center
-            box-sizing: border-box
             padding: '0'
-            overflow: hidden
-            border-radius: 18px
-            border: '1px solid #7195b7'
-            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
-            --mdc-icon-size: 23px
-            color: '#f4f7fa'
-            cursor: pointer
-            object-fit: contain
-          image: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMTAiIGhlaWdodD0iODQiIHZpZXdCb3g9IjAgMCAyMTAgODQiPjx0ZXh0IHg9IjEwNSIgeT0iNTEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmNGY3ZmEiIGZvbnQtc2l6ZT0iMjMiIGZvbnQtd2VpZ2h0PSI3MDAiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIj5PSzwvdGV4dD48L3N2Zz4=
-        - type: icon
+          styles:
+            card:
+            - width: 100%
+            - height: 100%
+            - padding: '0'
+            - border-radius: 18px
+            - border: '1px solid #7195b7'
+            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - overflow: hidden
+            - box-sizing: border-box
+            icon:
+            - width: 23px
+            - height: 23px
+            - color: '#f4f7fa'
+            name:
+            - font-family: Arial,sans-serif
+            - font-size: 23px
+            - font-weight: '700'
+            - color: '#f4f7fa'
+          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d,#382016 60%,#211713) !important; border:1px solid #ff7436 !important; box-shadow:0 0 15px rgba(255,116,54,0.8) !important; }'
+        - type: custom:button-card
+          entity: button.lg_49nano816na_56ba_remote_down
+          show_icon: true
+          show_name: false
           icon: mdi:chevron-down
-          title: Down
           tap_action:
             action: perform-action
             perform_action: button.press
@@ -1250,22 +1377,33 @@ views:
             top: 83.3%
             width: 50%
             height: 28%
-            display: flex
-            align-items: center
-            justify-content: center
-            box-sizing: border-box
             padding: '0'
-            overflow: hidden
-            border-radius: 18px
-            border: '1px solid #7195b7'
-            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
-            --mdc-icon-size: 23px
-            color: '#f4f7fa'
-            cursor: pointer
-        - type: icon
+          styles:
+            card:
+            - width: 100%
+            - height: 100%
+            - padding: '0'
+            - border-radius: 18px
+            - border: '1px solid #7195b7'
+            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - overflow: hidden
+            - box-sizing: border-box
+            icon:
+            - width: 23px
+            - height: 23px
+            - color: '#f4f7fa'
+            name:
+            - font-family: Arial,sans-serif
+            - font-size: 23px
+            - font-weight: '700'
+            - color: '#f4f7fa'
+          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d,#382016 60%,#211713) !important; border:1px solid #ff7436 !important; box-shadow:0 0 15px rgba(255,116,54,0.8) !important; }'
+        - type: custom:button-card
+          entity: button.lg_49nano816na_56ba_remote_right
+          show_icon: true
+          show_name: false
           icon: mdi:chevron-right
-          title: Right
           tap_action:
             action: perform-action
             perform_action: button.press
@@ -1278,19 +1416,28 @@ views:
             top: 50%
             width: 18%
             height: 80%
-            display: flex
-            align-items: center
-            justify-content: center
-            box-sizing: border-box
             padding: '0'
-            overflow: hidden
-            border-radius: 18px
-            border: '1px solid #7195b7'
-            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
-            --mdc-icon-size: 23px
-            color: '#f4f7fa'
-            cursor: pointer
+          styles:
+            card:
+            - width: 100%
+            - height: 100%
+            - padding: '0'
+            - border-radius: 18px
+            - border: '1px solid #7195b7'
+            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - overflow: hidden
+            - box-sizing: border-box
+            icon:
+            - width: 23px
+            - height: 23px
+            - color: '#f4f7fa'
+            name:
+            - font-family: Arial,sans-serif
+            - font-size: 23px
+            - font-weight: '700'
+            - color: '#f4f7fa'
+          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d,#382016 60%,#211713) !important; border:1px solid #ff7436 !important; box-shadow:0 0 15px rgba(255,116,54,0.8) !important; }'
       - type: grid
         columns: 3
         square: false
@@ -1328,6 +1475,7 @@ views:
             grid:
             - grid-template-areas: '"i" "n"'
             - grid-template-rows: 1fr min-content
+          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
         - type: custom:button-card
           entity: button.lg_49nano816na_56ba_remote_home
           name: Home
@@ -1361,6 +1509,7 @@ views:
             grid:
             - grid-template-areas: '"i" "n"'
             - grid-template-rows: 1fr min-content
+          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
         - type: custom:button-card
           entity: sensor.lg_49nano816na_56ba_active_app
           name: INPUT
@@ -1403,7 +1552,7 @@ views:
             - grid-template-rows: 1fr min-content
           triggers_update:
           - sensor.lg_49nano816na_56ba_active_app
-          extra_styles: '@keyframes tv-input-flash { 0%,55.5556% { color:#ffd000; } 100% { color:#4b8bbe; } }'
+          extra_styles: '@keyframes tv-input-flash { 0%,55.5556% { color:#ff7436; } 100% { color:#4b8bbe; } } ha-card:active { background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
       - type: grid
         columns: 1
         square: false
@@ -1434,6 +1583,7 @@ views:
                 show_state: false
                 triggers_update:
                 - sensor.lg_49nano816na_56ba_play_state
+                - binary_sensor.lg_49nano816na_56ba_power
                 styles:
                   card:
                   - height: min(86px, calc(16.78vw - 8.3px))
@@ -1449,8 +1599,8 @@ views:
                   icon:
                   - width: 25px
                   - height: 25px
-                  - color: '[[[ const p=states[''sensor.lg_49nano816na_56ba_play_state'']?.state; return p===''playing'' || p===''paused'' ? ''#ffd000'' : ''#f4f7fa''; ]]]'
-                  - animation: '[[[ return states[''sensor.lg_49nano816na_56ba_play_state'']?.state === ''paused'' ? ''tv-pause-soft 2.5s ease-in-out infinite'' :
+                  - color: '[[[ const p=states[''sensor.lg_49nano816na_56ba_play_state'']?.state; return (states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && (p===''playing'' || p===''paused'')) ? ''#ff7436'' : ''#f4f7fa''; ]]]'
+                  - animation: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_play_state'']?.state === ''paused'' ? ''tv-pause-soft 2.5s ease-in-out infinite'' :
                       ''none''; ]]]'
                   name:
                   - font-size: 15px
@@ -1458,7 +1608,7 @@ views:
                   grid:
                   - grid-template-areas: '"i" "n"'
                   - grid-template-rows: 1fr min-content
-                extra_styles: '@keyframes tv-pause-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} }'
+                extra_styles: '@keyframes tv-pause-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } ha-card:active { background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
             screen:
               card:
                 type: custom:button-card
@@ -1472,6 +1622,7 @@ views:
                   action: toggle
                 triggers_update:
                 - switch.lg_49nano816na_56ba_display_panel
+                - binary_sensor.lg_49nano816na_56ba_power
                 styles:
                   card:
                   - height: min(86px, calc(16.78vw - 8.3px))
@@ -1487,12 +1638,19 @@ views:
                   icon:
                   - width: 21.85px
                   - height: 21.85px
-                  - color: '[[[ return states[''switch.lg_49nano816na_56ba_display_panel'']?.state === ''off'' ? ''#ffd000'' : ''#f4f7fa''; ]]]'
-                  - animation: '[[[ return states[''switch.lg_49nano816na_56ba_display_panel'']?.state === ''off'' ? ''tv-screen-soft 2.5s ease-in-out infinite'' : ''none''; ]]]'
+                  - color: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''switch.lg_49nano816na_56ba_display_panel'']?.state === ''off'' ? ''#ff7436'' : ''#f4f7fa''; ]]]'
+                  - animation: >-
+                      [[[ const pw=states['binary_sensor.lg_49nano816na_56ba_power']?.state;
+                          const sw=states['switch.lg_49nano816na_56ba_display_panel']?.state;
+                          const ent=states['binary_sensor.lg_49nano816na_56ba_power'];
+                          const age=ent?.last_changed ? (Date.now()-new Date(ent.last_changed).getTime())/1000 : 999;
+                          if(pw==='on' && sw==='off') return 'tv-screen-soft 2.5s ease-in-out infinite';
+                          if(pw==='off' && age>=0 && age<6) return `tv-screen-tail 2.5s ease-in-out 2.4`;
+                          return 'none'; ]]]
                   name:
                   - font-size: 15px
                   - font-weight: '500'
-                extra_styles: '@keyframes tv-screen-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} }'
+                extra_styles: '@keyframes tv-screen-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } @keyframes tv-screen-tail { 0%,100% {opacity:1;color:#ff7436;} 50% {opacity:0.38;color:#ff7436;} } ha-card:active { background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
           styles:
             card:
             - height: min(86px, calc(16.78vw - 8.3px))
