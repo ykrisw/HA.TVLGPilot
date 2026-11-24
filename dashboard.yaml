@@ -1,4 +1,4 @@
-# HA.TVLGPilot 1.1.3 — mobilny pilot ~8–10% węższy i niższy, wyrównane POWER i Screen Off; desktop 1.1.1 bez zmian.
+# HA.TVLGPilot 1.1.4 — app tile glow, yellow Play/Pause + Screen Off pulse, 6s POWER pulse on confirmed state, 3% mobile reduction; shared 2.5s / 38%.
 views:
 - title: TV Control
   path: overview
@@ -47,6 +47,8 @@ views:
             action: perform-action
             perform_action: script.lg_tv_power_on_off_glasshouse_mqtt
             target: {}
+          triggers_update:
+          - binary_sensor.lg_49nano816na_56ba_power
           styles:
             card:
             - height: 101px
@@ -63,9 +65,16 @@ views:
             - width: 33px
             - height: 33px
             - color: '#ff2136'
+            - animation: >-
+                [[[ const value=states['binary_sensor.lg_49nano816na_56ba_power']?.state;
+                    if(value!=='on' && value!=='off') return 'none';
+                    if(this._tvPilotPowerLast===undefined) { this._tvPilotPowerLast=value; return 'none'; }
+                    if(this._tvPilotPowerLast!==value) { this._tvPilotPowerLast=value; this._tvPilotPowerUntil=Date.now()+6000; }
+                    return Date.now() < (this._tvPilotPowerUntil||0) ? 'tv-power-soft 2.5s ease-in-out 2.4' : 'none'; ]]]'
             name:
             - font-size: 14px
             - font-weight: '500'
+          extra_styles: '@keyframes tv-power-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} }'
       - type: grid
         columns: 3
         square: false
@@ -93,9 +102,9 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - border: '1px solid #7195b7'
-            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
@@ -122,8 +131,7 @@ views:
               - height: 100%
               - overflow: hidden
           custom_fields:
-            brand: '[[[ const active = states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30''; return `<span style="font-family:Arial,sans-serif;font-weight:800;font-size:25px;letter-spacing:-1.2px;color:${active
-              ? "#ffd000" : "#f4f7fa"}">ple<span style="color:#f9c12e">x</span></span>`; ]]]'
+            brand: '[[[ return `<span style="font-family:Arial,sans-serif;font-weight:800;font-size:25px;letter-spacing:-1.2px;color:#f4f7fa">ple<span style="color:#f9c12e">x</span></span>`; ]]]'
         - type: custom:button-card
           entity: sensor.lg_49nano816na_56ba_active_app
           name: YouTube
@@ -147,9 +155,9 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - border: '1px solid #7195b7'
-            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
@@ -157,8 +165,7 @@ views:
             icon:
             - width: 29px
             - height: 29px
-            - color: '[[[ const a=states[''sensor.lg_49nano816na_56ba_active_app'']; return a?.attributes?.app_id === ''youtube.leanback.v4'' ? ''#ffd000'' : ''#ff2637'';
-                ]]]'
+            - color: '#ff2637'
             name:
             - font-size: 13px
             - font-weight: '650'
@@ -178,8 +185,7 @@ views:
           custom_fields:
             brand: >-
               [[[
-                const active = states['sensor.lg_49nano816na_56ba_active_app']?.attributes?.app_id === 'youtube.leanback.v4';
-                const red = active ? '#ffd000' : '#ff2637';
+                const red = '#ff2637';
                 return `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;width:100%;height:100%;font-family:Arial,sans-serif">
                   <svg width="30" height="22" viewBox="0 0 30 22" aria-hidden="true">
                     <rect x="0" y="2" width="30" height="18" rx="5" fill="${red}"/>
@@ -211,9 +217,9 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - border: '1px solid #7195b7'
-            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
@@ -240,8 +246,7 @@ views:
               - height: 100%
               - overflow: hidden
           custom_fields:
-            brand: '[[[ const active = states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon''; return `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;color:${active
-              ? "#ffd000" : "#f2f5fa"};font-family:Arial,sans-serif;line-height:1"><div style="font-size:13.677px;font-weight:700;white-space:nowrap"><span style="color:#23adf2">prime</span>
+            brand: '[[[ return `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;color:#f2f5fa;font-family:Arial,sans-serif;line-height:1"><div style="font-size:13.677px;font-weight:700;white-space:nowrap"><span style="color:#23adf2">prime</span>
               video</div><svg viewBox="0 0 130 24" width="65.9504" height="14.476" aria-hidden="true" style="margin-top:2px"><path d="M15 4 Q58 34 110 5" stroke="#21b6f6"
               stroke-width="5" fill="none" stroke-linecap="round"/><path d="M98 5 L111 4 L107 15" stroke="#21b6f6" stroke-width="4" fill="none" stroke-linecap="round"/></svg></div>`;
               ]]]'
@@ -268,9 +273,9 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - border: '1px solid #7195b7'
-            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
@@ -278,8 +283,7 @@ views:
             icon:
             - width: 31.35px
             - height: 31.35px
-            - color: '[[[ const a=states[''sensor.lg_49nano816na_56ba_active_app'']; return a?.attributes?.app_id === ''com.apple.appletv'' ? ''#ffd000'' : ''#f4f7fa'';
-                ]]]'
+            - color: '#f4f7fa'
             name:
             - font-size: 12px
             - font-weight: '500'
@@ -312,9 +316,9 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - border: '1px solid #7195b7'
-            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
@@ -341,8 +345,7 @@ views:
               - height: 100%
               - overflow: hidden
           custom_fields:
-            brand: '[[[ const active = states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda''; return `<span style="font-family:Arial,sans-serif;font-weight:800;font-size:26px;letter-spacing:-1.2px;color:${active
-              ? "#ffd000" : "#ff2634"}">cda</span>`; ]]]'
+            brand: '[[[ return `<span style="font-family:Arial,sans-serif;font-weight:800;font-size:26px;letter-spacing:-1.2px;color:#ff2634">cda</span>`; ]]]'
         - type: custom:button-card
           entity: sensor.lg_49nano816na_56ba_active_app
           name: Plex Native
@@ -366,9 +369,9 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - border: '1px solid #7195b7'
-            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
@@ -395,8 +398,8 @@ views:
               - height: 100%
               - overflow: hidden
           custom_fields:
-            brand: '[[[ const active = states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative''; return `<div style="text-align:center;font-family:Arial,sans-serif;line-height:1.05"><div
-              style="font-weight:800;font-size:20.9px;letter-spacing:-1px;color:${active ? "#ffd000" : "#f4f7fa"}">ple<span style="color:#f9c12e">x</span></div><div
+            brand: '[[[ return `<div style="text-align:center;font-family:Arial,sans-serif;line-height:1.05"><div
+              style="font-weight:800;font-size:20.9px;letter-spacing:-1px;color:#f4f7fa">ple<span style="color:#f9c12e">x</span></div><div
               style="font-size:11.4px;font-weight:650;color:#f4f7fa;margin-top:4.75px">Native</div></div>`; ]]]'
       - type: picture-elements
         image: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MjAiIGhlaWdodD0iMzE1IiB2aWV3Qm94PSIwIDAgNDIwIDMxNSI+PHJlY3Qgd2lkdGg9IjQyMCIgaGVpZ2h0PSIzMTUiIGZpbGw9IiMxMTExMTEiLz48L3N2Zz4=
@@ -700,7 +703,7 @@ views:
                   icon:
                   - width: 25px
                   - height: 25px
-                  - color: '#f4f7fa'
+                  - color: '[[[ const p=states[''sensor.lg_49nano816na_56ba_play_state'']?.state; return p===''playing'' || p===''paused'' ? ''#ffd000'' : ''#f4f7fa''; ]]]'
                   - animation: '[[[ return states[''sensor.lg_49nano816na_56ba_play_state'']?.state === ''paused'' ? ''tv-pause-soft 2.5s ease-in-out infinite'' :
                       ''none''; ]]]'
                   name:
@@ -709,7 +712,7 @@ views:
                   grid:
                   - grid-template-areas: '"i" "n"'
                   - grid-template-rows: 1fr min-content
-                extra_styles: '@keyframes tv-pause-soft { 0%,100% {opacity:1;} 50% {opacity:0.58;} }'
+                extra_styles: '@keyframes tv-pause-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} }'
             screen:
               card:
                 type: custom:button-card
@@ -721,6 +724,8 @@ views:
                 show_state: false
                 tap_action:
                   action: toggle
+                triggers_update:
+                - switch.lg_49nano816na_56ba_display_panel
                 styles:
                   card:
                   - height: 86px
@@ -736,10 +741,12 @@ views:
                   icon:
                   - width: 21.85px
                   - height: 21.85px
-                  - color: '#f4f7fa'
+                  - color: '[[[ return states[''switch.lg_49nano816na_56ba_display_panel'']?.state === ''off'' ? ''#ffd000'' : ''#f4f7fa''; ]]]'
+                  - animation: '[[[ return states[''switch.lg_49nano816na_56ba_display_panel'']?.state === ''off'' ? ''tv-screen-soft 2.5s ease-in-out infinite'' : ''none''; ]]]'
                   name:
                   - font-size: 15px
                   - font-weight: '500'
+                extra_styles: '@keyframes tv-screen-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} }'
           styles:
             card:
             - height: 86px
@@ -786,9 +793,11 @@ views:
             action: perform-action
             perform_action: script.lg_tv_power_on_off_glasshouse_mqtt
             target: {}
+          triggers_update:
+          - binary_sensor.lg_49nano816na_56ba_power
           styles:
             card:
-            - height: min(101px, calc(20.33vw - 9.75px))
+            - height: min(101px, calc(19.72vw - 9.75px))
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
@@ -797,14 +806,21 @@ views:
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
-            - width: min(457px, calc(91.667vw - 28px))
+            - width: min(457px, calc(88.917vw - 28px))
             icon:
             - width: 33px
             - height: 33px
             - color: '#ff2136'
+            - animation: >-
+                [[[ const value=states['binary_sensor.lg_49nano816na_56ba_power']?.state;
+                    if(value!=='on' && value!=='off') return 'none';
+                    if(this._tvPilotPowerLast===undefined) { this._tvPilotPowerLast=value; return 'none'; }
+                    if(this._tvPilotPowerLast!==value) { this._tvPilotPowerLast=value; this._tvPilotPowerUntil=Date.now()+6000; }
+                    return Date.now() < (this._tvPilotPowerUntil||0) ? 'tv-power-soft 2.5s ease-in-out 2.4' : 'none'; ]]]'
             name:
             - font-size: 14px
             - font-weight: '500'
+          extra_styles: '@keyframes tv-power-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} }'
       - type: grid
         columns: 3
         square: false
@@ -828,17 +844,17 @@ views:
           - sensor.lg_49nano816na_56ba_active_app
           styles:
             card:
-            - height: min(101px, calc(20.33vw - 9.75px))
+            - height: min(101px, calc(19.72vw - 9.75px))
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - border: '1px solid #7195b7'
-            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
-            - width: min(138px, calc((91.667vw - 76px) / 3))
+            - width: min(138px, calc((88.917vw - 76px) / 3))
             icon:
             - width: 28px
             - height: 28px
@@ -861,8 +877,7 @@ views:
               - height: 100%
               - overflow: hidden
           custom_fields:
-            brand: '[[[ const active = states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30''; return `<span style="font-family:Arial,sans-serif;font-weight:800;font-size:25px;letter-spacing:-1.2px;color:${active
-              ? "#ffd000" : "#f4f7fa"}">ple<span style="color:#f9c12e">x</span></span>`; ]]]'
+            brand: '[[[ return `<span style="font-family:Arial,sans-serif;font-weight:800;font-size:25px;letter-spacing:-1.2px;color:#f4f7fa">ple<span style="color:#f9c12e">x</span></span>`; ]]]'
         - type: custom:button-card
           entity: sensor.lg_49nano816na_56ba_active_app
           name: YouTube
@@ -882,22 +897,21 @@ views:
           - sensor.lg_49nano816na_56ba_active_app
           styles:
             card:
-            - height: min(101px, calc(20.33vw - 9.75px))
+            - height: min(101px, calc(19.72vw - 9.75px))
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - border: '1px solid #7195b7'
-            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
-            - width: min(138px, calc((91.667vw - 76px) / 3))
+            - width: min(138px, calc((88.917vw - 76px) / 3))
             icon:
             - width: 29px
             - height: 29px
-            - color: '[[[ const a=states[''sensor.lg_49nano816na_56ba_active_app'']; return a?.attributes?.app_id === ''youtube.leanback.v4'' ? ''#ffd000'' : ''#ff2637'';
-                ]]]'
+            - color: '#ff2637'
             name:
             - font-size: 13px
             - font-weight: '650'
@@ -917,8 +931,7 @@ views:
           custom_fields:
             brand: >-
               [[[
-                const active = states['sensor.lg_49nano816na_56ba_active_app']?.attributes?.app_id === 'youtube.leanback.v4';
-                const red = active ? '#ffd000' : '#ff2637';
+                const red = '#ff2637';
                 return `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;width:100%;height:100%;font-family:Arial,sans-serif">
                   <svg width="30" height="22" viewBox="0 0 30 22" aria-hidden="true">
                     <rect x="0" y="2" width="30" height="18" rx="5" fill="${red}"/>
@@ -946,17 +959,17 @@ views:
           - sensor.lg_49nano816na_56ba_active_app
           styles:
             card:
-            - height: min(101px, calc(20.33vw - 9.75px))
+            - height: min(101px, calc(19.72vw - 9.75px))
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - border: '1px solid #7195b7'
-            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
-            - width: min(138px, calc((91.667vw - 76px) / 3))
+            - width: min(138px, calc((88.917vw - 76px) / 3))
             icon:
             - width: 28px
             - height: 28px
@@ -979,8 +992,7 @@ views:
               - height: 100%
               - overflow: hidden
           custom_fields:
-            brand: '[[[ const active = states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon''; return `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;color:${active
-              ? "#ffd000" : "#f2f5fa"};font-family:Arial,sans-serif;line-height:1"><div style="font-size:13.677px;font-weight:700;white-space:nowrap"><span style="color:#23adf2">prime</span>
+            brand: '[[[ return `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;color:#f2f5fa;font-family:Arial,sans-serif;line-height:1"><div style="font-size:13.677px;font-weight:700;white-space:nowrap"><span style="color:#23adf2">prime</span>
               video</div><svg viewBox="0 0 130 24" width="65.9504" height="14.476" aria-hidden="true" style="margin-top:2px"><path d="M15 4 Q58 34 110 5" stroke="#21b6f6"
               stroke-width="5" fill="none" stroke-linecap="round"/><path d="M98 5 L111 4 L107 15" stroke="#21b6f6" stroke-width="4" fill="none" stroke-linecap="round"/></svg></div>`;
               ]]]'
@@ -1003,22 +1015,21 @@ views:
           - sensor.lg_49nano816na_56ba_active_app
           styles:
             card:
-            - height: min(101px, calc(20.33vw - 9.75px))
+            - height: min(101px, calc(19.72vw - 9.75px))
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - border: '1px solid #7195b7'
-            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
-            - width: min(138px, calc((91.667vw - 76px) / 3))
+            - width: min(138px, calc((88.917vw - 76px) / 3))
             icon:
             - width: 31.35px
             - height: 31.35px
-            - color: '[[[ const a=states[''sensor.lg_49nano816na_56ba_active_app'']; return a?.attributes?.app_id === ''com.apple.appletv'' ? ''#ffd000'' : ''#f4f7fa'';
-                ]]]'
+            - color: '#f4f7fa'
             name:
             - font-size: 12px
             - font-weight: '500'
@@ -1047,17 +1058,17 @@ views:
           - sensor.lg_49nano816na_56ba_active_app
           styles:
             card:
-            - height: min(101px, calc(20.33vw - 9.75px))
+            - height: min(101px, calc(19.72vw - 9.75px))
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - border: '1px solid #7195b7'
-            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
-            - width: min(138px, calc((91.667vw - 76px) / 3))
+            - width: min(138px, calc((88.917vw - 76px) / 3))
             icon:
             - width: 28px
             - height: 28px
@@ -1080,8 +1091,7 @@ views:
               - height: 100%
               - overflow: hidden
           custom_fields:
-            brand: '[[[ const active = states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda''; return `<span style="font-family:Arial,sans-serif;font-weight:800;font-size:26px;letter-spacing:-1.2px;color:${active
-              ? "#ffd000" : "#ff2634"}">cda</span>`; ]]]'
+            brand: '[[[ return `<span style="font-family:Arial,sans-serif;font-weight:800;font-size:26px;letter-spacing:-1.2px;color:#ff2634">cda</span>`; ]]]'
         - type: custom:button-card
           entity: sensor.lg_49nano816na_56ba_active_app
           name: Plex Native
@@ -1101,17 +1111,17 @@ views:
           - sensor.lg_49nano816na_56ba_active_app
           styles:
             card:
-            - height: min(101px, calc(20.33vw - 9.75px))
+            - height: min(101px, calc(19.72vw - 9.75px))
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - border: '1px solid #7195b7'
-            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - background: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''linear-gradient(145deg, #706021 0%, #514516 57%, #302a11 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - border: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - box-shadow: '[[[ return states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''inset 0 1px 3px rgba(255,238,150,0.33), 0 0 16px rgba(255,208,0,0.64), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
-            - width: min(138px, calc((91.667vw - 76px) / 3))
+            - width: min(138px, calc((88.917vw - 76px) / 3))
             icon:
             - width: 28px
             - height: 28px
@@ -1134,8 +1144,8 @@ views:
               - height: 100%
               - overflow: hidden
           custom_fields:
-            brand: '[[[ const active = states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative''; return `<div style="text-align:center;font-family:Arial,sans-serif;line-height:1.05"><div
-              style="font-weight:800;font-size:20.9px;letter-spacing:-1px;color:${active ? "#ffd000" : "#f4f7fa"}">ple<span style="color:#f9c12e">x</span></div><div
+            brand: '[[[ return `<div style="text-align:center;font-family:Arial,sans-serif;line-height:1.05"><div
+              style="font-weight:800;font-size:20.9px;letter-spacing:-1px;color:#f4f7fa">ple<span style="color:#f9c12e">x</span></div><div
               style="font-size:11.4px;font-weight:650;color:#f4f7fa;margin-top:4.75px">Native</div></div>`; ]]]'
       - type: picture-elements
         image: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MjAiIGhlaWdodD0iMzE1IiB2aWV3Qm94PSIwIDAgNDIwIDMxNSI+PHJlY3Qgd2lkdGg9IjQyMCIgaGVpZ2h0PSIzMTUiIGZpbGw9IiMxMTExMTEiLz48L3N2Zz4=
@@ -1298,7 +1308,7 @@ views:
           show_state: false
           styles:
             card:
-            - height: min(86px, calc(17.3vw - 8.3px))
+            - height: min(86px, calc(16.78vw - 8.3px))
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
@@ -1307,7 +1317,7 @@ views:
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
-            - width: min(138px, calc((91.667vw - 76px) / 3))
+            - width: min(138px, calc((88.917vw - 76px) / 3))
             icon:
             - width: 23px
             - height: 23px
@@ -1331,7 +1341,7 @@ views:
           show_state: false
           styles:
             card:
-            - height: min(86px, calc(17.3vw - 8.3px))
+            - height: min(86px, calc(16.78vw - 8.3px))
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
@@ -1340,7 +1350,7 @@ views:
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
-            - width: min(138px, calc((91.667vw - 76px) / 3))
+            - width: min(138px, calc((88.917vw - 76px) / 3))
             icon:
             - width: 23px
             - height: 23px
@@ -1368,7 +1378,7 @@ views:
           show_state: false
           styles:
             card:
-            - height: min(86px, calc(17.3vw - 8.3px))
+            - height: min(86px, calc(16.78vw - 8.3px))
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
@@ -1377,7 +1387,7 @@ views:
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
-            - width: min(138px, calc((91.667vw - 76px) / 3))
+            - width: min(138px, calc((88.917vw - 76px) / 3))
             icon:
             - width: 23px
             - height: 23px
@@ -1426,10 +1436,10 @@ views:
                 - sensor.lg_49nano816na_56ba_play_state
                 styles:
                   card:
-                  - height: min(86px, calc(17.3vw - 8.3px))
+                  - height: min(86px, calc(16.78vw - 8.3px))
                   - padding: 5px
                   - border-radius: 18px
-                  - width: min(286px, calc(61.11vw - 28.7px))
+                  - width: min(286px, calc(59.28vw - 28.7px))
                   - margin: '0'
                   - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
                   - border: '1px solid #7195b7'
@@ -1439,7 +1449,7 @@ views:
                   icon:
                   - width: 25px
                   - height: 25px
-                  - color: '#f4f7fa'
+                  - color: '[[[ const p=states[''sensor.lg_49nano816na_56ba_play_state'']?.state; return p===''playing'' || p===''paused'' ? ''#ffd000'' : ''#f4f7fa''; ]]]'
                   - animation: '[[[ return states[''sensor.lg_49nano816na_56ba_play_state'']?.state === ''paused'' ? ''tv-pause-soft 2.5s ease-in-out infinite'' :
                       ''none''; ]]]'
                   name:
@@ -1448,7 +1458,7 @@ views:
                   grid:
                   - grid-template-areas: '"i" "n"'
                   - grid-template-rows: 1fr min-content
-                extra_styles: '@keyframes tv-pause-soft { 0%,100% {opacity:1;} 50% {opacity:0.58;} }'
+                extra_styles: '@keyframes tv-pause-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} }'
             screen:
               card:
                 type: custom:button-card
@@ -1460,12 +1470,14 @@ views:
                 show_state: false
                 tap_action:
                   action: toggle
+                triggers_update:
+                - switch.lg_49nano816na_56ba_display_panel
                 styles:
                   card:
-                  - height: min(86px, calc(17.3vw - 8.3px))
+                  - height: min(86px, calc(16.78vw - 8.3px))
                   - padding: 5px
                   - border-radius: 18px
-                  - width: min(156px, calc(30.56vw - 20.3px))
+                  - width: min(156px, calc(29.64vw - 20.3px))
                   - margin: '0'
                   - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
                   - border: '1px solid #7195b7'
@@ -1475,24 +1487,26 @@ views:
                   icon:
                   - width: 21.85px
                   - height: 21.85px
-                  - color: '#f4f7fa'
+                  - color: '[[[ return states[''switch.lg_49nano816na_56ba_display_panel'']?.state === ''off'' ? ''#ffd000'' : ''#f4f7fa''; ]]]'
+                  - animation: '[[[ return states[''switch.lg_49nano816na_56ba_display_panel'']?.state === ''off'' ? ''tv-screen-soft 2.5s ease-in-out infinite'' : ''none''; ]]]'
                   name:
                   - font-size: 15px
                   - font-weight: '500'
+                extra_styles: '@keyframes tv-screen-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} }'
           styles:
             card:
-            - height: min(86px, calc(17.3vw - 8.3px))
+            - height: min(86px, calc(16.78vw - 8.3px))
             - padding: '0'
             - margin: 7px 4px
             - background: transparent
             - border: none
             - box-shadow: none
             - border-radius: '0'
-            - width: min(457px, calc(91.667vw - 28px))
+            - width: min(457px, calc(88.917vw - 28px))
             grid:
             - grid-template-areas: '"play screen"'
             - grid-template-columns: minmax(0, 2fr) minmax(0, 1fr)
-            - grid-template-rows: min(86px, calc(17.3vw - 8.3px))
+            - grid-template-rows: min(86px, calc(16.78vw - 8.3px))
             - column-gap: 14px
             - align-items: stretch
             custom_fields:
