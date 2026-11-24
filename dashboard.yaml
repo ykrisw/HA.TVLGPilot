@@ -716,7 +716,7 @@ views:
             - width: 23px
             - height: 23px
             - color: '#f4f7fa'
-            - animation: "[[[\n  const a = states['sensor.lg_49nano816na_56ba_active_app'];\n  const id = String(a?.attributes?.app_id || '');\n  if (!/^com\\.webos\\\
+            - animation: "[[[\n  if (states['binary_sensor.lg_49nano816na_56ba_power']?.state !== 'on') return 'none';\n  const a = states['sensor.lg_49nano816na_56ba_active_app'];\n  const id = String(a?.attributes?.app_id || '');\n  if (!/^com\\.webos\\\
                 .app\\.hdmi[1-9]$/i.test(id) || !a?.last_changed) return 'none';\n  const age = (Date.now() - new Date(a.last_changed).getTime()) / 1000;\n  return\
                 \ age >= 0 && age < 9 ? `tv-input-flash 9s linear ${-age}s 1 both` : 'none';\n]]]"
             name:
@@ -727,6 +727,7 @@ views:
             - grid-template-rows: 1fr min-content
           triggers_update:
           - sensor.lg_49nano816na_56ba_active_app
+          - binary_sensor.lg_49nano816na_56ba_power
           extra_styles: '@keyframes tv-input-flash { 0%,55.5556% { color:#ff7436; } 100% { color:#4b8bbe; } } ha-card:active { background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
       - type: grid
         columns: 1
@@ -1541,7 +1542,7 @@ views:
             - width: 23px
             - height: 23px
             - color: '#f4f7fa'
-            - animation: "[[[\n  const a = states['sensor.lg_49nano816na_56ba_active_app'];\n  const id = String(a?.attributes?.app_id || '');\n  if (!/^com\\.webos\\\
+            - animation: "[[[\n  if (states['binary_sensor.lg_49nano816na_56ba_power']?.state !== 'on') return 'none';\n  const a = states['sensor.lg_49nano816na_56ba_active_app'];\n  const id = String(a?.attributes?.app_id || '');\n  if (!/^com\\.webos\\\
                 .app\\.hdmi[1-9]$/i.test(id) || !a?.last_changed) return 'none';\n  const age = (Date.now() - new Date(a.last_changed).getTime()) / 1000;\n  return\
                 \ age >= 0 && age < 9 ? `tv-input-flash 9s linear ${-age}s 1 both` : 'none';\n]]]"
             name:
@@ -1552,6 +1553,7 @@ views:
             - grid-template-rows: 1fr min-content
           triggers_update:
           - sensor.lg_49nano816na_56ba_active_app
+          - binary_sensor.lg_49nano816na_56ba_power
           extra_styles: '@keyframes tv-input-flash { 0%,55.5556% { color:#ff7436; } 100% { color:#4b8bbe; } } ha-card:active { background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
       - type: grid
         columns: 1
