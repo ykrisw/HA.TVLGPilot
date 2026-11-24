@@ -6,6 +6,8 @@ Pilot LG dla Home Assistant, wykorzystujący istniejące encje, MQTT i `custom:b
 
 **1.1.1 — zaakceptowany punkt wyjścia do testów funkcjonalnych.**
 
+**1.1.8 — poprawka po nieudanym teście 1.1.7:** nieaktywne ramki ciemniejsze o kolejne 20% (`#557089` → `#445A6E`). Usunięto nieskuteczne nadpisania natywnego efektu `ripple` joysticka. Ta zmiana NIE gwarantuje usunięcia szarych śladów z obsługi fokusowania w Home Assistant ani pełnego rozbłysku przycisków; nie zmieniano rozmiarów, układu i poleceń. Do uzyskania odrębnej, pełnopowierzchniowej animacji konieczne jest inne rozwiązanie techniczne, które wymaga sprawdzenia w realnym HA.
+
 **1.1.7 — korekta po testach macOS/iOS:** obramowania nieaktywnych przycisków przyciemnione o 25% (`#7195B7` → `#557089`), bez zmiany żółtego obramowania aktywnych aplikacji. W natywnych elementach joysticka wyłączono trwałe podświetlenie fokusu (szary ślad po kliknięciu) i zachowano krótką reakcję ripple. Rozświetlenie całego kafelka joysticka nie jest zagwarantowane w `picture-elements` — wymaga osobnego rozwiązania i testów, bez ponownej wymiany struktury. Geometria, akcje i wygląd pozostałych elementów zachowane.
 
 **1.1.6 — test akcentów i reakcji dotykowej:** żółta ramka aktywnej aplikacji pozostaje w pełnej intensywności; wypełnienie wnętrza osłabione do około 30%. Przyciski funkcyjne mają płynniejsze wygaszanie po dotknięciu (0,45 s). Dla oryginalnego joysticka `picture-elements` skonfigurowano natywny efekt dotknięcia i wygaszanie bez zmiany struktury, wymiarów i pozycji; skuteczność tego efektu zależy od obsługi CSS w używanej wersji Home Assistant/iOS i wymaga praktycznego testu. Zachowane wszystkie akcje sterowania.
@@ -16,7 +18,7 @@ Pilot LG dla Home Assistant, wykorzystujący istniejące encje, MQTT i `custom:b
 
 **1.1.2 — testowy układ mobilny:** dla ekranów do 599 px szerokości jeden dashboard wyświetla proporcjonalnie zmniejszoną wersję pilota. Powyżej 599 px pokazuje dokładnie zachowany układ komputerowy 1.1.1. Obie wersje mają te same akcje sterujące. Nie uznawać układu mobilnego za zatwierdzony bez testu na iPhonie.
 
-Plik `dashboard.yaml` zawiera bieżącą wersję projektu (**1.1.7**, test mobilny i funkcjonalny). Wersje sprzed 1.1.1 pozostają wyłącznie w standardowej historii commitów Git; stary osobny plik YAML usunięto z bieżącego drzewa repozytorium.
+Plik `dashboard.yaml` zawiera bieżącą wersję projektu (**1.1.8**, test mobilny i funkcjonalny). Wersje sprzed 1.1.1 pozostają wyłącznie w standardowej historii commitów Git; stary osobny plik YAML usunięto z bieżącego drzewa repozytorium.
 
 ## Zasada zamrożenia wyglądu
 
