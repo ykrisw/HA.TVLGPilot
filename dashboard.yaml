@@ -70,7 +70,7 @@ views:
                     if(value!=='on' && value!=='off') return 'none';
                     if(this._tvPilotPowerLast===undefined) { this._tvPilotPowerLast=value; return 'none'; }
                     if(this._tvPilotPowerLast!==value) { this._tvPilotPowerLast=value; this._tvPilotPowerUntil=Date.now()+6000; }
-                    return Date.now() < (this._tvPilotPowerUntil||0) ? 'tv-power-soft 2.5s ease-in-out 2.4' : 'none'; ]]]'
+                    return Date.now() < (this._tvPilotPowerUntil||0) ? 'tv-power-soft 2.5s ease-in-out 2.4' : 'none'; ]]]
             name:
             - font-size: 14px
             - font-weight: '500'
@@ -816,7 +816,7 @@ views:
                     if(value!=='on' && value!=='off') return 'none';
                     if(this._tvPilotPowerLast===undefined) { this._tvPilotPowerLast=value; return 'none'; }
                     if(this._tvPilotPowerLast!==value) { this._tvPilotPowerLast=value; this._tvPilotPowerUntil=Date.now()+6000; }
-                    return Date.now() < (this._tvPilotPowerUntil||0) ? 'tv-power-soft 2.5s ease-in-out 2.4' : 'none'; ]]]'
+                    return Date.now() < (this._tvPilotPowerUntil||0) ? 'tv-power-soft 2.5s ease-in-out 2.4' : 'none'; ]]]
             name:
             - font-size: 14px
             - font-weight: '500'
