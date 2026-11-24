@@ -1,4 +1,4 @@
-# HA.TVLGPilot 1.1.5 — power ON/OFF status, app glow -10%, state-aware highlights, orange-red functional press feedback, screen-off 6s tail. Layout sizes retained.
+# HA.TVLGPilot 1.1.6 — app active tile full-yellow border/30% interior, longer 0.45s release fade, native joystick ripple tuned; all layouts and actions preserved.
 views:
 - title: TV Control
   path: overview
@@ -111,7 +111,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
@@ -165,7 +165,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
@@ -228,7 +228,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
@@ -285,7 +285,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
@@ -329,7 +329,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
@@ -383,7 +383,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
@@ -445,6 +445,10 @@ views:
             box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             --mdc-icon-size: 23px
             color: '#f4f7fa'
+            --mdc-ripple-color: '#ff7436'
+            --mdc-ripple-press-opacity: 0.85
+            --mdc-ripple-hover-opacity: 0.18
+            transition: box-shadow 0.45s ease-out, filter 0.45s ease-out, border-color 0.45s ease-out
             cursor: pointer
         - type: icon
           icon: mdi:chevron-up
@@ -473,6 +477,10 @@ views:
             box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             --mdc-icon-size: 23px
             color: '#f4f7fa'
+            --mdc-ripple-color: '#ff7436'
+            --mdc-ripple-press-opacity: 0.85
+            --mdc-ripple-hover-opacity: 0.18
+            transition: box-shadow 0.45s ease-out, filter 0.45s ease-out, border-color 0.45s ease-out
             cursor: pointer
         - type: image
           title: OK
@@ -500,6 +508,10 @@ views:
             box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             --mdc-icon-size: 23px
             color: '#f4f7fa'
+            --mdc-ripple-color: '#ff7436'
+            --mdc-ripple-press-opacity: 0.85
+            --mdc-ripple-hover-opacity: 0.18
+            transition: box-shadow 0.45s ease-out, filter 0.45s ease-out, border-color 0.45s ease-out
             cursor: pointer
             object-fit: contain
           image: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMTAiIGhlaWdodD0iODQiIHZpZXdCb3g9IjAgMCAyMTAgODQiPjx0ZXh0IHg9IjEwNSIgeT0iNTEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmNGY3ZmEiIGZvbnQtc2l6ZT0iMjMiIGZvbnQtd2VpZ2h0PSI3MDAiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIj5PSzwvdGV4dD48L3N2Zz4=
@@ -530,6 +542,10 @@ views:
             box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             --mdc-icon-size: 23px
             color: '#f4f7fa'
+            --mdc-ripple-color: '#ff7436'
+            --mdc-ripple-press-opacity: 0.85
+            --mdc-ripple-hover-opacity: 0.18
+            transition: box-shadow 0.45s ease-out, filter 0.45s ease-out, border-color 0.45s ease-out
             cursor: pointer
         - type: icon
           icon: mdi:chevron-right
@@ -558,6 +574,10 @@ views:
             box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             --mdc-icon-size: 23px
             color: '#f4f7fa'
+            --mdc-ripple-color: '#ff7436'
+            --mdc-ripple-press-opacity: 0.85
+            --mdc-ripple-hover-opacity: 0.18
+            transition: box-shadow 0.45s ease-out, filter 0.45s ease-out, border-color 0.45s ease-out
             cursor: pointer
       - type: grid
         columns: 3
@@ -596,7 +616,7 @@ views:
             grid:
             - grid-template-areas: '"i" "n"'
             - grid-template-rows: 1fr min-content
-          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+          extra_styles: 'ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
         - type: custom:button-card
           entity: button.lg_49nano816na_56ba_remote_home
           name: Home
@@ -630,7 +650,7 @@ views:
             grid:
             - grid-template-areas: '"i" "n"'
             - grid-template-rows: 1fr min-content
-          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+          extra_styles: 'ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
         - type: custom:button-card
           entity: sensor.lg_49nano816na_56ba_active_app
           name: INPUT
@@ -674,7 +694,7 @@ views:
           triggers_update:
           - sensor.lg_49nano816na_56ba_active_app
           - binary_sensor.lg_49nano816na_56ba_power
-          extra_styles: '@keyframes tv-input-flash { 0%,55.5556% { color:#ff7436; } 100% { color:#4b8bbe; } } ha-card:active { background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+          extra_styles: '@keyframes tv-input-flash { 0%,55.5556% { color:#ff7436; } 100% { color:#4b8bbe; } } ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
       - type: grid
         columns: 1
         square: false
@@ -730,7 +750,7 @@ views:
                   grid:
                   - grid-template-areas: '"i" "n"'
                   - grid-template-rows: 1fr min-content
-                extra_styles: '@keyframes tv-pause-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } ha-card:active { background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+                extra_styles: '@keyframes tv-pause-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
             screen:
               card:
                 type: custom:button-card
@@ -772,7 +792,7 @@ views:
                   name:
                   - font-size: 15px
                   - font-weight: '500'
-                extra_styles: '@keyframes tv-screen-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } @keyframes tv-screen-tail { 0%,100% {opacity:1;color:#ff7436;} 50% {opacity:0.38;color:#ff7436;} } ha-card:active { background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+                extra_styles: '@keyframes tv-screen-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } @keyframes tv-screen-tail { 0%,100% {opacity:1;color:#ff7436;} 50% {opacity:0.38;color:#ff7436;} } ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
           styles:
             card:
             - height: 86px
@@ -883,7 +903,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
@@ -937,7 +957,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
@@ -1000,7 +1020,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
@@ -1057,7 +1077,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
@@ -1101,7 +1121,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
@@ -1155,7 +1175,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
-            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''linear-gradient(145deg, #65571f 0%, #4a4015 57%, #2c2711 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
+            - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
@@ -1217,6 +1237,10 @@ views:
             box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             --mdc-icon-size: 23px
             color: '#f4f7fa'
+            --mdc-ripple-color: '#ff7436'
+            --mdc-ripple-press-opacity: 0.85
+            --mdc-ripple-hover-opacity: 0.18
+            transition: box-shadow 0.45s ease-out, filter 0.45s ease-out, border-color 0.45s ease-out
             cursor: pointer
         - type: icon
           icon: mdi:chevron-up
@@ -1245,6 +1269,10 @@ views:
             box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             --mdc-icon-size: 23px
             color: '#f4f7fa'
+            --mdc-ripple-color: '#ff7436'
+            --mdc-ripple-press-opacity: 0.85
+            --mdc-ripple-hover-opacity: 0.18
+            transition: box-shadow 0.45s ease-out, filter 0.45s ease-out, border-color 0.45s ease-out
             cursor: pointer
         - type: image
           title: OK
@@ -1272,6 +1300,10 @@ views:
             box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             --mdc-icon-size: 23px
             color: '#f4f7fa'
+            --mdc-ripple-color: '#ff7436'
+            --mdc-ripple-press-opacity: 0.85
+            --mdc-ripple-hover-opacity: 0.18
+            transition: box-shadow 0.45s ease-out, filter 0.45s ease-out, border-color 0.45s ease-out
             cursor: pointer
             object-fit: contain
           image: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMTAiIGhlaWdodD0iODQiIHZpZXdCb3g9IjAgMCAyMTAgODQiPjx0ZXh0IHg9IjEwNSIgeT0iNTEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmNGY3ZmEiIGZvbnQtc2l6ZT0iMjMiIGZvbnQtd2VpZ2h0PSI3MDAiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIj5PSzwvdGV4dD48L3N2Zz4=
@@ -1302,6 +1334,10 @@ views:
             box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             --mdc-icon-size: 23px
             color: '#f4f7fa'
+            --mdc-ripple-color: '#ff7436'
+            --mdc-ripple-press-opacity: 0.85
+            --mdc-ripple-hover-opacity: 0.18
+            transition: box-shadow 0.45s ease-out, filter 0.45s ease-out, border-color 0.45s ease-out
             cursor: pointer
         - type: icon
           icon: mdi:chevron-right
@@ -1330,6 +1366,10 @@ views:
             box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             --mdc-icon-size: 23px
             color: '#f4f7fa'
+            --mdc-ripple-color: '#ff7436'
+            --mdc-ripple-press-opacity: 0.85
+            --mdc-ripple-hover-opacity: 0.18
+            transition: box-shadow 0.45s ease-out, filter 0.45s ease-out, border-color 0.45s ease-out
             cursor: pointer
       - type: grid
         columns: 3
@@ -1368,7 +1408,7 @@ views:
             grid:
             - grid-template-areas: '"i" "n"'
             - grid-template-rows: 1fr min-content
-          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+          extra_styles: 'ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
         - type: custom:button-card
           entity: button.lg_49nano816na_56ba_remote_home
           name: Home
@@ -1402,7 +1442,7 @@ views:
             grid:
             - grid-template-areas: '"i" "n"'
             - grid-template-rows: 1fr min-content
-          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+          extra_styles: 'ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
         - type: custom:button-card
           entity: sensor.lg_49nano816na_56ba_active_app
           name: INPUT
@@ -1446,7 +1486,7 @@ views:
           triggers_update:
           - sensor.lg_49nano816na_56ba_active_app
           - binary_sensor.lg_49nano816na_56ba_power
-          extra_styles: '@keyframes tv-input-flash { 0%,55.5556% { color:#ff7436; } 100% { color:#4b8bbe; } } ha-card:active { background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+          extra_styles: '@keyframes tv-input-flash { 0%,55.5556% { color:#ff7436; } 100% { color:#4b8bbe; } } ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
       - type: grid
         columns: 1
         square: false
@@ -1502,7 +1542,7 @@ views:
                   grid:
                   - grid-template-areas: '"i" "n"'
                   - grid-template-rows: 1fr min-content
-                extra_styles: '@keyframes tv-pause-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } ha-card:active { background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+                extra_styles: '@keyframes tv-pause-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
             screen:
               card:
                 type: custom:button-card
@@ -1544,7 +1584,7 @@ views:
                   name:
                   - font-size: 15px
                   - font-weight: '500'
-                extra_styles: '@keyframes tv-screen-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } @keyframes tv-screen-tail { 0%,100% {opacity:1;color:#ff7436;} 50% {opacity:0.38;color:#ff7436;} } ha-card:active { background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+                extra_styles: '@keyframes tv-screen-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } @keyframes tv-screen-tail { 0%,100% {opacity:1;color:#ff7436;} 50% {opacity:0.38;color:#ff7436;} } ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
           styles:
             card:
             - height: min(86px, calc(16.78vw - 8.3px))
