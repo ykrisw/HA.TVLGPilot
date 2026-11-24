@@ -1,4 +1,4 @@
-# HA.TVLGPilot 1.1.1 — logotyp Prime Video zmniejszony o 6%; pozostałe elementy bez zmian.
+# HA.TVLGPilot 1.1.2 — mobilny układ responsywny (≤599px); komputerowy wygląd 1.1.1 bez zmian.
 views:
 - title: TV Control
   path: overview
@@ -11,6 +11,9 @@ views:
     column_span: 2
     cards:
     - type: custom:button-card
+      visibility:
+      - condition: screen
+        media_query: "(min-width: 600px)"
       color_type: blank-card
       tap_action:
         action: none
@@ -25,6 +28,9 @@ views:
         columns: 6
         rows: 1
     - type: vertical-stack
+      visibility:
+      - condition: screen
+        media_query: "(min-width: 600px)"
       cards:
       - type: grid
         columns: 1
@@ -760,7 +766,749 @@ views:
       grid_options:
         columns: 11
         rows: auto
+    - type: vertical-stack
+      visibility:
+      - condition: screen
+        media_query: "(max-width: 599px)"
+      cards:
+      - type: grid
+        columns: 1
+        square: false
+        cards:
+        - type: custom:button-card
+          entity: script.lg_tv_power_on_off_glasshouse_mqtt
+          name: Power
+          icon: mdi:power
+          show_name: false
+          show_icon: true
+          show_state: false
+          tap_action:
+            action: perform-action
+            perform_action: script.lg_tv_power_on_off_glasshouse_mqtt
+            target: {}
+          styles:
+            card:
+            - height: min(101px, calc(22.1vw - 10.6px))
+            - padding: '0'
+            - border-radius: 18px
+            - margin: 7px 4px
+            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            - border: '1px solid #7195b7'
+            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - box-sizing: border-box
+            - overflow: hidden
+            - width: min(457px, calc(100vw - 48px))
+            icon:
+            - width: 33px
+            - height: 33px
+            - color: '#ff2136'
+            name:
+            - font-size: 14px
+            - font-weight: '500'
+      - type: grid
+        columns: 3
+        square: false
+        cards:
+        - type: custom:button-card
+          entity: sensor.lg_49nano816na_56ba_active_app
+          name: Plex
+          icon: mdi:plex
+          tap_action:
+            action: perform-action
+            perform_action: mqtt.publish
+            data:
+              topic: lgtv_49nano816na_56ba/command/launchApp
+              payload: Plex
+              qos: 0
+              retain: false
+          show_name: false
+          show_icon: false
+          show_state: false
+          triggers_update:
+          - sensor.lg_49nano816na_56ba_active_app
+          styles:
+            card:
+            - height: min(101px, calc(22.1vw - 10.6px))
+            - padding: '0'
+            - border-radius: 18px
+            - margin: 7px 4px
+            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            - border: '1px solid #7195b7'
+            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - box-sizing: border-box
+            - overflow: hidden
+            - color: '#f4f7fa'
+            - width: min(138px, calc((100vw - 76px) / 3))
+            icon:
+            - width: 28px
+            - height: 28px
+            - color: '#f4f7fa'
+            name:
+            - font-size: 12px
+            - font-weight: '500'
+            - transform: translateY(-1px)
+            - color: '#f4f7fa'
+            grid:
+            - grid-template-areas: '"brand"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr
+            custom_fields:
+              brand:
+              - display: flex
+              - align-items: center
+              - justify-content: center
+              - width: 100%
+              - height: 100%
+              - overflow: hidden
+          custom_fields:
+            brand: '[[[ const active = states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30''; return `<span style="font-family:Arial,sans-serif;font-weight:800;font-size:25px;letter-spacing:-1.2px;color:${active
+              ? "#ffd000" : "#f4f7fa"}">ple<span style="color:#f9c12e">x</span></span>`; ]]]'
+        - type: custom:button-card
+          entity: sensor.lg_49nano816na_56ba_active_app
+          name: YouTube
+          icon: mdi:youtube
+          tap_action:
+            action: perform-action
+            perform_action: mqtt.publish
+            data:
+              topic: lgtv_49nano816na_56ba/command/launchApp
+              payload: YouTube AdFree
+              qos: 0
+              retain: false
+          show_name: false
+          show_icon: false
+          show_state: false
+          triggers_update:
+          - sensor.lg_49nano816na_56ba_active_app
+          styles:
+            card:
+            - height: min(101px, calc(22.1vw - 10.6px))
+            - padding: '0'
+            - border-radius: 18px
+            - margin: 7px 4px
+            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            - border: '1px solid #7195b7'
+            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - box-sizing: border-box
+            - overflow: hidden
+            - color: '#f4f7fa'
+            - width: min(138px, calc((100vw - 76px) / 3))
+            icon:
+            - width: 29px
+            - height: 29px
+            - color: '[[[ const a=states[''sensor.lg_49nano816na_56ba_active_app'']; return a?.attributes?.app_id === ''youtube.leanback.v4'' ? ''#ffd000'' : ''#ff2637'';
+                ]]]'
+            name:
+            - font-size: 13px
+            - font-weight: '650'
+            - transform: translateY(-3px)
+            - color: '#f4f7fa'
+            grid:
+            - grid-template-areas: '"brand"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr
+            custom_fields:
+              brand:
+              - display: flex
+              - align-items: center
+              - justify-content: center
+              - width: 100%
+              - height: 100%
+          custom_fields:
+            brand: >-
+              [[[
+                const active = states['sensor.lg_49nano816na_56ba_active_app']?.attributes?.app_id === 'youtube.leanback.v4';
+                const red = active ? '#ffd000' : '#ff2637';
+                return `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;width:100%;height:100%;font-family:Arial,sans-serif">
+                  <svg width="30" height="22" viewBox="0 0 30 22" aria-hidden="true">
+                    <rect x="0" y="2" width="30" height="18" rx="5" fill="${red}"/>
+                    <path d="M12 7 L20 11 L12 15 Z" fill="#ffffff"/>
+                  </svg>
+                  <span style="font-size:12px;font-weight:650;line-height:15px;color:#f4f7fa">YouTube</span>
+                </div>`;
+              ]]]
+        - type: custom:button-card
+          entity: sensor.lg_49nano816na_56ba_active_app
+          name: Prime Video
+          icon: mdi:video-vintage
+          tap_action:
+            action: perform-action
+            perform_action: mqtt.publish
+            data:
+              topic: lgtv_49nano816na_56ba/command/launchApp
+              payload: Prime Video
+              qos: 0
+              retain: false
+          show_name: false
+          show_icon: false
+          show_state: false
+          triggers_update:
+          - sensor.lg_49nano816na_56ba_active_app
+          styles:
+            card:
+            - height: min(101px, calc(22.1vw - 10.6px))
+            - padding: '0'
+            - border-radius: 18px
+            - margin: 7px 4px
+            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            - border: '1px solid #7195b7'
+            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - box-sizing: border-box
+            - overflow: hidden
+            - color: '#f4f7fa'
+            - width: min(138px, calc((100vw - 76px) / 3))
+            icon:
+            - width: 28px
+            - height: 28px
+            - color: '#f4f7fa'
+            name:
+            - font-size: 12px
+            - font-weight: '500'
+            - transform: translateY(-1px)
+            - color: '#f4f7fa'
+            grid:
+            - grid-template-areas: '"brand"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr
+            custom_fields:
+              brand:
+              - display: flex
+              - align-items: center
+              - justify-content: center
+              - width: 100%
+              - height: 100%
+              - overflow: hidden
+          custom_fields:
+            brand: '[[[ const active = states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon''; return `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;color:${active
+              ? "#ffd000" : "#f2f5fa"};font-family:Arial,sans-serif;line-height:1"><div style="font-size:13.677px;font-weight:700;white-space:nowrap"><span style="color:#23adf2">prime</span>
+              video</div><svg viewBox="0 0 130 24" width="65.9504" height="14.476" aria-hidden="true" style="margin-top:2px"><path d="M15 4 Q58 34 110 5" stroke="#21b6f6"
+              stroke-width="5" fill="none" stroke-linecap="round"/><path d="M98 5 L111 4 L107 15" stroke="#21b6f6" stroke-width="4" fill="none" stroke-linecap="round"/></svg></div>`;
+              ]]]'
+        - type: custom:button-card
+          entity: sensor.lg_49nano816na_56ba_active_app
+          name: Apple TV
+          icon: mdi:apple
+          tap_action:
+            action: perform-action
+            perform_action: mqtt.publish
+            data:
+              topic: lgtv_49nano816na_56ba/command/launchApp
+              payload: Apple TV
+              qos: 0
+              retain: false
+          show_name: false
+          show_icon: true
+          show_state: false
+          triggers_update:
+          - sensor.lg_49nano816na_56ba_active_app
+          styles:
+            card:
+            - height: min(101px, calc(22.1vw - 10.6px))
+            - padding: '0'
+            - border-radius: 18px
+            - margin: 7px 4px
+            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            - border: '1px solid #7195b7'
+            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - box-sizing: border-box
+            - overflow: hidden
+            - color: '#f4f7fa'
+            - width: min(138px, calc((100vw - 76px) / 3))
+            icon:
+            - width: 31.35px
+            - height: 31.35px
+            - color: '[[[ const a=states[''sensor.lg_49nano816na_56ba_active_app'']; return a?.attributes?.app_id === ''com.apple.appletv'' ? ''#ffd000'' : ''#f4f7fa'';
+                ]]]'
+            name:
+            - font-size: 12px
+            - font-weight: '500'
+            - transform: translateY(-1px)
+            - color: '#f4f7fa'
+            grid:
+            - grid-template-areas: '"i"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr
+        - type: custom:button-card
+          entity: sensor.lg_49nano816na_56ba_active_app
+          name: CDA
+          icon: mdi:movie-open
+          tap_action:
+            action: perform-action
+            perform_action: mqtt.publish
+            data:
+              topic: lgtv_49nano816na_56ba/command/launchApp
+              payload: pl.cda
+              qos: 0
+              retain: false
+          show_name: false
+          show_icon: false
+          show_state: false
+          triggers_update:
+          - sensor.lg_49nano816na_56ba_active_app
+          styles:
+            card:
+            - height: min(101px, calc(22.1vw - 10.6px))
+            - padding: '0'
+            - border-radius: 18px
+            - margin: 7px 4px
+            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            - border: '1px solid #7195b7'
+            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - box-sizing: border-box
+            - overflow: hidden
+            - color: '#f4f7fa'
+            - width: min(138px, calc((100vw - 76px) / 3))
+            icon:
+            - width: 28px
+            - height: 28px
+            - color: '#f4f7fa'
+            name:
+            - font-size: 12px
+            - font-weight: '500'
+            - transform: translateY(-1px)
+            - color: '#f4f7fa'
+            grid:
+            - grid-template-areas: '"brand"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr
+            custom_fields:
+              brand:
+              - display: flex
+              - align-items: center
+              - justify-content: center
+              - width: 100%
+              - height: 100%
+              - overflow: hidden
+          custom_fields:
+            brand: '[[[ const active = states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda''; return `<span style="font-family:Arial,sans-serif;font-weight:800;font-size:26px;letter-spacing:-1.2px;color:${active
+              ? "#ffd000" : "#ff2634"}">cda</span>`; ]]]'
+        - type: custom:button-card
+          entity: sensor.lg_49nano816na_56ba_active_app
+          name: Plex Native
+          icon: mdi:plex
+          tap_action:
+            action: perform-action
+            perform_action: mqtt.publish
+            data:
+              topic: lgtv_49nano816na_56ba/command/launchApp
+              payload: com.beb.plxnative
+              qos: 0
+              retain: false
+          show_name: false
+          show_icon: false
+          show_state: false
+          triggers_update:
+          - sensor.lg_49nano816na_56ba_active_app
+          styles:
+            card:
+            - height: min(101px, calc(22.1vw - 10.6px))
+            - padding: '0'
+            - border-radius: 18px
+            - margin: 7px 4px
+            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            - border: '1px solid #7195b7'
+            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - box-sizing: border-box
+            - overflow: hidden
+            - color: '#f4f7fa'
+            - width: min(138px, calc((100vw - 76px) / 3))
+            icon:
+            - width: 28px
+            - height: 28px
+            - color: '#f4f7fa'
+            name:
+            - font-size: 12px
+            - font-weight: '500'
+            - transform: translateY(-1px)
+            - color: '#f4f7fa'
+            grid:
+            - grid-template-areas: '"brand"'
+            - grid-template-columns: 1fr
+            - grid-template-rows: 1fr
+            custom_fields:
+              brand:
+              - display: flex
+              - align-items: center
+              - justify-content: center
+              - width: 100%
+              - height: 100%
+              - overflow: hidden
+          custom_fields:
+            brand: '[[[ const active = states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative''; return `<div style="text-align:center;font-family:Arial,sans-serif;line-height:1.05"><div
+              style="font-weight:800;font-size:20.9px;letter-spacing:-1px;color:${active ? "#ffd000" : "#f4f7fa"}">ple<span style="color:#f9c12e">x</span></div><div
+              style="font-size:11.4px;font-weight:650;color:#f4f7fa;margin-top:4.75px">Native</div></div>`; ]]]'
+      - type: picture-elements
+        image: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MjAiIGhlaWdodD0iMzE1IiB2aWV3Qm94PSIwIDAgNDIwIDMxNSI+PHJlY3Qgd2lkdGg9IjQyMCIgaGVpZ2h0PSIzMTUiIGZpbGw9IiMxMTExMTEiLz48L3N2Zz4=
+        elements:
+        - type: icon
+          icon: mdi:chevron-left
+          title: Left
+          tap_action:
+            action: perform-action
+            perform_action: button.press
+            target:
+              entity_id: button.lg_49nano816na_56ba_remote_left
+          style:
+            position: absolute
+            transform: translate(-50%, -50%)
+            left: 12.5%
+            top: 50%
+            width: 18%
+            height: 80%
+            display: flex
+            align-items: center
+            justify-content: center
+            box-sizing: border-box
+            padding: '0'
+            overflow: hidden
+            border-radius: 18px
+            border: '1px solid #7195b7'
+            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            --mdc-icon-size: 23px
+            color: '#f4f7fa'
+            cursor: pointer
+        - type: icon
+          icon: mdi:chevron-up
+          title: Up
+          tap_action:
+            action: perform-action
+            perform_action: button.press
+            target:
+              entity_id: button.lg_49nano816na_56ba_remote_up
+          style:
+            position: absolute
+            transform: translate(-50%, -50%)
+            left: 50%
+            top: 16.7%
+            width: 50%
+            height: 28%
+            display: flex
+            align-items: center
+            justify-content: center
+            box-sizing: border-box
+            padding: '0'
+            overflow: hidden
+            border-radius: 18px
+            border: '1px solid #7195b7'
+            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            --mdc-icon-size: 23px
+            color: '#f4f7fa'
+            cursor: pointer
+        - type: image
+          title: OK
+          tap_action:
+            action: perform-action
+            perform_action: button.press
+            target:
+              entity_id: button.lg_49nano816na_56ba_remote_ok
+          style:
+            position: absolute
+            transform: translate(-50%, -50%)
+            left: 50%
+            top: 50%
+            width: 50%
+            height: 28%
+            display: flex
+            align-items: center
+            justify-content: center
+            box-sizing: border-box
+            padding: '0'
+            overflow: hidden
+            border-radius: 18px
+            border: '1px solid #7195b7'
+            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            --mdc-icon-size: 23px
+            color: '#f4f7fa'
+            cursor: pointer
+            object-fit: contain
+          image: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMTAiIGhlaWdodD0iODQiIHZpZXdCb3g9IjAgMCAyMTAgODQiPjx0ZXh0IHg9IjEwNSIgeT0iNTEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmNGY3ZmEiIGZvbnQtc2l6ZT0iMjMiIGZvbnQtd2VpZ2h0PSI3MDAiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIj5PSzwvdGV4dD48L3N2Zz4=
+        - type: icon
+          icon: mdi:chevron-down
+          title: Down
+          tap_action:
+            action: perform-action
+            perform_action: button.press
+            target:
+              entity_id: button.lg_49nano816na_56ba_remote_down
+          style:
+            position: absolute
+            transform: translate(-50%, -50%)
+            left: 50%
+            top: 83.3%
+            width: 50%
+            height: 28%
+            display: flex
+            align-items: center
+            justify-content: center
+            box-sizing: border-box
+            padding: '0'
+            overflow: hidden
+            border-radius: 18px
+            border: '1px solid #7195b7'
+            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            --mdc-icon-size: 23px
+            color: '#f4f7fa'
+            cursor: pointer
+        - type: icon
+          icon: mdi:chevron-right
+          title: Right
+          tap_action:
+            action: perform-action
+            perform_action: button.press
+            target:
+              entity_id: button.lg_49nano816na_56ba_remote_right
+          style:
+            position: absolute
+            transform: translate(-50%, -50%)
+            left: 87.5%
+            top: 50%
+            width: 18%
+            height: 80%
+            display: flex
+            align-items: center
+            justify-content: center
+            box-sizing: border-box
+            padding: '0'
+            overflow: hidden
+            border-radius: 18px
+            border: '1px solid #7195b7'
+            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            --mdc-icon-size: 23px
+            color: '#f4f7fa'
+            cursor: pointer
+      - type: grid
+        columns: 3
+        square: false
+        cards:
+        - type: custom:button-card
+          entity: button.lg_49nano816na_56ba_remote_back
+          name: Wstecz
+          show_name: false
+          tap_action:
+            action: perform-action
+            perform_action: button.press
+            target:
+              entity_id: button.lg_49nano816na_56ba_remote_back
+          show_icon: true
+          show_state: false
+          styles:
+            card:
+            - height: min(86px, calc(18.8vw - 9px))
+            - padding: '0'
+            - border-radius: 18px
+            - margin: 7px 4px
+            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            - border: '1px solid #7195b7'
+            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - box-sizing: border-box
+            - overflow: hidden
+            - width: min(138px, calc((100vw - 76px) / 3))
+            icon:
+            - width: 23px
+            - height: 23px
+            - color: '#f4f7fa'
+            name:
+            - font-size: 14px
+            - font-weight: '500'
+            grid:
+            - grid-template-areas: '"i" "n"'
+            - grid-template-rows: 1fr min-content
+        - type: custom:button-card
+          entity: button.lg_49nano816na_56ba_remote_home
+          name: Home
+          show_name: false
+          tap_action:
+            action: perform-action
+            perform_action: button.press
+            target:
+              entity_id: button.lg_49nano816na_56ba_remote_home
+          show_icon: true
+          show_state: false
+          styles:
+            card:
+            - height: min(86px, calc(18.8vw - 9px))
+            - padding: '0'
+            - border-radius: 18px
+            - margin: 7px 4px
+            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            - border: '1px solid #7195b7'
+            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - box-sizing: border-box
+            - overflow: hidden
+            - width: min(138px, calc((100vw - 76px) / 3))
+            icon:
+            - width: 23px
+            - height: 23px
+            - color: '#f4f7fa'
+            name:
+            - font-size: 14px
+            - font-weight: '500'
+            grid:
+            - grid-template-areas: '"i" "n"'
+            - grid-template-rows: 1fr min-content
+        - type: custom:button-card
+          entity: sensor.lg_49nano816na_56ba_active_app
+          name: INPUT
+          icon: mdi:import
+          show_name: false
+          tap_action:
+            action: perform-action
+            perform_action: mqtt.publish
+            data:
+              topic: lgtv_49nano816na_56ba/command/launchApp
+              payload: com.tvweb.inputbar
+              qos: 0
+              retain: false
+          show_icon: true
+          show_state: false
+          styles:
+            card:
+            - height: min(86px, calc(18.8vw - 9px))
+            - padding: '0'
+            - border-radius: 18px
+            - margin: 7px 4px
+            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            - border: '1px solid #7195b7'
+            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            - box-sizing: border-box
+            - overflow: hidden
+            - width: min(138px, calc((100vw - 76px) / 3))
+            icon:
+            - width: 23px
+            - height: 23px
+            - color: '#f4f7fa'
+            - animation: "[[[\n  const a = states['sensor.lg_49nano816na_56ba_active_app'];\n  const id = String(a?.attributes?.app_id || '');\n  if (!/^com\\.webos\\\
+                .app\\.hdmi[1-9]$/i.test(id) || !a?.last_changed) return 'none';\n  const age = (Date.now() - new Date(a.last_changed).getTime()) / 1000;\n  return\
+                \ age >= 0 && age < 9 ? `tv-input-flash 9s linear ${-age}s 1 both` : 'none';\n]]]"
+            name:
+            - font-size: 14px
+            - font-weight: '500'
+            grid:
+            - grid-template-areas: '"i" "n"'
+            - grid-template-rows: 1fr min-content
+          triggers_update:
+          - sensor.lg_49nano816na_56ba_active_app
+          extra_styles: '@keyframes tv-input-flash { 0%,55.5556% { color:#ffd000; } 100% { color:#4b8bbe; } }'
+      - type: grid
+        columns: 1
+        square: false
+        cards:
+        - type: custom:button-card
+          show_icon: false
+          show_name: false
+          show_state: false
+          tap_action:
+            action: none
+          custom_fields:
+            play:
+              card:
+                type: custom:button-card
+                entity: sensor.lg_49nano816na_56ba_play_state
+                name: Play/Pause
+                icon: mdi:play-pause
+                show_name: false
+                tap_action:
+                  action: perform-action
+                  perform_action: mqtt.publish
+                  data:
+                    topic: lgtv_49nano816na_56ba/command/playback
+                    payload: '[[[ return states[''sensor.lg_49nano816na_56ba_play_state'']?.state === ''playing'' ? ''pause'' : ''play''; ]]]'
+                    qos: 0
+                    retain: false
+                show_icon: true
+                show_state: false
+                triggers_update:
+                - sensor.lg_49nano816na_56ba_play_state
+                styles:
+                  card:
+                  - height: min(86px, calc(18.8vw - 9px))
+                  - padding: 5px
+                  - border-radius: 18px
+                  - width: min(286px, calc(64vw - 41.6px))
+                  - margin: '0'
+                  - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+                  - border: '1px solid #7195b7'
+                  - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+                  - overflow: hidden
+                  - box-sizing: border-box
+                  icon:
+                  - width: 25px
+                  - height: 25px
+                  - color: '#f4f7fa'
+                  - animation: '[[[ return states[''sensor.lg_49nano816na_56ba_play_state'']?.state === ''paused'' ? ''tv-pause-soft 2.5s ease-in-out infinite'' :
+                      ''none''; ]]]'
+                  name:
+                  - font-size: 15px
+                  - font-weight: '500'
+                  grid:
+                  - grid-template-areas: '"i" "n"'
+                  - grid-template-rows: 1fr min-content
+                extra_styles: '@keyframes tv-pause-soft { 0%,100% {opacity:1;} 50% {opacity:0.58;} }'
+            screen:
+              card:
+                type: custom:button-card
+                entity: switch.lg_49nano816na_56ba_display_panel
+                name: Screen Off
+                icon: mdi:monitor-off
+                show_icon: true
+                show_name: false
+                show_state: false
+                tap_action:
+                  action: toggle
+                styles:
+                  card:
+                  - height: min(86px, calc(18.8vw - 9px))
+                  - padding: 5px
+                  - border-radius: 18px
+                  - width: min(156px, calc(33vw - 21.45px))
+                  - margin: '0'
+                  - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+                  - border: '1px solid #7195b7'
+                  - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+                  - overflow: hidden
+                  - box-sizing: border-box
+                  icon:
+                  - width: 21.85px
+                  - height: 21.85px
+                  - color: '#f4f7fa'
+                  name:
+                  - font-size: 15px
+                  - font-weight: '500'
+          styles:
+            card:
+            - height: min(86px, calc(18.8vw - 9px))
+            - padding: '0'
+            - margin: 7px 4px
+            - background: transparent
+            - border: none
+            - box-shadow: none
+            - border-radius: '0'
+            - width: min(457px, calc(100vw - 48px))
+            grid:
+            - grid-template-areas: '"play screen"'
+            - grid-template-columns: minmax(0, 2fr) minmax(0, 1fr)
+            - grid-template-rows: min(86px, calc(18.8vw - 9px))
+            - column-gap: 14px
+            - align-items: stretch
+            custom_fields:
+              play:
+              - min-width: '0'
+              - width: 100%
+              screen:
+              - min-width: '0'
+              - width: 100%
+      grid_options:
+        columns: 12
+        rows: auto
     - type: custom:button-card
+      visibility:
+      - condition: screen
+        media_query: "(min-width: 600px)"
       color_type: blank-card
       tap_action:
         action: none
