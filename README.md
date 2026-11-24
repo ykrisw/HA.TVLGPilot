@@ -6,7 +6,9 @@ Pilot LG dla Home Assistant, wykorzystujący istniejące encje, MQTT i `custom:b
 
 **1.1.1 — zaakceptowany punkt wyjścia do testów funkcjonalnych.**
 
-Plik `dashboard.yaml` zawiera bieżącą wersję projektu. Wersje sprzed 1.1.1 pozostają wyłącznie w standardowej historii commitów Git; stary osobny plik YAML usunięto z bieżącego drzewa repozytorium.
+**1.1.2 — testowy układ mobilny:** dla ekranów do 599 px szerokości jeden dashboard wyświetla proporcjonalnie zmniejszoną wersję pilota. Powyżej 599 px pokazuje dokładnie zachowany układ komputerowy 1.1.1. Obie wersje mają te same akcje sterujące. Nie uznawać układu mobilnego za zatwierdzony bez testu na iPhonie.
+
+Plik `dashboard.yaml` zawiera bieżącą wersję projektu (**1.1.2**, test mobilny). Wersje sprzed 1.1.1 pozostają wyłącznie w standardowej historii commitów Git; stary osobny plik YAML usunięto z bieżącego drzewa repozytorium.
 
 ## Zasada zamrożenia wyglądu
 
