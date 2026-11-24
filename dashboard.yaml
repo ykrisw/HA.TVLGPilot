@@ -418,11 +418,9 @@ views:
       - type: picture-elements
         image: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MjAiIGhlaWdodD0iMzE1IiB2aWV3Qm94PSIwIDAgNDIwIDMxNSI+PHJlY3Qgd2lkdGg9IjQyMCIgaGVpZ2h0PSIzMTUiIGZpbGw9IiMxMTExMTEiLz48L3N2Zz4=
         elements:
-        - type: custom:button-card
-          entity: button.lg_49nano816na_56ba_remote_left
-          show_icon: true
-          show_name: false
+        - type: icon
           icon: mdi:chevron-left
+          title: Left
           tap_action:
             action: perform-action
             perform_action: button.press
@@ -435,33 +433,22 @@ views:
             top: 50%
             width: 18%
             height: 80%
+            display: flex
+            align-items: center
+            justify-content: center
+            box-sizing: border-box
             padding: '0'
-          styles:
-            card:
-            - width: 100%
-            - height: 100%
-            - padding: '0'
-            - border-radius: 18px
-            - border: '1px solid #7195b7'
-            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
-            - overflow: hidden
-            - box-sizing: border-box
-            icon:
-            - width: 23px
-            - height: 23px
-            - color: '#f4f7fa'
-            name:
-            - font-family: Arial,sans-serif
-            - font-size: 23px
-            - font-weight: '700'
-            - color: '#f4f7fa'
-          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d,#382016 60%,#211713) !important; border:1px solid #ff7436 !important; box-shadow:0 0 15px rgba(255,116,54,0.8) !important; }'
-        - type: custom:button-card
-          entity: button.lg_49nano816na_56ba_remote_up
-          show_icon: true
-          show_name: false
+            overflow: hidden
+            border-radius: 18px
+            border: '1px solid #7195b7'
+            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            --mdc-icon-size: 23px
+            color: '#f4f7fa'
+            cursor: pointer
+        - type: icon
           icon: mdi:chevron-up
+          title: Up
           tap_action:
             action: perform-action
             perform_action: button.press
@@ -474,33 +461,21 @@ views:
             top: 16.7%
             width: 50%
             height: 28%
+            display: flex
+            align-items: center
+            justify-content: center
+            box-sizing: border-box
             padding: '0'
-          styles:
-            card:
-            - width: 100%
-            - height: 100%
-            - padding: '0'
-            - border-radius: 18px
-            - border: '1px solid #7195b7'
-            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
-            - overflow: hidden
-            - box-sizing: border-box
-            icon:
-            - width: 23px
-            - height: 23px
-            - color: '#f4f7fa'
-            name:
-            - font-family: Arial,sans-serif
-            - font-size: 23px
-            - font-weight: '700'
-            - color: '#f4f7fa'
-          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d,#382016 60%,#211713) !important; border:1px solid #ff7436 !important; box-shadow:0 0 15px rgba(255,116,54,0.8) !important; }'
-        - type: custom:button-card
-          entity: button.lg_49nano816na_56ba_remote_ok
-          show_icon: false
-          show_name: true
-          name: OK
+            overflow: hidden
+            border-radius: 18px
+            border: '1px solid #7195b7'
+            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            --mdc-icon-size: 23px
+            color: '#f4f7fa'
+            cursor: pointer
+        - type: image
+          title: OK
           tap_action:
             action: perform-action
             perform_action: button.press
@@ -513,33 +488,24 @@ views:
             top: 50%
             width: 50%
             height: 28%
+            display: flex
+            align-items: center
+            justify-content: center
+            box-sizing: border-box
             padding: '0'
-          styles:
-            card:
-            - width: 100%
-            - height: 100%
-            - padding: '0'
-            - border-radius: 18px
-            - border: '1px solid #7195b7'
-            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
-            - overflow: hidden
-            - box-sizing: border-box
-            icon:
-            - width: 23px
-            - height: 23px
-            - color: '#f4f7fa'
-            name:
-            - font-family: Arial,sans-serif
-            - font-size: 23px
-            - font-weight: '700'
-            - color: '#f4f7fa'
-          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d,#382016 60%,#211713) !important; border:1px solid #ff7436 !important; box-shadow:0 0 15px rgba(255,116,54,0.8) !important; }'
-        - type: custom:button-card
-          entity: button.lg_49nano816na_56ba_remote_down
-          show_icon: true
-          show_name: false
+            overflow: hidden
+            border-radius: 18px
+            border: '1px solid #7195b7'
+            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            --mdc-icon-size: 23px
+            color: '#f4f7fa'
+            cursor: pointer
+            object-fit: contain
+          image: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMTAiIGhlaWdodD0iODQiIHZpZXdCb3g9IjAgMCAyMTAgODQiPjx0ZXh0IHg9IjEwNSIgeT0iNTEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmNGY3ZmEiIGZvbnQtc2l6ZT0iMjMiIGZvbnQtd2VpZ2h0PSI3MDAiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIj5PSzwvdGV4dD48L3N2Zz4=
+        - type: icon
           icon: mdi:chevron-down
+          title: Down
           tap_action:
             action: perform-action
             perform_action: button.press
@@ -552,33 +518,22 @@ views:
             top: 83.3%
             width: 50%
             height: 28%
+            display: flex
+            align-items: center
+            justify-content: center
+            box-sizing: border-box
             padding: '0'
-          styles:
-            card:
-            - width: 100%
-            - height: 100%
-            - padding: '0'
-            - border-radius: 18px
-            - border: '1px solid #7195b7'
-            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
-            - overflow: hidden
-            - box-sizing: border-box
-            icon:
-            - width: 23px
-            - height: 23px
-            - color: '#f4f7fa'
-            name:
-            - font-family: Arial,sans-serif
-            - font-size: 23px
-            - font-weight: '700'
-            - color: '#f4f7fa'
-          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d,#382016 60%,#211713) !important; border:1px solid #ff7436 !important; box-shadow:0 0 15px rgba(255,116,54,0.8) !important; }'
-        - type: custom:button-card
-          entity: button.lg_49nano816na_56ba_remote_right
-          show_icon: true
-          show_name: false
+            overflow: hidden
+            border-radius: 18px
+            border: '1px solid #7195b7'
+            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            --mdc-icon-size: 23px
+            color: '#f4f7fa'
+            cursor: pointer
+        - type: icon
           icon: mdi:chevron-right
+          title: Right
           tap_action:
             action: perform-action
             perform_action: button.press
@@ -591,28 +546,19 @@ views:
             top: 50%
             width: 18%
             height: 80%
+            display: flex
+            align-items: center
+            justify-content: center
+            box-sizing: border-box
             padding: '0'
-          styles:
-            card:
-            - width: 100%
-            - height: 100%
-            - padding: '0'
-            - border-radius: 18px
-            - border: '1px solid #7195b7'
-            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
-            - overflow: hidden
-            - box-sizing: border-box
-            icon:
-            - width: 23px
-            - height: 23px
-            - color: '#f4f7fa'
-            name:
-            - font-family: Arial,sans-serif
-            - font-size: 23px
-            - font-weight: '700'
-            - color: '#f4f7fa'
-          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d,#382016 60%,#211713) !important; border:1px solid #ff7436 !important; box-shadow:0 0 15px rgba(255,116,54,0.8) !important; }'
+            overflow: hidden
+            border-radius: 18px
+            border: '1px solid #7195b7'
+            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            --mdc-icon-size: 23px
+            color: '#f4f7fa'
+            cursor: pointer
       - type: grid
         columns: 3
         square: false
@@ -1244,11 +1190,9 @@ views:
       - type: picture-elements
         image: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MjAiIGhlaWdodD0iMzE1IiB2aWV3Qm94PSIwIDAgNDIwIDMxNSI+PHJlY3Qgd2lkdGg9IjQyMCIgaGVpZ2h0PSIzMTUiIGZpbGw9IiMxMTExMTEiLz48L3N2Zz4=
         elements:
-        - type: custom:button-card
-          entity: button.lg_49nano816na_56ba_remote_left
-          show_icon: true
-          show_name: false
+        - type: icon
           icon: mdi:chevron-left
+          title: Left
           tap_action:
             action: perform-action
             perform_action: button.press
@@ -1261,33 +1205,22 @@ views:
             top: 50%
             width: 18%
             height: 80%
+            display: flex
+            align-items: center
+            justify-content: center
+            box-sizing: border-box
             padding: '0'
-          styles:
-            card:
-            - width: 100%
-            - height: 100%
-            - padding: '0'
-            - border-radius: 18px
-            - border: '1px solid #7195b7'
-            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
-            - overflow: hidden
-            - box-sizing: border-box
-            icon:
-            - width: 23px
-            - height: 23px
-            - color: '#f4f7fa'
-            name:
-            - font-family: Arial,sans-serif
-            - font-size: 23px
-            - font-weight: '700'
-            - color: '#f4f7fa'
-          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d,#382016 60%,#211713) !important; border:1px solid #ff7436 !important; box-shadow:0 0 15px rgba(255,116,54,0.8) !important; }'
-        - type: custom:button-card
-          entity: button.lg_49nano816na_56ba_remote_up
-          show_icon: true
-          show_name: false
+            overflow: hidden
+            border-radius: 18px
+            border: '1px solid #7195b7'
+            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            --mdc-icon-size: 23px
+            color: '#f4f7fa'
+            cursor: pointer
+        - type: icon
           icon: mdi:chevron-up
+          title: Up
           tap_action:
             action: perform-action
             perform_action: button.press
@@ -1300,33 +1233,21 @@ views:
             top: 16.7%
             width: 50%
             height: 28%
+            display: flex
+            align-items: center
+            justify-content: center
+            box-sizing: border-box
             padding: '0'
-          styles:
-            card:
-            - width: 100%
-            - height: 100%
-            - padding: '0'
-            - border-radius: 18px
-            - border: '1px solid #7195b7'
-            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
-            - overflow: hidden
-            - box-sizing: border-box
-            icon:
-            - width: 23px
-            - height: 23px
-            - color: '#f4f7fa'
-            name:
-            - font-family: Arial,sans-serif
-            - font-size: 23px
-            - font-weight: '700'
-            - color: '#f4f7fa'
-          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d,#382016 60%,#211713) !important; border:1px solid #ff7436 !important; box-shadow:0 0 15px rgba(255,116,54,0.8) !important; }'
-        - type: custom:button-card
-          entity: button.lg_49nano816na_56ba_remote_ok
-          show_icon: false
-          show_name: true
-          name: OK
+            overflow: hidden
+            border-radius: 18px
+            border: '1px solid #7195b7'
+            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            --mdc-icon-size: 23px
+            color: '#f4f7fa'
+            cursor: pointer
+        - type: image
+          title: OK
           tap_action:
             action: perform-action
             perform_action: button.press
@@ -1339,33 +1260,24 @@ views:
             top: 50%
             width: 50%
             height: 28%
+            display: flex
+            align-items: center
+            justify-content: center
+            box-sizing: border-box
             padding: '0'
-          styles:
-            card:
-            - width: 100%
-            - height: 100%
-            - padding: '0'
-            - border-radius: 18px
-            - border: '1px solid #7195b7'
-            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
-            - overflow: hidden
-            - box-sizing: border-box
-            icon:
-            - width: 23px
-            - height: 23px
-            - color: '#f4f7fa'
-            name:
-            - font-family: Arial,sans-serif
-            - font-size: 23px
-            - font-weight: '700'
-            - color: '#f4f7fa'
-          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d,#382016 60%,#211713) !important; border:1px solid #ff7436 !important; box-shadow:0 0 15px rgba(255,116,54,0.8) !important; }'
-        - type: custom:button-card
-          entity: button.lg_49nano816na_56ba_remote_down
-          show_icon: true
-          show_name: false
+            overflow: hidden
+            border-radius: 18px
+            border: '1px solid #7195b7'
+            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            --mdc-icon-size: 23px
+            color: '#f4f7fa'
+            cursor: pointer
+            object-fit: contain
+          image: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMTAiIGhlaWdodD0iODQiIHZpZXdCb3g9IjAgMCAyMTAgODQiPjx0ZXh0IHg9IjEwNSIgeT0iNTEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmNGY3ZmEiIGZvbnQtc2l6ZT0iMjMiIGZvbnQtd2VpZ2h0PSI3MDAiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIj5PSzwvdGV4dD48L3N2Zz4=
+        - type: icon
           icon: mdi:chevron-down
+          title: Down
           tap_action:
             action: perform-action
             perform_action: button.press
@@ -1378,33 +1290,22 @@ views:
             top: 83.3%
             width: 50%
             height: 28%
+            display: flex
+            align-items: center
+            justify-content: center
+            box-sizing: border-box
             padding: '0'
-          styles:
-            card:
-            - width: 100%
-            - height: 100%
-            - padding: '0'
-            - border-radius: 18px
-            - border: '1px solid #7195b7'
-            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
-            - overflow: hidden
-            - box-sizing: border-box
-            icon:
-            - width: 23px
-            - height: 23px
-            - color: '#f4f7fa'
-            name:
-            - font-family: Arial,sans-serif
-            - font-size: 23px
-            - font-weight: '700'
-            - color: '#f4f7fa'
-          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d,#382016 60%,#211713) !important; border:1px solid #ff7436 !important; box-shadow:0 0 15px rgba(255,116,54,0.8) !important; }'
-        - type: custom:button-card
-          entity: button.lg_49nano816na_56ba_remote_right
-          show_icon: true
-          show_name: false
+            overflow: hidden
+            border-radius: 18px
+            border: '1px solid #7195b7'
+            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            --mdc-icon-size: 23px
+            color: '#f4f7fa'
+            cursor: pointer
+        - type: icon
           icon: mdi:chevron-right
+          title: Right
           tap_action:
             action: perform-action
             perform_action: button.press
@@ -1417,28 +1318,19 @@ views:
             top: 50%
             width: 18%
             height: 80%
+            display: flex
+            align-items: center
+            justify-content: center
+            box-sizing: border-box
             padding: '0'
-          styles:
-            card:
-            - width: 100%
-            - height: 100%
-            - padding: '0'
-            - border-radius: 18px
-            - border: '1px solid #7195b7'
-            - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
-            - overflow: hidden
-            - box-sizing: border-box
-            icon:
-            - width: 23px
-            - height: 23px
-            - color: '#f4f7fa'
-            name:
-            - font-family: Arial,sans-serif
-            - font-size: 23px
-            - font-weight: '700'
-            - color: '#f4f7fa'
-          extra_styles: 'ha-card:active { background:linear-gradient(145deg,#59301d,#382016 60%,#211713) !important; border:1px solid #ff7436 !important; box-shadow:0 0 15px rgba(255,116,54,0.8) !important; }'
+            overflow: hidden
+            border-radius: 18px
+            border: '1px solid #7195b7'
+            background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
+            box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
+            --mdc-icon-size: 23px
+            color: '#f4f7fa'
+            cursor: pointer
       - type: grid
         columns: 3
         square: false
