@@ -1,4 +1,4 @@
-# HA.TVLGPilot 1.0.8 — proporcjonalnie węższy pilot; wysokości, akcje i joystick bez zmian.
+# HA.TVLGPilot 1.0.9 — korekty geometrii i logotypów według zaakceptowanego zrzutu 1.0.8.
 views:
 - title: TV Control
   path: overview
@@ -43,7 +43,7 @@ views:
             target: {}
           styles:
             card:
-            - height: 96px
+            - height: 101px
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
@@ -52,7 +52,7 @@ views:
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
-            - width: 445px
+            - width: 457px
             icon:
             - width: 33px
             - height: 33px
@@ -83,7 +83,7 @@ views:
           - sensor.lg_49nano816na_56ba_active_app
           styles:
             card:
-            - height: 96px
+            - height: 101px
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
@@ -137,7 +137,7 @@ views:
           - sensor.lg_49nano816na_56ba_active_app
           styles:
             card:
-            - height: 96px
+            - height: 101px
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
@@ -156,11 +156,11 @@ views:
             name:
             - font-size: 13px
             - font-weight: '650'
-            - transform: translateY(-1px)
+            - transform: translateY(-3px)
             - color: '#f4f7fa'
             grid:
             - grid-template-areas: '"i" "n"'
-            - grid-template-rows: 55px 22px
+            - grid-template-rows: 40px 18px
             - justify-items: center
             - align-content: center
         - type: custom:button-card
@@ -182,7 +182,7 @@ views:
           - sensor.lg_49nano816na_56ba_active_app
           styles:
             card:
-            - height: 96px
+            - height: 101px
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
@@ -216,8 +216,8 @@ views:
               - overflow: hidden
           custom_fields:
             brand: '[[[ const active = states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon''; return `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;color:${active
-              ? "#ffd000" : "#f2f5fa"};font-family:Arial,sans-serif;line-height:1"><div style="font-size:17px;font-weight:700;white-space:nowrap"><span style="color:#23adf2">prime</span>
-              video</div><svg viewBox="0 0 130 24" width="82" height="18" aria-hidden="true" style="margin-top:2px"><path d="M15 4 Q58 34 110 5" stroke="#21b6f6"
+              ? "#ffd000" : "#f2f5fa"};font-family:Arial,sans-serif;line-height:1"><div style="font-size:15.64px;font-weight:700;white-space:nowrap"><span style="color:#23adf2">prime</span>
+              video</div><svg viewBox="0 0 130 24" width="75.44" height="16.56" aria-hidden="true" style="margin-top:2px"><path d="M15 4 Q58 34 110 5" stroke="#21b6f6"
               stroke-width="5" fill="none" stroke-linecap="round"/><path d="M98 5 L111 4 L107 15" stroke="#21b6f6" stroke-width="4" fill="none" stroke-linecap="round"/></svg></div>`;
               ]]]'
         - type: custom:button-card
@@ -239,7 +239,7 @@ views:
           - sensor.lg_49nano816na_56ba_active_app
           styles:
             card:
-            - height: 96px
+            - height: 101px
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
@@ -251,8 +251,8 @@ views:
             - color: '#f4f7fa'
             - width: 138px
             icon:
-            - width: 33px
-            - height: 33px
+            - width: 31.35px
+            - height: 31.35px
             - color: '[[[ const a=states[''sensor.lg_49nano816na_56ba_active_app'']; return a?.attributes?.app_id === ''com.apple.appletv'' ? ''#ffd000'' : ''#f4f7fa'';
                 ]]]'
             name:
@@ -283,7 +283,7 @@ views:
           - sensor.lg_49nano816na_56ba_active_app
           styles:
             card:
-            - height: 96px
+            - height: 101px
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
@@ -337,7 +337,7 @@ views:
           - sensor.lg_49nano816na_56ba_active_app
           styles:
             card:
-            - height: 96px
+            - height: 101px
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
@@ -374,7 +374,7 @@ views:
               style="font-weight:800;font-size:22px;letter-spacing:-1px;color:${active ? "#ffd000" : "#f4f7fa"}">ple<span style="color:#f9c12e">x</span></div><div
               style="font-size:12px;font-weight:650;color:#f4f7fa;margin-top:5px">Native</div></div>`; ]]]'
       - type: picture-elements
-        image: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MjAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgNDIwIDMwMCI+PHJlY3Qgd2lkdGg9IjQyMCIgaGVpZ2h0PSIzMDAiIGZpbGw9IiMxMTExMTEiIGZpbGwtb3BhY2l0eT0iMC4wMDEiLz48L3N2Zz4=
+        image: data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MjAiIGhlaWdodD0iMzE1IiB2aWV3Qm94PSIwIDAgNDIwIDMxNSI+PHJlY3Qgd2lkdGg9IjQyMCIgaGVpZ2h0PSIzMTUiIGZpbGw9IiMxMTExMTEiIGZpbGwtb3BhY2l0eT0iMC4wMDEiLz48L3N2Zz4=
         elements:
         - type: icon
           icon: mdi:chevron-left
@@ -389,8 +389,8 @@ views:
             transform: translate(-50%, -50%)
             left: 12.5%
             top: 50%
-            width: 22.5%
-            height: 94%
+            width: 18%
+            height: 80%
             display: flex
             align-items: center
             justify-content: center
@@ -502,8 +502,8 @@ views:
             transform: translate(-50%, -50%)
             left: 87.5%
             top: 50%
-            width: 22.5%
-            height: 94%
+            width: 18%
+            height: 80%
             display: flex
             align-items: center
             justify-content: center
@@ -534,7 +534,7 @@ views:
           show_state: false
           styles:
             card:
-            - height: 82px
+            - height: 86px
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
@@ -567,7 +567,7 @@ views:
           show_state: false
           styles:
             card:
-            - height: 82px
+            - height: 86px
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
@@ -604,7 +604,7 @@ views:
           show_state: false
           styles:
             card:
-            - height: 82px
+            - height: 86px
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
@@ -662,7 +662,7 @@ views:
                 - sensor.lg_49nano816na_56ba_play_state
                 styles:
                   card:
-                  - height: 82px
+                  - height: 86px
                   - padding: 5px
                   - border-radius: 18px
                   - width: 286px
@@ -675,8 +675,7 @@ views:
                   icon:
                   - width: 25px
                   - height: 25px
-                  - color: '[[[ const s=states[''sensor.lg_49nano816na_56ba_play_state'']?.state; return [''playing'',''paused''].includes(s) ? ''#ffd000'' : ''#4b8bbe'';
-                      ]]]'
+                  - color: '#f4f7fa'
                   - animation: '[[[ return states[''sensor.lg_49nano816na_56ba_play_state'']?.state === ''paused'' ? ''tv-pause-soft 2.5s ease-in-out infinite'' :
                       ''none''; ]]]'
                   name:
@@ -699,10 +698,10 @@ views:
                   action: toggle
                 styles:
                   card:
-                  - height: 82px
+                  - height: 86px
                   - padding: 5px
                   - border-radius: 18px
-                  - width: 144px
+                  - width: 156px
                   - margin: '0'
                   - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
                   - border: '1px solid #7195b7'
@@ -710,26 +709,26 @@ views:
                   - overflow: hidden
                   - box-sizing: border-box
                   icon:
-                  - width: 25px
-                  - height: 25px
-                  - color: '[[[ return entity?.state === ''off'' ? ''#ffd000'' : ''#4b8bbe''; ]]]'
+                  - width: 23px
+                  - height: 23px
+                  - color: '#f4f7fa'
                   name:
                   - font-size: 15px
                   - font-weight: '500'
           styles:
             card:
-            - height: 82px
+            - height: 86px
             - padding: '0'
             - margin: 7px 4px
             - background: transparent
             - border: none
             - box-shadow: none
             - border-radius: '0'
-            - width: 445px
+            - width: 457px
             grid:
             - grid-template-areas: '"play screen"'
-            - grid-template-columns: 286px 144px
-            - grid-template-rows: 82px
+            - grid-template-columns: 286px 156px
+            - grid-template-rows: 86px
             - column-gap: 14px
             - align-items: stretch
             custom_fields:
