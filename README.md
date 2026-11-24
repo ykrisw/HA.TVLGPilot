@@ -1,32 +1,29 @@
 # HA.TVLGPilot
 
-Pilot do telewizora LG w panelu Home Assistant, oparty o `custom:button-card`, integrację MQTT oraz istniejące encje TV.
+Pilot LG dla Home Assistant, wykorzystujący istniejące encje, MQTT i `custom:button-card`.
 
-**Wersja:** `1.0.2` (rozwojowa). Kolejne wersje: `1.0.2`, `1.0.3` itd. Każda wersja zwiększa trzeci numer o 1.
+## Wersja bazowa
+
+**1.1.1 — zaakceptowany punkt wyjścia do testów funkcjonalnych.**
+
+Plik `dashboard.yaml` zawiera bieżącą wersję projektu. Wersje sprzed 1.1.1 pozostają wyłącznie w standardowej historii commitów Git; stary osobny plik YAML usunięto z bieżącego drzewa repozytorium.
+
+## Zasada zamrożenia wyglądu
+
+Wygląd **1.1.1** jest zaakceptowany: kolory, gradienty, obramowania, logotypy, wymiary, proporcje i rozmieszczenie przycisków. **Nie zmieniać tych cech** przy testach ani poprawkach funkcjonalności. Nawet jeśli użytkownik poprosi o zmianę wyglądu, należy poprosić o **odrębne potwierdzenie przed jej wprowadzeniem**.
+
+Dalsze wersje służą testowaniu i naprawie funkcjonalności pilota. Zachować istniejące akcje, tematy MQTT, powiązania encji, kolory stanu i animacje, chyba że użytkownik zatwierdzi zmianę konkretnego zachowania.
 
 ## Pliki
 
-- `dashboard.yaml` — bieżący projekt pilota (**1.0.2**).
-- `reference/last-working-layout.yaml` — archiwalny punkt odniesienia (wcześniejszy układ v18), do porównywania działań i centrowania.
-- `LICENSE` — licencja MIT.
+- `dashboard.yaml` — aktualna wersja pilota, bazowo **1.1.1**
+- `same_as_before_but_with_three_changes_logo_sizes.png` — zaakceptowany render projektu
+- `Szablon 1.png`, `Szablon 2.png` — szablony symetrii i proporcji
+- `LICENSE` — licencja MIT
 
-## Stan projektu
+## Testowanie
 
-Projekt jest w trakcie dopracowywania wyglądu. **W wersji 1.0.2 joystick przebudowano na natywne stosy kart, ale wygląd oraz dolny rząd nadal wymagają sprawdzenia w Home Assistant.** Prawidłowa składnia YAML nie gwarantuje prawidłowego wyglądu w Home Assistant.
-
-Docelowy wygląd: ciemne gradientowe przyciski z cienkim niebieskoszarym obramowaniem, symetryczna siatka; pełnoszeroki POWER o tej samej wysokości co przyciski aplikacji; dwa rzędy aplikacji; joystick z wysokimi przyciskami bocznymi; Back/Home/INPUT; Play/Pause i Screen Off w proporcji 2:1. Pilot ma być wysoki i stosunkowo wąski, bez zwiększania zaakceptowanej szerokości.
-
-### Ważne zasady
-
-- Nie zmieniać istniejących tematów MQTT, akcji ani powiązań encji bez uzgodnienia.
-- Zachować dynamiczne kolory aktywnej aplikacji, Play/Pause, Screen Off i animację INPUT.
-- Nie dodawać podpisów do przycisków funkcyjnych (wyjątek: `OK`); napisy tylko przy wybranych aplikacjach. YouTube bez `AdFree`, Apple samo jabłko.
-- Następne poprawki dotyczą przede wszystkim **geometrii**, z unikanem problematycznych zagnieżdżonych przycisków w `custom_fields`.
-- Przed uznaniem zmian za poprawne sprawdzić wygląd w przeglądarce Home Assistant.
-
-## Użycie
-
-Wymagany jest już zainstalowany `custom:button-card` oraz istniejące integracje/encje użyte w YAML. Wklej zawartość `dashboard.yaml` do edytora YAML odpowiedniego panelu Home Assistant.
+Wklej cały `dashboard.yaml` do edytora YAML właściwego dashboardu Home Assistant i zapisz. Testuj przyciski w Home Assistant na żywo. Poprawność składni YAML nie potwierdza poprawnego działania.
 
 ## Licencja
 
