@@ -1,4 +1,4 @@
-# HA.TVLGPilot 1.1.6 — app active tile full-yellow border/30% interior, longer 0.45s release fade, native joystick ripple tuned; all layouts and actions preserved.
+# HA.TVLGPilot 1.1.7 — darken inactive borders 25%; suppress persistent joystick focus halo; retain native joystick and actions.
 views:
 - title: TV Control
   path: overview
@@ -58,7 +58,7 @@ views:
             - border-radius: 18px
             - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - border: '1px solid #7195b7'
+            - border: '1px solid #557089'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
@@ -112,7 +112,7 @@ views:
             - border-radius: 18px
             - margin: 7px 4px
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''1px solid #ffd000'' : ''1px solid #557089''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
@@ -166,7 +166,7 @@ views:
             - border-radius: 18px
             - margin: 7px 4px
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''1px solid #ffd000'' : ''1px solid #557089''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
@@ -229,7 +229,7 @@ views:
             - border-radius: 18px
             - margin: 7px 4px
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''1px solid #ffd000'' : ''1px solid #557089''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
@@ -286,7 +286,7 @@ views:
             - border-radius: 18px
             - margin: 7px 4px
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''1px solid #ffd000'' : ''1px solid #557089''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
@@ -330,7 +330,7 @@ views:
             - border-radius: 18px
             - margin: 7px 4px
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''1px solid #ffd000'' : ''1px solid #557089''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
@@ -384,7 +384,7 @@ views:
             - border-radius: 18px
             - margin: 7px 4px
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''1px solid #ffd000'' : ''1px solid #557089''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
@@ -440,14 +440,17 @@ views:
             padding: '0'
             overflow: hidden
             border-radius: 18px
-            border: '1px solid #7195b7'
+            border: '1px solid #557089'
             background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             --mdc-icon-size: 23px
             color: '#f4f7fa'
             --mdc-ripple-color: '#ff7436'
-            --mdc-ripple-press-opacity: 0.85
-            --mdc-ripple-hover-opacity: 0.18
+            --mdc-ripple-press-opacity: 0.70
+            --mdc-ripple-hover-opacity: 0
+            --mdc-ripple-focus-opacity: 0
+            --mdc-ripple-selected-opacity: 0
+            --mdc-theme-primary: '#ff7436'
             transition: box-shadow 0.45s ease-out, filter 0.45s ease-out, border-color 0.45s ease-out
             cursor: pointer
         - type: icon
@@ -472,14 +475,17 @@ views:
             padding: '0'
             overflow: hidden
             border-radius: 18px
-            border: '1px solid #7195b7'
+            border: '1px solid #557089'
             background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             --mdc-icon-size: 23px
             color: '#f4f7fa'
             --mdc-ripple-color: '#ff7436'
-            --mdc-ripple-press-opacity: 0.85
-            --mdc-ripple-hover-opacity: 0.18
+            --mdc-ripple-press-opacity: 0.70
+            --mdc-ripple-hover-opacity: 0
+            --mdc-ripple-focus-opacity: 0
+            --mdc-ripple-selected-opacity: 0
+            --mdc-theme-primary: '#ff7436'
             transition: box-shadow 0.45s ease-out, filter 0.45s ease-out, border-color 0.45s ease-out
             cursor: pointer
         - type: image
@@ -503,14 +509,17 @@ views:
             padding: '0'
             overflow: hidden
             border-radius: 18px
-            border: '1px solid #7195b7'
+            border: '1px solid #557089'
             background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             --mdc-icon-size: 23px
             color: '#f4f7fa'
             --mdc-ripple-color: '#ff7436'
-            --mdc-ripple-press-opacity: 0.85
-            --mdc-ripple-hover-opacity: 0.18
+            --mdc-ripple-press-opacity: 0.70
+            --mdc-ripple-hover-opacity: 0
+            --mdc-ripple-focus-opacity: 0
+            --mdc-ripple-selected-opacity: 0
+            --mdc-theme-primary: '#ff7436'
             transition: box-shadow 0.45s ease-out, filter 0.45s ease-out, border-color 0.45s ease-out
             cursor: pointer
             object-fit: contain
@@ -537,14 +546,17 @@ views:
             padding: '0'
             overflow: hidden
             border-radius: 18px
-            border: '1px solid #7195b7'
+            border: '1px solid #557089'
             background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             --mdc-icon-size: 23px
             color: '#f4f7fa'
             --mdc-ripple-color: '#ff7436'
-            --mdc-ripple-press-opacity: 0.85
-            --mdc-ripple-hover-opacity: 0.18
+            --mdc-ripple-press-opacity: 0.70
+            --mdc-ripple-hover-opacity: 0
+            --mdc-ripple-focus-opacity: 0
+            --mdc-ripple-selected-opacity: 0
+            --mdc-theme-primary: '#ff7436'
             transition: box-shadow 0.45s ease-out, filter 0.45s ease-out, border-color 0.45s ease-out
             cursor: pointer
         - type: icon
@@ -569,14 +581,17 @@ views:
             padding: '0'
             overflow: hidden
             border-radius: 18px
-            border: '1px solid #7195b7'
+            border: '1px solid #557089'
             background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             --mdc-icon-size: 23px
             color: '#f4f7fa'
             --mdc-ripple-color: '#ff7436'
-            --mdc-ripple-press-opacity: 0.85
-            --mdc-ripple-hover-opacity: 0.18
+            --mdc-ripple-press-opacity: 0.70
+            --mdc-ripple-hover-opacity: 0
+            --mdc-ripple-focus-opacity: 0
+            --mdc-ripple-selected-opacity: 0
+            --mdc-theme-primary: '#ff7436'
             transition: box-shadow 0.45s ease-out, filter 0.45s ease-out, border-color 0.45s ease-out
             cursor: pointer
       - type: grid
@@ -601,7 +616,7 @@ views:
             - border-radius: 18px
             - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - border: '1px solid #7195b7'
+            - border: '1px solid #557089'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
@@ -635,7 +650,7 @@ views:
             - border-radius: 18px
             - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - border: '1px solid #7195b7'
+            - border: '1px solid #557089'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
@@ -673,7 +688,7 @@ views:
             - border-radius: 18px
             - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - border: '1px solid #7195b7'
+            - border: '1px solid #557089'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
@@ -734,7 +749,7 @@ views:
                   - width: 286px
                   - margin: '0'
                   - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-                  - border: '1px solid #7195b7'
+                  - border: '1px solid #557089'
                   - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
                   - overflow: hidden
                   - box-sizing: border-box
@@ -773,7 +788,7 @@ views:
                   - width: 156px
                   - margin: '0'
                   - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-                  - border: '1px solid #7195b7'
+                  - border: '1px solid #557089'
                   - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
                   - overflow: hidden
                   - box-sizing: border-box
@@ -850,7 +865,7 @@ views:
             - border-radius: 18px
             - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - border: '1px solid #7195b7'
+            - border: '1px solid #557089'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
@@ -904,7 +919,7 @@ views:
             - border-radius: 18px
             - margin: 7px 4px
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''1px solid #ffd000'' : ''1px solid #557089''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
@@ -958,7 +973,7 @@ views:
             - border-radius: 18px
             - margin: 7px 4px
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''1px solid #ffd000'' : ''1px solid #557089''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
@@ -1021,7 +1036,7 @@ views:
             - border-radius: 18px
             - margin: 7px 4px
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''1px solid #ffd000'' : ''1px solid #557089''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
@@ -1078,7 +1093,7 @@ views:
             - border-radius: 18px
             - margin: 7px 4px
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''1px solid #ffd000'' : ''1px solid #557089''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
@@ -1122,7 +1137,7 @@ views:
             - border-radius: 18px
             - margin: 7px 4px
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''1px solid #ffd000'' : ''1px solid #557089''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
@@ -1176,7 +1191,7 @@ views:
             - border-radius: 18px
             - margin: 7px 4px
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
-            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''1px solid #ffd000'' : ''1px solid #7195b7''; ]]]'
+            - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''1px solid #ffd000'' : ''1px solid #557089''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
@@ -1232,14 +1247,17 @@ views:
             padding: '0'
             overflow: hidden
             border-radius: 18px
-            border: '1px solid #7195b7'
+            border: '1px solid #557089'
             background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             --mdc-icon-size: 23px
             color: '#f4f7fa'
             --mdc-ripple-color: '#ff7436'
-            --mdc-ripple-press-opacity: 0.85
-            --mdc-ripple-hover-opacity: 0.18
+            --mdc-ripple-press-opacity: 0.70
+            --mdc-ripple-hover-opacity: 0
+            --mdc-ripple-focus-opacity: 0
+            --mdc-ripple-selected-opacity: 0
+            --mdc-theme-primary: '#ff7436'
             transition: box-shadow 0.45s ease-out, filter 0.45s ease-out, border-color 0.45s ease-out
             cursor: pointer
         - type: icon
@@ -1264,14 +1282,17 @@ views:
             padding: '0'
             overflow: hidden
             border-radius: 18px
-            border: '1px solid #7195b7'
+            border: '1px solid #557089'
             background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             --mdc-icon-size: 23px
             color: '#f4f7fa'
             --mdc-ripple-color: '#ff7436'
-            --mdc-ripple-press-opacity: 0.85
-            --mdc-ripple-hover-opacity: 0.18
+            --mdc-ripple-press-opacity: 0.70
+            --mdc-ripple-hover-opacity: 0
+            --mdc-ripple-focus-opacity: 0
+            --mdc-ripple-selected-opacity: 0
+            --mdc-theme-primary: '#ff7436'
             transition: box-shadow 0.45s ease-out, filter 0.45s ease-out, border-color 0.45s ease-out
             cursor: pointer
         - type: image
@@ -1295,14 +1316,17 @@ views:
             padding: '0'
             overflow: hidden
             border-radius: 18px
-            border: '1px solid #7195b7'
+            border: '1px solid #557089'
             background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             --mdc-icon-size: 23px
             color: '#f4f7fa'
             --mdc-ripple-color: '#ff7436'
-            --mdc-ripple-press-opacity: 0.85
-            --mdc-ripple-hover-opacity: 0.18
+            --mdc-ripple-press-opacity: 0.70
+            --mdc-ripple-hover-opacity: 0
+            --mdc-ripple-focus-opacity: 0
+            --mdc-ripple-selected-opacity: 0
+            --mdc-theme-primary: '#ff7436'
             transition: box-shadow 0.45s ease-out, filter 0.45s ease-out, border-color 0.45s ease-out
             cursor: pointer
             object-fit: contain
@@ -1329,14 +1353,17 @@ views:
             padding: '0'
             overflow: hidden
             border-radius: 18px
-            border: '1px solid #7195b7'
+            border: '1px solid #557089'
             background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             --mdc-icon-size: 23px
             color: '#f4f7fa'
             --mdc-ripple-color: '#ff7436'
-            --mdc-ripple-press-opacity: 0.85
-            --mdc-ripple-hover-opacity: 0.18
+            --mdc-ripple-press-opacity: 0.70
+            --mdc-ripple-hover-opacity: 0
+            --mdc-ripple-focus-opacity: 0
+            --mdc-ripple-selected-opacity: 0
+            --mdc-theme-primary: '#ff7436'
             transition: box-shadow 0.45s ease-out, filter 0.45s ease-out, border-color 0.45s ease-out
             cursor: pointer
         - type: icon
@@ -1361,14 +1388,17 @@ views:
             padding: '0'
             overflow: hidden
             border-radius: 18px
-            border: '1px solid #7195b7'
+            border: '1px solid #557089'
             background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             --mdc-icon-size: 23px
             color: '#f4f7fa'
             --mdc-ripple-color: '#ff7436'
-            --mdc-ripple-press-opacity: 0.85
-            --mdc-ripple-hover-opacity: 0.18
+            --mdc-ripple-press-opacity: 0.70
+            --mdc-ripple-hover-opacity: 0
+            --mdc-ripple-focus-opacity: 0
+            --mdc-ripple-selected-opacity: 0
+            --mdc-theme-primary: '#ff7436'
             transition: box-shadow 0.45s ease-out, filter 0.45s ease-out, border-color 0.45s ease-out
             cursor: pointer
       - type: grid
@@ -1393,7 +1423,7 @@ views:
             - border-radius: 18px
             - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - border: '1px solid #7195b7'
+            - border: '1px solid #557089'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
@@ -1427,7 +1457,7 @@ views:
             - border-radius: 18px
             - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - border: '1px solid #7195b7'
+            - border: '1px solid #557089'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
@@ -1465,7 +1495,7 @@ views:
             - border-radius: 18px
             - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-            - border: '1px solid #7195b7'
+            - border: '1px solid #557089'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
@@ -1526,7 +1556,7 @@ views:
                   - width: min(286px, calc(59.28vw - 28.7px))
                   - margin: '0'
                   - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-                  - border: '1px solid #7195b7'
+                  - border: '1px solid #557089'
                   - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
                   - overflow: hidden
                   - box-sizing: border-box
@@ -1565,7 +1595,7 @@ views:
                   - width: min(156px, calc(29.64vw - 20.3px))
                   - margin: '0'
                   - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
-                  - border: '1px solid #7195b7'
+                  - border: '1px solid #557089'
                   - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
                   - overflow: hidden
                   - box-sizing: border-box
