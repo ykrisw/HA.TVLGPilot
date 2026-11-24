@@ -6,9 +6,11 @@ Pilot LG dla Home Assistant, wykorzystujący istniejące encje, MQTT i `custom:b
 
 **1.1.1 — zaakceptowany punkt wyjścia do testów funkcjonalnych.**
 
+**1.1.4 — test funkcjonalny i mobilny:** dalsze zmniejszenie kafelków na iPhonie o ok. 3%; aktywna aplikacja podświetla tło i obramowanie kafelka, nie logo; Play/Pause świeci na żółto podczas odtwarzania i pulsuje podczas pauzy; Screen Off pulsuje na żółto, gdy ekran wyłączony; POWER pulsuje na czerwono przez ok. 6 s po zmianie stanu encji `binary_sensor.lg_49nano816na_56ba_power` (bez reakcji na samo kliknięcie). Animacje mają cykl 2,5 s i zakres przezroczystości 100%–38%. Ostateczny wygląd wymaga testów na iOS i macOS; bazowy wygląd 1.1.1 pozostaje punktem odniesienia.
+
 **1.1.2 — testowy układ mobilny:** dla ekranów do 599 px szerokości jeden dashboard wyświetla proporcjonalnie zmniejszoną wersję pilota. Powyżej 599 px pokazuje dokładnie zachowany układ komputerowy 1.1.1. Obie wersje mają te same akcje sterujące. Nie uznawać układu mobilnego za zatwierdzony bez testu na iPhonie.
 
-Plik `dashboard.yaml` zawiera bieżącą wersję projektu (**1.1.2**, test mobilny). Wersje sprzed 1.1.1 pozostają wyłącznie w standardowej historii commitów Git; stary osobny plik YAML usunięto z bieżącego drzewa repozytorium.
+Plik `dashboard.yaml` zawiera bieżącą wersję projektu (**1.1.4**, test mobilny i funkcjonalny). Wersje sprzed 1.1.1 pozostają wyłącznie w standardowej historii commitów Git; stary osobny plik YAML usunięto z bieżącego drzewa repozytorium.
 
 ## Zasada zamrożenia wyglądu
 
