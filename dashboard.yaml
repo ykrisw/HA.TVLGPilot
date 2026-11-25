@@ -1842,7 +1842,7 @@ views:
               - right: 14px
               - z-index: 3
             name:
-            - font-size: 14px
+            - font-size: 11.2px
             - font-weight: '500'
           extra_styles: '@keyframes tv-pilot-breathe { 0%,100% {opacity:1;} 50% {opacity:0.38;} }'
       - type: grid
@@ -1885,7 +1885,7 @@ views:
             - height: 22.4px
             - color: '#f4f7fa'
             name:
-            - font-size: 12px
+            - font-size: 9.6px
             - font-weight: '500'
             - transform: translateY(-1px)
             - color: '#f4f7fa'
@@ -1940,7 +1940,7 @@ views:
             - height: 23.2px
             - color: '#ff2637'
             name:
-            - font-size: 13px
+            - font-size: 10.4px
             - font-weight: '650'
             - transform: translateY(-3px)
             - color: '#f4f7fa'
@@ -2004,7 +2004,7 @@ views:
             - height: 22.4px
             - color: '#f4f7fa'
             name:
-            - font-size: 12px
+            - font-size: 9.6px
             - font-weight: '500'
             - transform: translateY(-1px)
             - color: '#f4f7fa'
@@ -2062,7 +2062,7 @@ views:
             - height: 25.08px
             - color: '#f4f7fa'
             name:
-            - font-size: 12px
+            - font-size: 9.6px
             - font-weight: '500'
             - transform: translateY(-1px)
             - color: '#f4f7fa'
@@ -2106,7 +2106,7 @@ views:
             - height: 22.4px
             - color: '#f4f7fa'
             name:
-            - font-size: 12px
+            - font-size: 9.6px
             - font-weight: '500'
             - transform: translateY(-1px)
             - color: '#f4f7fa'
@@ -2161,7 +2161,7 @@ views:
             - height: 22.4px
             - color: '#f4f7fa'
             name:
-            - font-size: 12px
+            - font-size: 9.6px
             - font-weight: '500'
             - transform: translateY(-1px)
             - color: '#f4f7fa'
@@ -2230,7 +2230,7 @@ views:
             - height: 18.4px
             - color: '#f4f7fa'
             name:
-            - font-size: 14px
+            - font-size: 11.2px
             - font-weight: '700'
             - color: '#f4f7fa'
           extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
@@ -2278,7 +2278,7 @@ views:
             - height: 18.4px
             - color: '#f4f7fa'
             name:
-            - font-size: 14px
+            - font-size: 11.2px
             - font-weight: '700'
             - color: '#f4f7fa'
           extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
@@ -2310,7 +2310,7 @@ views:
             - height: 18.4px
             - color: '#f4f7fa'
             name:
-            - font-size: 23px
+            - font-size: 18.4px
             - font-weight: '700'
             - color: '#f4f7fa'
           extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
@@ -2342,7 +2342,7 @@ views:
             - height: 18.4px
             - color: '#f4f7fa'
             name:
-            - font-size: 14px
+            - font-size: 11.2px
             - font-weight: '700'
             - color: '#f4f7fa'
           extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
@@ -2390,7 +2390,7 @@ views:
             - height: 18.4px
             - color: '#f4f7fa'
             name:
-            - font-size: 14px
+            - font-size: 11.2px
             - font-weight: '700'
             - color: '#f4f7fa'
           extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
@@ -2442,7 +2442,7 @@ views:
             - height: 18.4px
             - color: '#f4f7fa'
             name:
-            - font-size: 14px
+            - font-size: 11.2px
             - font-weight: '500'
             grid:
             - grid-template-areas: '"i" "n"'
@@ -2476,7 +2476,7 @@ views:
             - height: 18.4px
             - color: '#f4f7fa'
             name:
-            - font-size: 14px
+            - font-size: 11.2px
             - font-weight: '500'
             grid:
             - grid-template-areas: '"i" "n"'
@@ -2517,7 +2517,7 @@ views:
                 .app\\.hdmi[1-9]$/i.test(id) || !a?.last_changed) return 'none';\n  const age = (Date.now() - new Date(a.last_changed).getTime()) / 1000;\n  return\
                 \ age >= 0 && age < 9 ? `tv-input-flash 9s linear ${-age}s 1 both` : 'none';\n]]]"
             name:
-            - font-size: 14px
+            - font-size: 11.2px
             - font-weight: '500'
             grid:
             - grid-template-areas: '"i" "n"'
@@ -2576,7 +2576,7 @@ views:
                   - animation: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_play_state'']?.state === ''paused'' ? `tv-pilot-breathe 2500ms ease-in-out -${(document.timeline?.currentTime ?? performance.now())%2500}ms infinite` :
                       ''none''; ]]]'
                   name:
-                  - font-size: 15px
+                  - font-size: 12px
                   - font-weight: '500'
                   grid:
                   - grid-template-areas: '"i" "n"'
@@ -2622,7 +2622,7 @@ views:
                           if(pw==='off' && age>=0 && age<6) return `tv-pilot-tail 2500ms ease-in-out -${phase}ms ${(6000-age*1000+phase)/2500}`;
                           return 'none'; ]]]
                   name:
-                  - font-size: 15px
+                  - font-size: 12px
                   - font-weight: '500'
                 extra_styles: '@keyframes tv-pilot-breathe { 0%,100% {opacity:1;} 50% {opacity:0.38;} } @keyframes tv-pilot-tail { 0%,100% {opacity:1;color:#13cb42;} 50% {opacity:0.38;color:#13cb42;} } ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
           styles:
