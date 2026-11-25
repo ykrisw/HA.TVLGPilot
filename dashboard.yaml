@@ -1,4 +1,4 @@
-# HA.TVLGPilot 1.1.9 — unified 3-column app-sized grid and 101px height across buttons, 5-button cross with empty corners, no joystick frame; all actions preserved.
+# HA.TVLGPilot 1.2.0 — function accent #13CB42 matches power ON, release fade +60%; app colors, layout and actions preserved.
 views:
 - title: TV Control
   path: overview
@@ -466,7 +466,7 @@ views:
             - font-size: 14px
             - font-weight: '700'
             - color: '#f4f7fa'
-          extra_styles: 'ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+          extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
         - type: custom:button-card
           show_icon: false
           show_name: false
@@ -514,7 +514,7 @@ views:
             - font-size: 14px
             - font-weight: '700'
             - color: '#f4f7fa'
-          extra_styles: 'ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+          extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
         - type: custom:button-card
           entity: button.lg_49nano816na_56ba_remote_ok
           name: OK
@@ -546,7 +546,7 @@ views:
             - font-size: 23px
             - font-weight: '700'
             - color: '#f4f7fa'
-          extra_styles: 'ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+          extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
         - type: custom:button-card
           entity: button.lg_49nano816na_56ba_remote_right
           icon: mdi:chevron-right
@@ -578,7 +578,7 @@ views:
             - font-size: 14px
             - font-weight: '700'
             - color: '#f4f7fa'
-          extra_styles: 'ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+          extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
         - type: custom:button-card
           show_icon: false
           show_name: false
@@ -626,7 +626,7 @@ views:
             - font-size: 14px
             - font-weight: '700'
             - color: '#f4f7fa'
-          extra_styles: 'ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+          extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
         - type: custom:button-card
           show_icon: false
           show_name: false
@@ -680,7 +680,7 @@ views:
             grid:
             - grid-template-areas: '"i" "n"'
             - grid-template-rows: 1fr min-content
-          extra_styles: 'ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+          extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
         - type: custom:button-card
           entity: button.lg_49nano816na_56ba_remote_home
           name: Home
@@ -714,7 +714,7 @@ views:
             grid:
             - grid-template-areas: '"i" "n"'
             - grid-template-rows: 1fr min-content
-          extra_styles: 'ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+          extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
         - type: custom:button-card
           entity: sensor.lg_49nano816na_56ba_active_app
           name: INPUT
@@ -758,7 +758,7 @@ views:
           triggers_update:
           - sensor.lg_49nano816na_56ba_active_app
           - binary_sensor.lg_49nano816na_56ba_power
-          extra_styles: '@keyframes tv-input-flash { 0%,55.5556% { color:#ff7436; } 100% { color:#4b8bbe; } } ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+          extra_styles: '@keyframes tv-input-flash { 0%,55.5556% { color:#13cb42; } 100% { color:#4b8bbe; } } ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
       - type: grid
         columns: 1
         square: false
@@ -805,7 +805,7 @@ views:
                   icon:
                   - width: 25px
                   - height: 25px
-                  - color: '[[[ const p=states[''sensor.lg_49nano816na_56ba_play_state'']?.state; return (states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && (p===''playing'' || p===''paused'')) ? ''#ff7436'' : ''#f4f7fa''; ]]]'
+                  - color: '[[[ const p=states[''sensor.lg_49nano816na_56ba_play_state'']?.state; return (states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && (p===''playing'' || p===''paused'')) ? ''#13cb42'' : ''#f4f7fa''; ]]]'
                   - animation: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_play_state'']?.state === ''paused'' ? ''tv-pause-soft 2.5s ease-in-out infinite'' :
                       ''none''; ]]]'
                   name:
@@ -814,7 +814,7 @@ views:
                   grid:
                   - grid-template-areas: '"i" "n"'
                   - grid-template-rows: 1fr min-content
-                extra_styles: '@keyframes tv-pause-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+                extra_styles: '@keyframes tv-pause-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
             screen:
               card:
                 type: custom:button-card
@@ -844,7 +844,7 @@ views:
                   icon:
                   - width: 21.85px
                   - height: 21.85px
-                  - color: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''switch.lg_49nano816na_56ba_display_panel'']?.state === ''off'' ? ''#ff7436'' : ''#f4f7fa''; ]]]'
+                  - color: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''switch.lg_49nano816na_56ba_display_panel'']?.state === ''off'' ? ''#13cb42'' : ''#f4f7fa''; ]]]'
                   - animation: >-
                       [[[ const pw=states['binary_sensor.lg_49nano816na_56ba_power']?.state;
                           const sw=states['switch.lg_49nano816na_56ba_display_panel']?.state;
@@ -856,7 +856,7 @@ views:
                   name:
                   - font-size: 15px
                   - font-weight: '500'
-                extra_styles: '@keyframes tv-screen-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } @keyframes tv-screen-tail { 0%,100% {opacity:1;color:#ff7436;} 50% {opacity:0.38;color:#ff7436;} } ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+                extra_styles: '@keyframes tv-screen-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } @keyframes tv-screen-tail { 0%,100% {opacity:1;color:#13cb42;} 50% {opacity:0.38;color:#13cb42;} } ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
           styles:
             card:
             - height: 101px
@@ -1322,7 +1322,7 @@ views:
             - font-size: 14px
             - font-weight: '700'
             - color: '#f4f7fa'
-          extra_styles: 'ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+          extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
         - type: custom:button-card
           show_icon: false
           show_name: false
@@ -1370,7 +1370,7 @@ views:
             - font-size: 14px
             - font-weight: '700'
             - color: '#f4f7fa'
-          extra_styles: 'ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+          extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
         - type: custom:button-card
           entity: button.lg_49nano816na_56ba_remote_ok
           name: OK
@@ -1402,7 +1402,7 @@ views:
             - font-size: 23px
             - font-weight: '700'
             - color: '#f4f7fa'
-          extra_styles: 'ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+          extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
         - type: custom:button-card
           entity: button.lg_49nano816na_56ba_remote_right
           icon: mdi:chevron-right
@@ -1434,7 +1434,7 @@ views:
             - font-size: 14px
             - font-weight: '700'
             - color: '#f4f7fa'
-          extra_styles: 'ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+          extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
         - type: custom:button-card
           show_icon: false
           show_name: false
@@ -1482,7 +1482,7 @@ views:
             - font-size: 14px
             - font-weight: '700'
             - color: '#f4f7fa'
-          extra_styles: 'ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+          extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
         - type: custom:button-card
           show_icon: false
           show_name: false
@@ -1536,7 +1536,7 @@ views:
             grid:
             - grid-template-areas: '"i" "n"'
             - grid-template-rows: 1fr min-content
-          extra_styles: 'ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+          extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
         - type: custom:button-card
           entity: button.lg_49nano816na_56ba_remote_home
           name: Home
@@ -1570,7 +1570,7 @@ views:
             grid:
             - grid-template-areas: '"i" "n"'
             - grid-template-rows: 1fr min-content
-          extra_styles: 'ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+          extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
         - type: custom:button-card
           entity: sensor.lg_49nano816na_56ba_active_app
           name: INPUT
@@ -1614,7 +1614,7 @@ views:
           triggers_update:
           - sensor.lg_49nano816na_56ba_active_app
           - binary_sensor.lg_49nano816na_56ba_power
-          extra_styles: '@keyframes tv-input-flash { 0%,55.5556% { color:#ff7436; } 100% { color:#4b8bbe; } } ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+          extra_styles: '@keyframes tv-input-flash { 0%,55.5556% { color:#13cb42; } 100% { color:#4b8bbe; } } ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
       - type: grid
         columns: 1
         square: false
@@ -1661,7 +1661,7 @@ views:
                   icon:
                   - width: 25px
                   - height: 25px
-                  - color: '[[[ const p=states[''sensor.lg_49nano816na_56ba_play_state'']?.state; return (states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && (p===''playing'' || p===''paused'')) ? ''#ff7436'' : ''#f4f7fa''; ]]]'
+                  - color: '[[[ const p=states[''sensor.lg_49nano816na_56ba_play_state'']?.state; return (states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && (p===''playing'' || p===''paused'')) ? ''#13cb42'' : ''#f4f7fa''; ]]]'
                   - animation: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_play_state'']?.state === ''paused'' ? ''tv-pause-soft 2.5s ease-in-out infinite'' :
                       ''none''; ]]]'
                   name:
@@ -1670,7 +1670,7 @@ views:
                   grid:
                   - grid-template-areas: '"i" "n"'
                   - grid-template-rows: 1fr min-content
-                extra_styles: '@keyframes tv-pause-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+                extra_styles: '@keyframes tv-pause-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
             screen:
               card:
                 type: custom:button-card
@@ -1700,7 +1700,7 @@ views:
                   icon:
                   - width: 21.85px
                   - height: 21.85px
-                  - color: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''switch.lg_49nano816na_56ba_display_panel'']?.state === ''off'' ? ''#ff7436'' : ''#f4f7fa''; ]]]'
+                  - color: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''switch.lg_49nano816na_56ba_display_panel'']?.state === ''off'' ? ''#13cb42'' : ''#f4f7fa''; ]]]'
                   - animation: >-
                       [[[ const pw=states['binary_sensor.lg_49nano816na_56ba_power']?.state;
                           const sw=states['switch.lg_49nano816na_56ba_display_panel']?.state;
@@ -1712,7 +1712,7 @@ views:
                   name:
                   - font-size: 15px
                   - font-weight: '500'
-                extra_styles: '@keyframes tv-screen-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } @keyframes tv-screen-tail { 0%,100% {opacity:1;color:#ff7436;} 50% {opacity:0.38;color:#ff7436;} } ha-card { transition:filter 0.45s ease-out,box-shadow 0.45s ease-out,border-color 0.45s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#59301d 0%,#382016 60%,#211713 100%) !important; border-color:#ff7436 !important; box-shadow:inset 0 1px 3px rgba(255,160,94,0.38),0 0 15px rgba(255,116,54,0.8) !important; }'
+                extra_styles: '@keyframes tv-screen-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } @keyframes tv-screen-tail { 0%,100% {opacity:1;color:#13cb42;} 50% {opacity:0.38;color:#13cb42;} } ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
           styles:
             card:
             - height: min(101px, calc(19.72vw - 9.75px))
