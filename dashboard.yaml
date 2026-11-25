@@ -1,4 +1,4 @@
-# HA.TVLGPilot 1.2.0 — function accent #13CB42 matches power ON, release fade +60%; app colors, layout and actions preserved.
+# HA.TVLGPilot 1.2.1 — iPhone screen-right alignment, viewport centering +4vw, mobile app logos -15%; shared 2.5s phase for simultaneous pulses. Desktop geometry unchanged.
 views:
 - title: TV Control
   path: overview
@@ -72,7 +72,7 @@ views:
                     if(value!=='on' && value!=='off') return 'none';
                     if(this._tvPilotPowerLast===undefined) { this._tvPilotPowerLast=value; return 'none'; }
                     if(this._tvPilotPowerLast!==value) { this._tvPilotPowerLast=value; this._tvPilotPowerUntil=Date.now()+6000; }
-                    return Date.now() < (this._tvPilotPowerUntil||0) ? 'tv-power-soft 2.5s ease-in-out 2.4' : 'none'; ]]]
+                    return Date.now() < (this._tvPilotPowerUntil||0) ? `tv-power-soft 2.5s ease-in-out 2.4 -${Date.now()%2500}ms` : 'none'; ]]]
             custom_fields:
               status:
               - position: absolute
@@ -806,7 +806,7 @@ views:
                   - width: 25px
                   - height: 25px
                   - color: '[[[ const p=states[''sensor.lg_49nano816na_56ba_play_state'']?.state; return (states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && (p===''playing'' || p===''paused'')) ? ''#13cb42'' : ''#f4f7fa''; ]]]'
-                  - animation: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_play_state'']?.state === ''paused'' ? ''tv-pause-soft 2.5s ease-in-out infinite'' :
+                  - animation: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_play_state'']?.state === ''paused'' ? `tv-pause-soft 2.5s ease-in-out infinite -${Date.now()%2500}ms` :
                       ''none''; ]]]'
                   name:
                   - font-size: 15px
@@ -850,8 +850,8 @@ views:
                           const sw=states['switch.lg_49nano816na_56ba_display_panel']?.state;
                           const ent=states['binary_sensor.lg_49nano816na_56ba_power'];
                           const age=ent?.last_changed ? (Date.now()-new Date(ent.last_changed).getTime())/1000 : 999;
-                          if(pw==='on' && sw==='off') return 'tv-screen-soft 2.5s ease-in-out infinite';
-                          if(pw==='off' && age>=0 && age<6) return `tv-screen-tail 2.5s ease-in-out 2.4`;
+                          if(pw==='on' && sw==='off') return `tv-screen-soft 2.5s ease-in-out infinite -${Date.now()%2500}ms`;
+                          if(pw==='off' && age>=0 && age<6) return `tv-screen-tail 2.5s ease-in-out 2.4 -${Date.now()%2500}ms`;
                           return 'none'; ]]]
                   name:
                   - font-size: 15px
@@ -913,6 +913,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
+            - transform: translateX(4vw)
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #445A6E'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
@@ -928,7 +929,7 @@ views:
                     if(value!=='on' && value!=='off') return 'none';
                     if(this._tvPilotPowerLast===undefined) { this._tvPilotPowerLast=value; return 'none'; }
                     if(this._tvPilotPowerLast!==value) { this._tvPilotPowerLast=value; this._tvPilotPowerUntil=Date.now()+6000; }
-                    return Date.now() < (this._tvPilotPowerUntil||0) ? 'tv-power-soft 2.5s ease-in-out 2.4' : 'none'; ]]]
+                    return Date.now() < (this._tvPilotPowerUntil||0) ? `tv-power-soft 2.5s ease-in-out 2.4 -${Date.now()%2500}ms` : 'none'; ]]]
             custom_fields:
               status:
               - position: absolute
@@ -967,6 +968,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
+            - transform: translateX(4vw)
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''1px solid #ffd000'' : ''1px solid #445A6E''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
@@ -989,6 +991,7 @@ views:
             - grid-template-rows: 1fr
             custom_fields:
               brand:
+              - transform: scale(0.85)
               - display: flex
               - align-items: center
               - justify-content: center
@@ -1021,6 +1024,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
+            - transform: translateX(4vw)
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''1px solid #ffd000'' : ''1px solid #445A6E''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
@@ -1043,6 +1047,7 @@ views:
             - grid-template-rows: 1fr
             custom_fields:
               brand:
+              - transform: scale(0.85)
               - display: flex
               - align-items: center
               - justify-content: center
@@ -1084,6 +1089,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
+            - transform: translateX(4vw)
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''1px solid #ffd000'' : ''1px solid #445A6E''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
@@ -1106,6 +1112,7 @@ views:
             - grid-template-rows: 1fr
             custom_fields:
               brand:
+              - transform: scale(0.85)
               - display: flex
               - align-items: center
               - justify-content: center
@@ -1141,6 +1148,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
+            - transform: translateX(4vw)
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''1px solid #ffd000'' : ''1px solid #445A6E''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
@@ -1149,8 +1157,8 @@ views:
             - color: '#f4f7fa'
             - width: min(138px, calc((88.917vw - 76px) / 3))
             icon:
-            - width: 31.35px
-            - height: 31.35px
+            - width: 26.6475px
+            - height: 26.6475px
             - color: '#f4f7fa'
             name:
             - font-size: 12px
@@ -1185,6 +1193,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
+            - transform: translateX(4vw)
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''1px solid #ffd000'' : ''1px solid #445A6E''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
@@ -1207,6 +1216,7 @@ views:
             - grid-template-rows: 1fr
             custom_fields:
               brand:
+              - transform: scale(0.85)
               - display: flex
               - align-items: center
               - justify-content: center
@@ -1239,6 +1249,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
+            - transform: translateX(4vw)
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''1px solid #ffd000'' : ''1px solid #445A6E''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
@@ -1261,6 +1272,7 @@ views:
             - grid-template-rows: 1fr
             custom_fields:
               brand:
+              - transform: scale(0.85)
               - display: flex
               - align-items: center
               - justify-content: center
@@ -1286,6 +1298,7 @@ views:
             - height: min(101px, calc(19.72vw - 9.75px))
             - width: min(138px, calc((88.917vw - 76px) / 3))
             - margin: 7px 4px
+            - transform: translateX(4vw)
             - padding: '0'
             - visibility: hidden
             - background: transparent
@@ -1309,6 +1322,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
+            - transform: translateX(4vw)
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #445A6E'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
@@ -1334,6 +1348,7 @@ views:
             - height: min(101px, calc(19.72vw - 9.75px))
             - width: min(138px, calc((88.917vw - 76px) / 3))
             - margin: 7px 4px
+            - transform: translateX(4vw)
             - padding: '0'
             - visibility: hidden
             - background: transparent
@@ -1357,6 +1372,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
+            - transform: translateX(4vw)
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #445A6E'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
@@ -1389,6 +1405,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
+            - transform: translateX(4vw)
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #445A6E'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
@@ -1421,6 +1438,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
+            - transform: translateX(4vw)
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #445A6E'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
@@ -1446,6 +1464,7 @@ views:
             - height: min(101px, calc(19.72vw - 9.75px))
             - width: min(138px, calc((88.917vw - 76px) / 3))
             - margin: 7px 4px
+            - transform: translateX(4vw)
             - padding: '0'
             - visibility: hidden
             - background: transparent
@@ -1469,6 +1488,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
+            - transform: translateX(4vw)
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #445A6E'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
@@ -1494,6 +1514,7 @@ views:
             - height: min(101px, calc(19.72vw - 9.75px))
             - width: min(138px, calc((88.917vw - 76px) / 3))
             - margin: 7px 4px
+            - transform: translateX(4vw)
             - padding: '0'
             - visibility: hidden
             - background: transparent
@@ -1520,6 +1541,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
+            - transform: translateX(4vw)
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #445A6E'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
@@ -1554,6 +1576,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
+            - transform: translateX(4vw)
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #445A6E'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
@@ -1592,6 +1615,7 @@ views:
             - padding: '0'
             - border-radius: 18px
             - margin: 7px 4px
+            - transform: translateX(4vw)
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #445A6E'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
@@ -1662,7 +1686,7 @@ views:
                   - width: 25px
                   - height: 25px
                   - color: '[[[ const p=states[''sensor.lg_49nano816na_56ba_play_state'']?.state; return (states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && (p===''playing'' || p===''paused'')) ? ''#13cb42'' : ''#f4f7fa''; ]]]'
-                  - animation: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_play_state'']?.state === ''paused'' ? ''tv-pause-soft 2.5s ease-in-out infinite'' :
+                  - animation: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_play_state'']?.state === ''paused'' ? `tv-pause-soft 2.5s ease-in-out infinite -${Date.now()%2500}ms` :
                       ''none''; ]]]'
                   name:
                   - font-size: 15px
@@ -1690,7 +1714,7 @@ views:
                   - height: min(101px, calc(19.72vw - 9.75px))
                   - padding: 5px
                   - border-radius: 18px
-                  - width: min(156px, calc(29.64vw - 20.3px))
+                  - width: min(156px, calc(29.64vw - 8.3px))
                   - margin: '0'
                   - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
                   - border: '1px solid #445A6E'
@@ -1706,8 +1730,8 @@ views:
                           const sw=states['switch.lg_49nano816na_56ba_display_panel']?.state;
                           const ent=states['binary_sensor.lg_49nano816na_56ba_power'];
                           const age=ent?.last_changed ? (Date.now()-new Date(ent.last_changed).getTime())/1000 : 999;
-                          if(pw==='on' && sw==='off') return 'tv-screen-soft 2.5s ease-in-out infinite';
-                          if(pw==='off' && age>=0 && age<6) return `tv-screen-tail 2.5s ease-in-out 2.4`;
+                          if(pw==='on' && sw==='off') return `tv-screen-soft 2.5s ease-in-out infinite -${Date.now()%2500}ms`;
+                          if(pw==='off' && age>=0 && age<6) return `tv-screen-tail 2.5s ease-in-out 2.4 -${Date.now()%2500}ms`;
                           return 'none'; ]]]
                   name:
                   - font-size: 15px
@@ -1718,6 +1742,7 @@ views:
             - height: min(101px, calc(19.72vw - 9.75px))
             - padding: '0'
             - margin: 7px 4px
+            - transform: translateX(4vw)
             - background: transparent
             - border: none
             - box-shadow: none
