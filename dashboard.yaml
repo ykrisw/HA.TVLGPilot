@@ -1,4 +1,4 @@
-# HA.TVLGPilot 1.2.6 — desktop viewport fitting; mobile views and controls unchanged.
+# HA.TVLGPilot 1.2.7 — Windows centering, mobile browser fitting, phone POWER alignment.
 views:
 - title: TV Control
   path: overview
@@ -69,7 +69,7 @@ views:
             - color: '#ff2136'
             - animation: >-
                 [[[ const value=states['binary_sensor.lg_49nano816na_56ba_power']?.state;
-                    if ((/Windows/i.test(navigator.userAgent) && /Firefox\//i.test(navigator.userAgent))) { const card=this; requestAnimationFrame(()=>{ let node=card; while(node && node.localName!=='hui-vertical-stack-card') node=node.parentElement || node.getRootNode()?.host; if(!node || node._tvPilotFit) return; const stack=node; stack.style.width='465px'; stack.style.maxWidth='none'; let scale=1; const fit=()=>{ if(!stack.isConnected) { window.removeEventListener('resize',fit); stack._tvPilotFit=false; return; } const rect=stack.getBoundingClientRect(); const natural=rect.height/scale; if(natural<=0) return; const next=Math.min(1,Math.max(0.1,(window.innerHeight-rect.top-18)/natural)); if(Math.abs(next-scale)>0.005) { scale=next; stack.style.zoom=String(scale); } }; stack._tvPilotFit=true; window.addEventListener('resize',fit); fit(); }); }
+                    if ((/Windows/i.test(navigator.userAgent) && /Firefox\//i.test(navigator.userAgent))) { const card=this; requestAnimationFrame(()=>{ let node=card; while(node && node.localName!=='hui-vertical-stack-card') node=node.parentElement || node.getRootNode()?.host; if(!node || node._tvPilotFit) return; const stack=node; stack.style.width='465px'; stack.style.maxWidth='none'; let scale=1; const fit=()=>{ if(!stack.isConnected) { window.removeEventListener('resize',fit); stack._tvPilotFit=false; return; } const rect=stack.getBoundingClientRect(); const natural=rect.height/scale; if(natural<=0) return; const next=Math.min(1,Math.max(0.1,(window.innerHeight-rect.top-18)/natural)); if(Math.abs(next-scale)>0.005) { scale=next; stack.style.zoom=String(scale); } if(scale<0.995){ stack.style.position='relative'; stack.style.left='0px'; const fitted=stack.getBoundingClientRect(); stack.style.left=((window.innerWidth/2-fitted.left-fitted.width/2)/scale)+'px'; } else { stack.style.left=''; stack.style.position=''; } }; stack._tvPilotFit=true; window.addEventListener('resize',fit); fit(); }); }
                     if (!(/Windows/i.test(navigator.userAgent) && /Firefox\//i.test(navigator.userAgent)) && !/iPad|iPhone|iPod/i.test(navigator.userAgent) && !(navigator.platform==='MacIntel' && navigator.maxTouchPoints>1)) {
                       const card=this; requestAnimationFrame(()=>requestAnimationFrame(()=>{
                         let stack=card; while(stack && stack.localName!=='hui-vertical-stack-card') stack=stack.parentElement || stack.getRootNode()?.host;
@@ -977,13 +977,52 @@ views:
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
-            - width: min(457px, calc(88.917vw - 28px))
+            - width: min(457px, calc(88.917vw - 22px))
             icon:
             - width: 33px
             - height: 33px
             - color: '#ff2136'
             - animation: >-
                 [[[ const value=states['binary_sensor.lg_49nano816na_56ba_power']?.state;
+                    const ua=navigator.userAgent;
+                    const browser=/FxiOS|CriOS|EdgiOS|Version\/.*Safari/i.test(ua) && !/Home.?Assistant/i.test(ua);
+                    if(browser){
+                      const card=this; requestAnimationFrame(()=>requestAnimationFrame(()=>{
+                        let stack=card; while(stack && stack.localName!=='hui-vertical-stack-card') stack=stack.parentElement || stack.getRootNode()?.host;
+                        if(!stack || stack._tvPilotMobileFit) return;
+                        const original={width:stack.style.width,maxWidth:stack.style.maxWidth,zoom:stack.style.zoom,position:stack.style.position,left:stack.style.left};
+                        const viewport=window.visualViewport;
+                        let pending=0;
+                        const fit=()=>{
+                          pending=0;
+                          if(!stack.isConnected){window.removeEventListener('resize',schedule); viewport?.removeEventListener('resize',schedule); return;}
+                          Object.assign(stack.style,original);
+                          const rect=stack.getBoundingClientRect();
+                          if(!rect.width || !rect.height) return;
+                          let top=rect.top,bottom=viewport ? viewport.offsetTop+viewport.height : window.innerHeight;
+                          let parent=stack.parentElement || stack.getRootNode()?.host, scroll=null;
+                          while(parent && parent!==document.body && parent!==document.documentElement){
+                            if(/auto|scroll|overlay/.test(getComputedStyle(parent).overflowY) && parent.clientHeight>0){
+                              scroll=parent; const bounds=parent.getBoundingClientRect();
+                              top+=parent.scrollTop; bottom=Math.min(bottom,bounds.top+parent.clientTop+parent.clientHeight); break;
+                            }
+                            parent=parent.parentElement || parent.getRootNode()?.host;
+                          }
+                          const scale=Math.min(1,Math.max(0.1,(bottom-top-12)/rect.height));
+                          if(scale<0.995){
+                            stack.style.width=rect.width+'px'; stack.style.maxWidth='none'; stack.style.zoom=String(scale); stack.style.position='relative';
+                            const scaled=stack.getBoundingClientRect();
+                            stack.style.left=((rect.left+rect.width/2-scaled.left-scaled.width/2)/scale)+'px';
+                          }
+                          if(/FxiOS/i.test(ua) && /iPhone/i.test(ua) && scroll){
+                            scroll.style.backgroundColor='var(--primary-background-color, #111111)';
+                          }
+                        };
+                        const schedule=()=>{if(!pending) pending=requestAnimationFrame(fit);};
+                        stack._tvPilotMobileFit=true; window.addEventListener('resize',schedule); viewport?.addEventListener('resize',schedule);
+                        fit(); schedule();
+                      }));
+                    }
                     if(value!=='on' && value!=='off') return 'none';
                     if(this._tvPilotPowerLast===undefined) { this._tvPilotPowerLast=value; return 'none'; }
                     if(this._tvPilotPowerLast!==value) { this._tvPilotPowerLast=value; this._tvPilotPowerUntil=Date.now()+6000; }
@@ -1898,6 +1937,45 @@ views:
             - animation: >-
                 [[[ const value=states['binary_sensor.lg_49nano816na_56ba_power']?.state;
                     const card=this; requestAnimationFrame(()=>{ let node=card; while(node && node.localName!=='hui-vertical-stack-card') node=node.parentElement || node.getRootNode()?.host; if(!node) return; node.style.width='465px'; node.style.maxWidth='none'; if(node._tvPilotCenter) return; const stack=node; let offset=0; const center=()=>{ if(!stack.isConnected) { window.removeEventListener('resize',center); stack._tvPilotCenter=false; return; } const rect=stack.getBoundingClientRect(); if(!rect.width) return; const target=window.innerWidth/2; offset+=target-(rect.left+rect.width/2); stack.style.position='relative'; stack.style.left=`${offset}px`; }; stack._tvPilotCenter=true; window.addEventListener('resize',center); requestAnimationFrame(center); });
+                    const ua=navigator.userAgent;
+                    const browser=/FxiOS|CriOS|EdgiOS|Version\/.*Safari/i.test(ua) && !/Home.?Assistant/i.test(ua);
+                    if(browser){
+                      const card=this; requestAnimationFrame(()=>requestAnimationFrame(()=>{
+                        let stack=card; while(stack && stack.localName!=='hui-vertical-stack-card') stack=stack.parentElement || stack.getRootNode()?.host;
+                        if(!stack || stack._tvPilotMobileFit) return;
+                        const original={width:stack.style.width,maxWidth:stack.style.maxWidth,zoom:stack.style.zoom,position:stack.style.position,left:stack.style.left};
+                        const viewport=window.visualViewport;
+                        let pending=0;
+                        const fit=()=>{
+                          pending=0;
+                          if(!stack.isConnected){window.removeEventListener('resize',schedule); viewport?.removeEventListener('resize',schedule); return;}
+                          Object.assign(stack.style,original);
+                          const rect=stack.getBoundingClientRect();
+                          if(!rect.width || !rect.height) return;
+                          let top=rect.top,bottom=viewport ? viewport.offsetTop+viewport.height : window.innerHeight;
+                          let parent=stack.parentElement || stack.getRootNode()?.host, scroll=null;
+                          while(parent && parent!==document.body && parent!==document.documentElement){
+                            if(/auto|scroll|overlay/.test(getComputedStyle(parent).overflowY) && parent.clientHeight>0){
+                              scroll=parent; const bounds=parent.getBoundingClientRect();
+                              top+=parent.scrollTop; bottom=Math.min(bottom,bounds.top+parent.clientTop+parent.clientHeight); break;
+                            }
+                            parent=parent.parentElement || parent.getRootNode()?.host;
+                          }
+                          const scale=Math.min(1,Math.max(0.1,(bottom-top-12)/rect.height));
+                          if(scale<0.995){
+                            stack.style.width=rect.width+'px'; stack.style.maxWidth='none'; stack.style.zoom=String(scale); stack.style.position='relative';
+                            const scaled=stack.getBoundingClientRect();
+                            stack.style.left=((rect.left+rect.width/2-scaled.left-scaled.width/2)/scale)+'px';
+                          }
+                          if(/FxiOS/i.test(ua) && /iPhone/i.test(ua) && scroll){
+                            scroll.style.backgroundColor='var(--primary-background-color, #111111)';
+                          }
+                        };
+                        const schedule=()=>{if(!pending) pending=requestAnimationFrame(fit);};
+                        stack._tvPilotMobileFit=true; window.addEventListener('resize',schedule); viewport?.addEventListener('resize',schedule);
+                        fit(); schedule();
+                      }));
+                    }
                     if(value!=='on' && value!=='off') return 'none';
                     if(this._tvPilotPowerLast===undefined) { this._tvPilotPowerLast=value; return 'none'; }
                     if(this._tvPilotPowerLast!==value) { this._tvPilotPowerLast=value; this._tvPilotPowerUntil=Date.now()+6000; }
