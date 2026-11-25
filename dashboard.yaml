@@ -1,4 +1,4 @@
-# HA.TVLGPilot 1.2.4 — iPhone bottom alignment, larger iPad layout, Windows Firefox grid alignment.
+# HA.TVLGPilot 1.2.5 — iPad centering and INPUT HDMI feedback; other layout and controls unchanged.
 views:
 - title: TV Control
   path: overview
@@ -750,9 +750,22 @@ views:
             - width: 23px
             - height: 23px
             - color: '#f4f7fa'
-            - animation: "[[[\n  if (states['binary_sensor.lg_49nano816na_56ba_power']?.state !== 'on') return 'none';\n  const a = states['sensor.lg_49nano816na_56ba_active_app'];\n  const id = String(a?.attributes?.app_id || '');\n  if (!/^com\\.webos\\\
-                .app\\.hdmi[1-9]$/i.test(id) || !a?.last_changed) return 'none';\n  const age = (Date.now() - new Date(a.last_changed).getTime()) / 1000;\n  return\
-                \ age >= 0 && age < 9 ? `tv-input-flash 9s linear ${-age}s 1 both` : 'none';\n]]]"
+            - animation: >-
+                [[[ const a=states['sensor.lg_49nano816na_56ba_active_app'];
+                    const id=String(a?.attributes?.app_id || '');
+                    const on=states['binary_sensor.lg_49nano816na_56ba_power']?.state==='on';
+                    const hdmi=/^com\.webos\.app\.hdmi[1-9]$/i.test(id);
+                    const now=Date.now();
+                    if(this._tvInputId!==id || this._tvInputOn!==on) {
+                      const initial=this._tvInputId===undefined;
+                      this._tvInputId=id; this._tvInputOn=on;
+                      const age=now-new Date(a?.last_updated || a?.last_changed || 0).getTime();
+                      this._tvInputUntil=on && hdmi ? (initial ? now+Math.max(0,9000-Math.max(0,age)) : now+9000) : 0;
+                      this._tvInputDelay=initial ? -Math.min(9000,Math.max(0,age)) : 0;
+                      this._tvInputVariant=this._tvInputVariant===1 ? 2 : 1;
+                    }
+                    if(!on || !hdmi || now >= (this._tvInputUntil||0)) return 'none';
+                    return `tv-input-flash-${this._tvInputVariant} 9s linear ${this._tvInputDelay}ms 1 both`; ]]]
             name:
             - font-size: 14px
             - font-weight: '500'
@@ -762,7 +775,7 @@ views:
           triggers_update:
           - sensor.lg_49nano816na_56ba_active_app
           - binary_sensor.lg_49nano816na_56ba_power
-          extra_styles: '@keyframes tv-input-flash { 0%,55.5556% { color:#13cb42; } 100% { color:#4b8bbe; } } ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
+          extra_styles: '@keyframes tv-input-flash-1 { 0%,55.5556% { color:#13cb42; } 100% { color:#f4f7fa; } } @keyframes tv-input-flash-2 { 0%,55.5556% { color:#13cb42; } 100% { color:#f4f7fa; } } ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
       - type: grid
         columns: 1
         square: false
@@ -1634,9 +1647,22 @@ views:
             - width: 23px
             - height: 23px
             - color: '#f4f7fa'
-            - animation: "[[[\n  if (states['binary_sensor.lg_49nano816na_56ba_power']?.state !== 'on') return 'none';\n  const a = states['sensor.lg_49nano816na_56ba_active_app'];\n  const id = String(a?.attributes?.app_id || '');\n  if (!/^com\\.webos\\\
-                .app\\.hdmi[1-9]$/i.test(id) || !a?.last_changed) return 'none';\n  const age = (Date.now() - new Date(a.last_changed).getTime()) / 1000;\n  return\
-                \ age >= 0 && age < 9 ? `tv-input-flash 9s linear ${-age}s 1 both` : 'none';\n]]]"
+            - animation: >-
+                [[[ const a=states['sensor.lg_49nano816na_56ba_active_app'];
+                    const id=String(a?.attributes?.app_id || '');
+                    const on=states['binary_sensor.lg_49nano816na_56ba_power']?.state==='on';
+                    const hdmi=/^com\.webos\.app\.hdmi[1-9]$/i.test(id);
+                    const now=Date.now();
+                    if(this._tvInputId!==id || this._tvInputOn!==on) {
+                      const initial=this._tvInputId===undefined;
+                      this._tvInputId=id; this._tvInputOn=on;
+                      const age=now-new Date(a?.last_updated || a?.last_changed || 0).getTime();
+                      this._tvInputUntil=on && hdmi ? (initial ? now+Math.max(0,9000-Math.max(0,age)) : now+9000) : 0;
+                      this._tvInputDelay=initial ? -Math.min(9000,Math.max(0,age)) : 0;
+                      this._tvInputVariant=this._tvInputVariant===1 ? 2 : 1;
+                    }
+                    if(!on || !hdmi || now >= (this._tvInputUntil||0)) return 'none';
+                    return `tv-input-flash-${this._tvInputVariant} 9s linear ${this._tvInputDelay}ms 1 both`; ]]]
             name:
             - font-size: 14px
             - font-weight: '500'
@@ -1646,7 +1672,7 @@ views:
           triggers_update:
           - sensor.lg_49nano816na_56ba_active_app
           - binary_sensor.lg_49nano816na_56ba_power
-          extra_styles: '@keyframes tv-input-flash { 0%,55.5556% { color:#13cb42; } 100% { color:#4b8bbe; } } ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
+          extra_styles: '@keyframes tv-input-flash-1 { 0%,55.5556% { color:#13cb42; } 100% { color:#f4f7fa; } } @keyframes tv-input-flash-2 { 0%,55.5556% { color:#13cb42; } 100% { color:#f4f7fa; } } ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
       - type: grid
         columns: 1
         square: false
@@ -1832,7 +1858,7 @@ views:
             - color: '#ff2136'
             - animation: >-
                 [[[ const value=states['binary_sensor.lg_49nano816na_56ba_power']?.state;
-                    const card=this; requestAnimationFrame(()=>{ let node=card; while(node && node.localName!=='hui-vertical-stack-card') node=node.parentElement || node.getRootNode()?.host; if(!node) return; node.style.width='465px'; node.style.maxWidth='none'; });
+                    const card=this; requestAnimationFrame(()=>{ let node=card; while(node && node.localName!=='hui-vertical-stack-card') node=node.parentElement || node.getRootNode()?.host; if(!node) return; node.style.width='465px'; node.style.maxWidth='none'; if(node._tvPilotCenter) return; const stack=node; let offset=0; const center=()=>{ if(!stack.isConnected) { window.removeEventListener('resize',center); stack._tvPilotCenter=false; return; } const rect=stack.getBoundingClientRect(); if(!rect.width) return; const target=window.innerWidth/2; offset+=target-(rect.left+rect.width/2); stack.style.position='relative'; stack.style.left=`${offset}px`; }; stack._tvPilotCenter=true; window.addEventListener('resize',center); requestAnimationFrame(center); });
                     if(value!=='on' && value!=='off') return 'none';
                     if(this._tvPilotPowerLast===undefined) { this._tvPilotPowerLast=value; return 'none'; }
                     if(this._tvPilotPowerLast!==value) { this._tvPilotPowerLast=value; this._tvPilotPowerUntil=Date.now()+6000; }
@@ -2517,9 +2543,22 @@ views:
             - width: 23px
             - height: 23px
             - color: '#f4f7fa'
-            - animation: "[[[\n  if (states['binary_sensor.lg_49nano816na_56ba_power']?.state !== 'on') return 'none';\n  const a = states['sensor.lg_49nano816na_56ba_active_app'];\n  const id = String(a?.attributes?.app_id || '');\n  if (!/^com\\.webos\\\
-                .app\\.hdmi[1-9]$/i.test(id) || !a?.last_changed) return 'none';\n  const age = (Date.now() - new Date(a.last_changed).getTime()) / 1000;\n  return\
-                \ age >= 0 && age < 9 ? `tv-input-flash 9s linear ${-age}s 1 both` : 'none';\n]]]"
+            - animation: >-
+                [[[ const a=states['sensor.lg_49nano816na_56ba_active_app'];
+                    const id=String(a?.attributes?.app_id || '');
+                    const on=states['binary_sensor.lg_49nano816na_56ba_power']?.state==='on';
+                    const hdmi=/^com\.webos\.app\.hdmi[1-9]$/i.test(id);
+                    const now=Date.now();
+                    if(this._tvInputId!==id || this._tvInputOn!==on) {
+                      const initial=this._tvInputId===undefined;
+                      this._tvInputId=id; this._tvInputOn=on;
+                      const age=now-new Date(a?.last_updated || a?.last_changed || 0).getTime();
+                      this._tvInputUntil=on && hdmi ? (initial ? now+Math.max(0,9000-Math.max(0,age)) : now+9000) : 0;
+                      this._tvInputDelay=initial ? -Math.min(9000,Math.max(0,age)) : 0;
+                      this._tvInputVariant=this._tvInputVariant===1 ? 2 : 1;
+                    }
+                    if(!on || !hdmi || now >= (this._tvInputUntil||0)) return 'none';
+                    return `tv-input-flash-${this._tvInputVariant} 9s linear ${this._tvInputDelay}ms 1 both`; ]]]
             name:
             - font-size: 14px
             - font-weight: '500'
@@ -2529,7 +2568,7 @@ views:
           triggers_update:
           - sensor.lg_49nano816na_56ba_active_app
           - binary_sensor.lg_49nano816na_56ba_power
-          extra_styles: '@keyframes tv-input-flash { 0%,55.5556% { color:#13cb42; } 100% { color:#4b8bbe; } } ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
+          extra_styles: '@keyframes tv-input-flash-1 { 0%,55.5556% { color:#13cb42; } 100% { color:#f4f7fa; } } @keyframes tv-input-flash-2 { 0%,55.5556% { color:#13cb42; } 100% { color:#f4f7fa; } } ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
       - type: grid
         columns: 1
         square: false
