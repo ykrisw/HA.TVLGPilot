@@ -1,4 +1,4 @@
-# HA.TVLGPilot 1.2.5 — iPad centering and INPUT HDMI feedback; other layout and controls unchanged.
+# HA.TVLGPilot 1.2.6 — desktop viewport fitting; mobile views and controls unchanged.
 views:
 - title: TV Control
   path: overview
@@ -70,6 +70,45 @@ views:
             - animation: >-
                 [[[ const value=states['binary_sensor.lg_49nano816na_56ba_power']?.state;
                     if ((/Windows/i.test(navigator.userAgent) && /Firefox\//i.test(navigator.userAgent))) { const card=this; requestAnimationFrame(()=>{ let node=card; while(node && node.localName!=='hui-vertical-stack-card') node=node.parentElement || node.getRootNode()?.host; if(!node || node._tvPilotFit) return; const stack=node; stack.style.width='465px'; stack.style.maxWidth='none'; let scale=1; const fit=()=>{ if(!stack.isConnected) { window.removeEventListener('resize',fit); stack._tvPilotFit=false; return; } const rect=stack.getBoundingClientRect(); const natural=rect.height/scale; if(natural<=0) return; const next=Math.min(1,Math.max(0.1,(window.innerHeight-rect.top-18)/natural)); if(Math.abs(next-scale)>0.005) { scale=next; stack.style.zoom=String(scale); } }; stack._tvPilotFit=true; window.addEventListener('resize',fit); fit(); }); }
+                    if (!(/Windows/i.test(navigator.userAgent) && /Firefox\//i.test(navigator.userAgent)) && !/iPad|iPhone|iPod/i.test(navigator.userAgent) && !(navigator.platform==='MacIntel' && navigator.maxTouchPoints>1)) {
+                      const card=this; requestAnimationFrame(()=>requestAnimationFrame(()=>{
+                        let stack=card; while(stack && stack.localName!=='hui-vertical-stack-card') stack=stack.parentElement || stack.getRootNode()?.host;
+                        if(!stack || stack._tvPilotDesktopFit) return;
+                        const original={width:stack.style.width,maxWidth:stack.style.maxWidth,zoom:stack.style.zoom,position:stack.style.position,left:stack.style.left};
+                        const restore=()=>Object.assign(stack.style,original);
+                        let pending=0;
+                        const fit=()=>{
+                          pending=0; if(!stack.isConnected){window.removeEventListener('resize',schedule); window.visualViewport?.removeEventListener('resize',schedule); return;}
+                          restore();
+                          const rect=stack.getBoundingClientRect();
+                          if(rect.height<=0 || rect.width<=0) return;
+                          let top=rect.top, bottom=window.visualViewport?.height ?? window.innerHeight;
+                          let parent=stack.parentElement || stack.getRootNode()?.host;
+                          while(parent && parent!==document.body && parent!==document.documentElement){
+                            const css=getComputedStyle(parent);
+                            if(/auto|scroll|overlay/.test(css.overflowY) && parent.clientHeight>0){
+                              const bounds=parent.getBoundingClientRect();
+                              top+=parent.scrollTop;
+                              bottom=Math.min(bottom,bounds.top+parent.clientTop+parent.clientHeight);
+                              break;
+                            }
+                            parent=parent.parentElement || parent.getRootNode()?.host;
+                          }
+                          const available=bottom-top-18;
+                          if(available<=0) return;
+                          const scale=Math.min(1,Math.max(0.1,available/rect.height));
+                          if(scale>=0.995) return;
+                          stack.style.width=rect.width+'px'; stack.style.maxWidth='none';
+                          stack.style.zoom=String(scale);
+                          stack.style.position='relative';
+                          const scaled=stack.getBoundingClientRect();
+                          stack.style.left=((rect.left+rect.width/2-scaled.left-scaled.width/2)/scale)+'px';
+                        };
+                        const schedule=()=>{if(!pending) pending=requestAnimationFrame(fit);};
+                        stack._tvPilotDesktopFit=true; window.addEventListener('resize',schedule); window.visualViewport?.addEventListener('resize',schedule);
+                        fit(); schedule();
+                      }));
+                    }
                     if ((/Windows/i.test(navigator.userAgent) && /Firefox\//i.test(navigator.userAgent))) { const card=this; requestAnimationFrame(()=>requestAnimationFrame(()=>{ const root=card.shadowRoot?.querySelector('ha-card'); if(!root) return; for(const a of root.getAnimations({subtree:true})) { if(!['tv-pilot-breathe','tv-pilot-tail'].includes(a.animationName)) continue; const delay=a.effect?.getTiming().delay || 0; if(a._tvPilotSyncedDelay===delay) continue; const t=document.timeline.currentTime; if(typeof t!=='number') continue; a.startTime=Math.floor(t/2500)*2500-delay; a._tvPilotSyncedDelay=delay; } })); }
                     if(value!=='on' && value!=='off') return 'none';
                     if(this._tvPilotPowerLast===undefined) { this._tvPilotPowerLast=value; return 'none'; }
