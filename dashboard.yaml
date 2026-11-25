@@ -1,4 +1,4 @@
-# HA.TVLGPilot 1.2.3 — iPadOS-only 80% proportional controls, correct 3-column grid, preserve macOS/iPhone layout and actions. 1.2.2 archived.
+# HA.TVLGPilot 1.2.3 — iPadOS layout + Windows Firefox adaptive fit and shared animation timeline. 1.2.2 archived.
 views:
 - title: TV Control
   path: overview
@@ -69,6 +69,8 @@ views:
             - color: '#ff2136'
             - animation: >-
                 [[[ const value=states['binary_sensor.lg_49nano816na_56ba_power']?.state;
+                    if ((/Windows/i.test(navigator.userAgent) && /Firefox\//i.test(navigator.userAgent))) { const card=this; requestAnimationFrame(()=>{ let node=card; while(node && node.localName!=='hui-vertical-stack-card') node=node.parentElement || node.getRootNode()?.host; if(!node || node._tvPilotFit) return; const stack=node; let scale=1; const fit=()=>{ if(!stack.isConnected) { window.removeEventListener('resize',fit); stack._tvPilotFit=false; return; } const rect=stack.getBoundingClientRect(); const natural=rect.height/scale; if(natural<=0) return; const next=Math.min(1,Math.max(0.1,(window.innerHeight-rect.top-18)/natural)); if(Math.abs(next-scale)>0.005) { scale=next; stack.style.zoom=String(scale); } }; stack._tvPilotFit=true; window.addEventListener('resize',fit); fit(); }); }
+                    if ((/Windows/i.test(navigator.userAgent) && /Firefox\//i.test(navigator.userAgent))) { const card=this; requestAnimationFrame(()=>requestAnimationFrame(()=>{ const root=card.shadowRoot?.querySelector('ha-card'); if(!root) return; for(const a of root.getAnimations({subtree:true})) { if(!['tv-pilot-breathe','tv-pilot-tail'].includes(a.animationName)) continue; const delay=a.effect?.getTiming().delay || 0; if(a._tvPilotSyncedDelay===delay) continue; const t=document.timeline.currentTime; if(typeof t!=='number') continue; a.startTime=Math.floor(t/2500)*2500-delay; a._tvPilotSyncedDelay=delay; } })); }
                     if(value!=='on' && value!=='off') return 'none';
                     if(this._tvPilotPowerLast===undefined) { this._tvPilotPowerLast=value; return 'none'; }
                     if(this._tvPilotPowerLast!==value) { this._tvPilotPowerLast=value; this._tvPilotPowerUntil=Date.now()+6000; }
@@ -808,7 +810,7 @@ views:
                   - width: 25px
                   - height: 25px
                   - color: '[[[ const p=states[''sensor.lg_49nano816na_56ba_play_state'']?.state; return (states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && (p===''playing'' || p===''paused'')) ? ''#13cb42'' : ''#f4f7fa''; ]]]'
-                  - animation: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_play_state'']?.state === ''paused'' ? `tv-pilot-breathe 2500ms ease-in-out -${(document.timeline?.currentTime ?? performance.now())%2500}ms infinite` :
+                  - animation: '[[[ if ((/Windows/i.test(navigator.userAgent) && /Firefox\//i.test(navigator.userAgent))) { const card=this; requestAnimationFrame(()=>requestAnimationFrame(()=>{ const root=card.shadowRoot?.querySelector(''ha-card''); if(!root) return; for(const a of root.getAnimations({subtree:true})) { if(![''tv-pilot-breathe'',''tv-pilot-tail''].includes(a.animationName)) continue; const delay=a.effect?.getTiming().delay || 0; if(a._tvPilotSyncedDelay===delay) continue; const t=document.timeline.currentTime; if(typeof t!==''number'') continue; a.startTime=Math.floor(t/2500)*2500-delay; a._tvPilotSyncedDelay=delay; } })); } return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_play_state'']?.state === ''paused'' ? `tv-pilot-breathe 2500ms ease-in-out -${(document.timeline?.currentTime ?? performance.now())%2500}ms infinite` :
                       ''none''; ]]]'
                   name:
                   - font-size: 15px
@@ -849,6 +851,7 @@ views:
                   - color: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''switch.lg_49nano816na_56ba_display_panel'']?.state === ''off'' ? ''#13cb42'' : ''#f4f7fa''; ]]]'
                   - animation: >-
                       [[[ const pw=states['binary_sensor.lg_49nano816na_56ba_power']?.state;
+                          if ((/Windows/i.test(navigator.userAgent) && /Firefox\//i.test(navigator.userAgent))) { const card=this; requestAnimationFrame(()=>requestAnimationFrame(()=>{ const root=card.shadowRoot?.querySelector('ha-card'); if(!root) return; for(const a of root.getAnimations({subtree:true})) { if(!['tv-pilot-breathe','tv-pilot-tail'].includes(a.animationName)) continue; const delay=a.effect?.getTiming().delay || 0; if(a._tvPilotSyncedDelay===delay) continue; const t=document.timeline.currentTime; if(typeof t!=='number') continue; a.startTime=Math.floor(t/2500)*2500-delay; a._tvPilotSyncedDelay=delay; } })); }
                           const sw=states['switch.lg_49nano816na_56ba_display_panel']?.state;
                           const ent=states['binary_sensor.lg_49nano816na_56ba_power'];
                           const age=ent?.last_changed ? (Date.now()-new Date(ent.last_changed).getTime())/1000 : 999;
