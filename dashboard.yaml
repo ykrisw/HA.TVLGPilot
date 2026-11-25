@@ -1,4 +1,4 @@
-# HA.TVLGPilot 1.2.1 — iPhone screen-right alignment, viewport centering +4vw, mobile app logos -15%; shared 2.5s phase for simultaneous pulses. Desktop geometry unchanged.
+# HA.TVLGPilot 1.2.2 — bottom-row alignment desktop/mobile per three-column app grid; shared document-timeline breathing phase 2500ms; geometry elsewhere preserved.
 views:
 - title: TV Control
   path: overview
@@ -72,7 +72,9 @@ views:
                     if(value!=='on' && value!=='off') return 'none';
                     if(this._tvPilotPowerLast===undefined) { this._tvPilotPowerLast=value; return 'none'; }
                     if(this._tvPilotPowerLast!==value) { this._tvPilotPowerLast=value; this._tvPilotPowerUntil=Date.now()+6000; }
-                    return Date.now() < (this._tvPilotPowerUntil||0) ? `tv-power-soft 2.5s ease-in-out 2.4 -${Date.now()%2500}ms` : 'none'; ]]]
+                    if(Date.now() >= (this._tvPilotPowerUntil||0)) return 'none';
+                    const phase=(document.timeline?.currentTime ?? performance.now())%2500;
+                    return `tv-pilot-breathe 2500ms ease-in-out -${phase}ms ${2.4+phase/2500}`; ]]]
             custom_fields:
               status:
               - position: absolute
@@ -82,7 +84,7 @@ views:
             name:
             - font-size: 14px
             - font-weight: '500'
-          extra_styles: '@keyframes tv-power-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} }'
+          extra_styles: '@keyframes tv-pilot-breathe { 0%,100% {opacity:1;} 50% {opacity:0.38;} }'
       - type: grid
         columns: 3
         square: false
@@ -795,7 +797,7 @@ views:
                   - height: 101px
                   - padding: 5px
                   - border-radius: 18px
-                  - width: 286px
+                  - width: 296px
                   - margin: '0'
                   - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
                   - border: '1px solid #445A6E'
@@ -806,7 +808,7 @@ views:
                   - width: 25px
                   - height: 25px
                   - color: '[[[ const p=states[''sensor.lg_49nano816na_56ba_play_state'']?.state; return (states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && (p===''playing'' || p===''paused'')) ? ''#13cb42'' : ''#f4f7fa''; ]]]'
-                  - animation: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_play_state'']?.state === ''paused'' ? `tv-pause-soft 2.5s ease-in-out infinite -${Date.now()%2500}ms` :
+                  - animation: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_play_state'']?.state === ''paused'' ? `tv-pilot-breathe 2500ms ease-in-out -${(document.timeline?.currentTime ?? performance.now())%2500}ms infinite` :
                       ''none''; ]]]'
                   name:
                   - font-size: 15px
@@ -814,7 +816,7 @@ views:
                   grid:
                   - grid-template-areas: '"i" "n"'
                   - grid-template-rows: 1fr min-content
-                extra_styles: '@keyframes tv-pause-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
+                extra_styles: '@keyframes tv-pilot-breathe { 0%,100% {opacity:1;} 50% {opacity:0.38;} } ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
             screen:
               card:
                 type: custom:button-card
@@ -834,7 +836,7 @@ views:
                   - height: 101px
                   - padding: 5px
                   - border-radius: 18px
-                  - width: 156px
+                  - width: 138px
                   - margin: '0'
                   - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
                   - border: '1px solid #445A6E'
@@ -850,13 +852,14 @@ views:
                           const sw=states['switch.lg_49nano816na_56ba_display_panel']?.state;
                           const ent=states['binary_sensor.lg_49nano816na_56ba_power'];
                           const age=ent?.last_changed ? (Date.now()-new Date(ent.last_changed).getTime())/1000 : 999;
-                          if(pw==='on' && sw==='off') return `tv-screen-soft 2.5s ease-in-out infinite -${Date.now()%2500}ms`;
-                          if(pw==='off' && age>=0 && age<6) return `tv-screen-tail 2.5s ease-in-out 2.4 -${Date.now()%2500}ms`;
+                          const phase=(document.timeline?.currentTime ?? performance.now())%2500;
+                          if(pw==='on' && sw==='off') return `tv-pilot-breathe 2500ms ease-in-out -${phase}ms infinite`;
+                          if(pw==='off' && age>=0 && age<6) return `tv-pilot-tail 2500ms ease-in-out -${phase}ms ${(6000-age*1000+phase)/2500}`;
                           return 'none'; ]]]
                   name:
                   - font-size: 15px
                   - font-weight: '500'
-                extra_styles: '@keyframes tv-screen-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } @keyframes tv-screen-tail { 0%,100% {opacity:1;color:#13cb42;} 50% {opacity:0.38;color:#13cb42;} } ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
+                extra_styles: '@keyframes tv-pilot-breathe { 0%,100% {opacity:1;} 50% {opacity:0.38;} } @keyframes tv-pilot-tail { 0%,100% {opacity:1;color:#13cb42;} 50% {opacity:0.38;color:#13cb42;} } ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
           styles:
             card:
             - height: 101px
@@ -869,9 +872,9 @@ views:
             - width: 457px
             grid:
             - grid-template-areas: '"play screen"'
-            - grid-template-columns: 286px 156px
+            - grid-template-columns: 296px 138px
             - grid-template-rows: 101px
-            - column-gap: 14px
+            - column-gap: 22px
             - align-items: stretch
             custom_fields:
               play:
@@ -929,7 +932,9 @@ views:
                     if(value!=='on' && value!=='off') return 'none';
                     if(this._tvPilotPowerLast===undefined) { this._tvPilotPowerLast=value; return 'none'; }
                     if(this._tvPilotPowerLast!==value) { this._tvPilotPowerLast=value; this._tvPilotPowerUntil=Date.now()+6000; }
-                    return Date.now() < (this._tvPilotPowerUntil||0) ? `tv-power-soft 2.5s ease-in-out 2.4 -${Date.now()%2500}ms` : 'none'; ]]]
+                    if(Date.now() >= (this._tvPilotPowerUntil||0)) return 'none';
+                    const phase=(document.timeline?.currentTime ?? performance.now())%2500;
+                    return `tv-pilot-breathe 2500ms ease-in-out -${phase}ms ${2.4+phase/2500}`; ]]]
             custom_fields:
               status:
               - position: absolute
@@ -939,7 +944,7 @@ views:
             name:
             - font-size: 14px
             - font-weight: '500'
-          extra_styles: '@keyframes tv-power-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} }'
+          extra_styles: '@keyframes tv-pilot-breathe { 0%,100% {opacity:1;} 50% {opacity:0.38;} }'
       - type: grid
         columns: 3
         square: false
@@ -1675,7 +1680,7 @@ views:
                   - height: min(101px, calc(19.72vw - 9.75px))
                   - padding: 5px
                   - border-radius: 18px
-                  - width: min(286px, calc(59.28vw - 28.7px))
+                  - width: min(296px, calc(64.8195vw - 42.667px))
                   - margin: '0'
                   - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
                   - border: '1px solid #445A6E'
@@ -1686,7 +1691,7 @@ views:
                   - width: 25px
                   - height: 25px
                   - color: '[[[ const p=states[''sensor.lg_49nano816na_56ba_play_state'']?.state; return (states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && (p===''playing'' || p===''paused'')) ? ''#13cb42'' : ''#f4f7fa''; ]]]'
-                  - animation: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_play_state'']?.state === ''paused'' ? `tv-pause-soft 2.5s ease-in-out infinite -${Date.now()%2500}ms` :
+                  - animation: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_play_state'']?.state === ''paused'' ? `tv-pilot-breathe 2500ms ease-in-out -${(document.timeline?.currentTime ?? performance.now())%2500}ms infinite` :
                       ''none''; ]]]'
                   name:
                   - font-size: 15px
@@ -1694,7 +1699,7 @@ views:
                   grid:
                   - grid-template-areas: '"i" "n"'
                   - grid-template-rows: 1fr min-content
-                extra_styles: '@keyframes tv-pause-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
+                extra_styles: '@keyframes tv-pilot-breathe { 0%,100% {opacity:1;} 50% {opacity:0.38;} } ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
             screen:
               card:
                 type: custom:button-card
@@ -1714,7 +1719,7 @@ views:
                   - height: min(101px, calc(19.72vw - 9.75px))
                   - padding: 5px
                   - border-radius: 18px
-                  - width: min(156px, calc(29.64vw - 8.3px))
+                  - width: min(138px, calc((88.917vw - 76px) / 3))
                   - margin: '0'
                   - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
                   - border: '1px solid #445A6E'
@@ -1730,13 +1735,14 @@ views:
                           const sw=states['switch.lg_49nano816na_56ba_display_panel']?.state;
                           const ent=states['binary_sensor.lg_49nano816na_56ba_power'];
                           const age=ent?.last_changed ? (Date.now()-new Date(ent.last_changed).getTime())/1000 : 999;
-                          if(pw==='on' && sw==='off') return `tv-screen-soft 2.5s ease-in-out infinite -${Date.now()%2500}ms`;
-                          if(pw==='off' && age>=0 && age<6) return `tv-screen-tail 2.5s ease-in-out 2.4 -${Date.now()%2500}ms`;
+                          const phase=(document.timeline?.currentTime ?? performance.now())%2500;
+                          if(pw==='on' && sw==='off') return `tv-pilot-breathe 2500ms ease-in-out -${phase}ms infinite`;
+                          if(pw==='off' && age>=0 && age<6) return `tv-pilot-tail 2500ms ease-in-out -${phase}ms ${(6000-age*1000+phase)/2500}`;
                           return 'none'; ]]]
                   name:
                   - font-size: 15px
                   - font-weight: '500'
-                extra_styles: '@keyframes tv-screen-soft { 0%,100% {opacity:1;} 50% {opacity:0.38;} } @keyframes tv-screen-tail { 0%,100% {opacity:1;color:#13cb42;} 50% {opacity:0.38;color:#13cb42;} } ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
+                extra_styles: '@keyframes tv-pilot-breathe { 0%,100% {opacity:1;} 50% {opacity:0.38;} } @keyframes tv-pilot-tail { 0%,100% {opacity:1;color:#13cb42;} 50% {opacity:0.38;color:#13cb42;} } ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
           styles:
             card:
             - height: min(101px, calc(19.72vw - 9.75px))
@@ -1747,12 +1753,12 @@ views:
             - border: none
             - box-shadow: none
             - border-radius: '0'
-            - width: min(457px, calc(88.917vw - 28px))
+            - width: calc(100vw - 60px)
             grid:
             - grid-template-areas: '"play screen"'
-            - grid-template-columns: minmax(0, 2fr) minmax(0, 1fr)
+            - grid-template-columns: min(296px, calc(64.8195vw - 42.667px)) min(138px, calc((88.917vw - 76px) / 3))
             - grid-template-rows: min(101px, calc(19.72vw - 9.75px))
-            - column-gap: 14px
+            - column-gap: calc(5.5415vw + 8px)
             - align-items: stretch
             custom_fields:
               play:
