@@ -6,6 +6,8 @@ Pilot LG dla Home Assistant, wykorzystujący istniejące encje, MQTT i `custom:b
 
 **1.1.1 — zaakceptowany punkt wyjścia do testów funkcjonalnych.**
 
+**1.2.2 — poprawione pozycje dolnego rzędu i synchronizacja:** na macOS Play/Pause zajmuje szerokość dwóch sąsiednich przycisków funkcyjnych, a Screen Off wyrównano dokładnie z kolumną INPUT (szerokości 296 px i 138 px, odstęp 22 px). W mobilnym widoku szerokości i odstęp dolnego rzędu liczone są z szerokości siatki trzech aplikacji, tak aby Screen Off nie wychodził poza prawą krawędź. Pulsowanie POWER, Play/Pause i Screen Off jest wyrównywane do wspólnego zegara animacji przeglądarki (`document.timeline.currentTime`) z cyklem 2500 ms i zakresem 100%–38%; animacje wygasające po wyłączeniu telewizora zachowują limit około 6 s. Bez zmian pozostałe wymiary, kolory i akcje. Wymaga testu rzeczywistego na macOS i iOS.
+
 **1.2.1 — korekty mobilne i pulsowania:** Screen Off na iPhonie poszerzony o 12 px, aby prawą krawędzią zbliżyć się do INPUT; mobilne przyciski przesunięte w prawo o `4vw` dla symetryczniejszego wyśrodkowania; logo wszystkich sześciu aplikacji zmniejszone o 15% tylko w mobilnym widoku. Wskaźniki POWER, Play/Pause i Screen Off korzystają ze wspólnej fazy cyklu 2,5 s, obliczanej względem bieżącego czasu — wymaga testu synchronizacji na urządzeniu. Układ i wymiary desktopowe bez zmian, wszystkie akcje zachowane.
 
 **1.2.0 — zielony akcent przycisków funkcyjnych:** zastosowano ten sam odcień zieleni `#13CB42`, co dla wskaźnika `ON` na POWER: podświetlenia dotykowe i poświata, Play/Pause, Screen Off oraz INPUT. Wygaszanie efektów dotykowych przedłużono z 0,45 s do 0,72 s (+60%). Żółta ramka i poświata aktywnych aplikacji, czerwony symbol POWER i cała geometria pilota bez zmian. Zmiany wymagają testu w HA na macOS/iOS.
@@ -24,7 +26,7 @@ Pilot LG dla Home Assistant, wykorzystujący istniejące encje, MQTT i `custom:b
 
 **1.1.2 — testowy układ mobilny:** dla ekranów do 599 px szerokości jeden dashboard wyświetla proporcjonalnie zmniejszoną wersję pilota. Powyżej 599 px pokazuje dokładnie zachowany układ komputerowy 1.1.1. Obie wersje mają te same akcje sterujące. Nie uznawać układu mobilnego za zatwierdzony bez testu na iPhonie.
 
-Plik `dashboard.yaml` zawiera bieżącą wersję projektu (**1.2.1**, test mobilny i funkcjonalny). Wersje sprzed 1.1.1 pozostają wyłącznie w standardowej historii commitów Git; stary osobny plik YAML usunięto z bieżącego drzewa repozytorium.
+Plik `dashboard.yaml` zawiera bieżącą wersję projektu (**1.2.2**, test mobilny i funkcjonalny). Wersje sprzed 1.1.1 pozostają wyłącznie w standardowej historii commitów Git; stary osobny plik YAML usunięto z bieżącego drzewa repozytorium.
 
 ## Zasada zamrożenia wyglądu
 
