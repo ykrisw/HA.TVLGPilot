@@ -1,4 +1,4 @@
-# HA.TVLGPilot 1.2.3 — iPadOS layout + Windows Firefox adaptive fit and shared animation timeline. 1.2.2 archived.
+# HA.TVLGPilot 1.2.4 — iPhone bottom alignment, larger iPad layout, Windows Firefox grid alignment.
 views:
 - title: TV Control
   path: overview
@@ -69,7 +69,7 @@ views:
             - color: '#ff2136'
             - animation: >-
                 [[[ const value=states['binary_sensor.lg_49nano816na_56ba_power']?.state;
-                    if ((/Windows/i.test(navigator.userAgent) && /Firefox\//i.test(navigator.userAgent))) { const card=this; requestAnimationFrame(()=>{ let node=card; while(node && node.localName!=='hui-vertical-stack-card') node=node.parentElement || node.getRootNode()?.host; if(!node || node._tvPilotFit) return; const stack=node; let scale=1; const fit=()=>{ if(!stack.isConnected) { window.removeEventListener('resize',fit); stack._tvPilotFit=false; return; } const rect=stack.getBoundingClientRect(); const natural=rect.height/scale; if(natural<=0) return; const next=Math.min(1,Math.max(0.1,(window.innerHeight-rect.top-18)/natural)); if(Math.abs(next-scale)>0.005) { scale=next; stack.style.zoom=String(scale); } }; stack._tvPilotFit=true; window.addEventListener('resize',fit); fit(); }); }
+                    if ((/Windows/i.test(navigator.userAgent) && /Firefox\//i.test(navigator.userAgent))) { const card=this; requestAnimationFrame(()=>{ let node=card; while(node && node.localName!=='hui-vertical-stack-card') node=node.parentElement || node.getRootNode()?.host; if(!node || node._tvPilotFit) return; const stack=node; stack.style.width='465px'; stack.style.maxWidth='none'; let scale=1; const fit=()=>{ if(!stack.isConnected) { window.removeEventListener('resize',fit); stack._tvPilotFit=false; return; } const rect=stack.getBoundingClientRect(); const natural=rect.height/scale; if(natural<=0) return; const next=Math.min(1,Math.max(0.1,(window.innerHeight-rect.top-18)/natural)); if(Math.abs(next-scale)>0.005) { scale=next; stack.style.zoom=String(scale); } }; stack._tvPilotFit=true; window.addEventListener('resize',fit); fit(); }); }
                     if ((/Windows/i.test(navigator.userAgent) && /Firefox\//i.test(navigator.userAgent))) { const card=this; requestAnimationFrame(()=>requestAnimationFrame(()=>{ const root=card.shadowRoot?.querySelector('ha-card'); if(!root) return; for(const a of root.getAnimations({subtree:true})) { if(!['tv-pilot-breathe','tv-pilot-tail'].includes(a.animationName)) continue; const delay=a.effect?.getTiming().delay || 0; if(a._tvPilotSyncedDelay===delay) continue; const t=document.timeline.currentTime; if(typeof t!=='number') continue; a.startTime=Math.floor(t/2500)*2500-delay; a._tvPilotSyncedDelay=delay; } })); }
                     if(value!=='on' && value!=='off') return 'none';
                     if(this._tvPilotPowerLast===undefined) { this._tvPilotPowerLast=value; return 'none'; }
@@ -1761,7 +1761,7 @@ views:
             - grid-template-areas: '"play screen"'
             - grid-template-columns: min(296px, calc(64.8195vw - 42.667px)) min(138px, calc((88.917vw - 76px) / 3))
             - grid-template-rows: min(101px, calc(19.72vw - 9.75px))
-            - column-gap: calc(5.5415vw + 8px)
+            - column-gap: calc(5.5415vw + 3px)
             - align-items: stretch
             custom_fields:
               play:
@@ -1811,27 +1811,28 @@ views:
             perform_action: script.lg_tv_power_on_off_glasshouse_mqtt
             target: {}
           custom_fields:
-            status: '[[[ const value=states[''binary_sensor.lg_49nano816na_56ba_power'']?.state; const on=value===''on''; const off=value===''off''; return on || off ? `<span style="font-family:Arial,sans-serif;font-size:12.8px;font-weight:800;letter-spacing:0.2px;color:${on ? ''#13cb42'' : ''#ff2136''};text-shadow:0 0 7px ${on ? ''rgba(19,203,66,0.7)'' : ''rgba(255,33,54,0.45)''}">${on ? ''ON'' : ''OFF''}</span>` : ''''; ]]]'
+            status: '[[[ const value=states[''binary_sensor.lg_49nano816na_56ba_power'']?.state; const on=value===''on''; const off=value===''off''; return on || off ? `<span style="font-family:Arial,sans-serif;font-size:16px;font-weight:800;letter-spacing:0.2px;color:${on ? ''#13cb42'' : ''#ff2136''};text-shadow:0 0 7px ${on ? ''rgba(19,203,66,0.7)'' : ''rgba(255,33,54,0.45)''}">${on ? ''ON'' : ''OFF''}</span>` : ''''; ]]]'
           triggers_update:
           - binary_sensor.lg_49nano816na_56ba_power
           styles:
             card:
-            - height: 80.8px
+            - height: 101px
             - padding: '0'
-            - border-radius: 14.4px
-            - margin: 5.6px 3.2px
+            - border-radius: 18px
+            - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #445A6E'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
-            - width: 365.6px
+            - width: 457px
             icon:
-            - width: 26.4px
-            - height: 26.4px
+            - width: 33px
+            - height: 33px
             - color: '#ff2136'
             - animation: >-
                 [[[ const value=states['binary_sensor.lg_49nano816na_56ba_power']?.state;
+                    const card=this; requestAnimationFrame(()=>{ let node=card; while(node && node.localName!=='hui-vertical-stack-card') node=node.parentElement || node.getRootNode()?.host; if(!node) return; node.style.width='465px'; node.style.maxWidth='none'; });
                     if(value!=='on' && value!=='off') return 'none';
                     if(this._tvPilotPowerLast===undefined) { this._tvPilotPowerLast=value; return 'none'; }
                     if(this._tvPilotPowerLast!==value) { this._tvPilotPowerLast=value; this._tvPilotPowerUntil=Date.now()+6000; }
@@ -1845,7 +1846,7 @@ views:
               - right: 14px
               - z-index: 3
             name:
-            - font-size: 11.2px
+            - font-size: 14px
             - font-weight: '500'
           extra_styles: '@keyframes tv-pilot-breathe { 0%,100% {opacity:1;} 50% {opacity:0.38;} }'
       - type: grid
@@ -1872,23 +1873,23 @@ views:
           - binary_sensor.lg_49nano816na_56ba_power
           styles:
             card:
-            - height: 80.8px
+            - height: 101px
             - padding: '0'
-            - border-radius: 14.4px
-            - margin: 5.6px 3.2px
+            - border-radius: 18px
+            - margin: 7px 4px
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''1px solid #ffd000'' : ''1px solid #445A6E''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''cdp-30'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
-            - width: 110.4px
+            - width: 138px
             icon:
-            - width: 22.4px
-            - height: 22.4px
+            - width: 28px
+            - height: 28px
             - color: '#f4f7fa'
             name:
-            - font-size: 9.6px
+            - font-size: 12px
             - font-weight: '500'
             - transform: translateY(-1px)
             - color: '#f4f7fa'
@@ -1898,7 +1899,7 @@ views:
             - grid-template-rows: 1fr
             custom_fields:
               brand:
-              - transform: scale(0.8)
+              - transform: scale(1)
               - display: flex
               - align-items: center
               - justify-content: center
@@ -1927,23 +1928,23 @@ views:
           - binary_sensor.lg_49nano816na_56ba_power
           styles:
             card:
-            - height: 80.8px
+            - height: 101px
             - padding: '0'
-            - border-radius: 14.4px
-            - margin: 5.6px 3.2px
+            - border-radius: 18px
+            - margin: 7px 4px
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''1px solid #ffd000'' : ''1px solid #445A6E''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''youtube.leanback.v4'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
-            - width: 110.4px
+            - width: 138px
             icon:
-            - width: 23.2px
-            - height: 23.2px
+            - width: 29px
+            - height: 29px
             - color: '#ff2637'
             name:
-            - font-size: 10.4px
+            - font-size: 13px
             - font-weight: '650'
             - transform: translateY(-3px)
             - color: '#f4f7fa'
@@ -1953,7 +1954,7 @@ views:
             - grid-template-rows: 1fr
             custom_fields:
               brand:
-              - transform: scale(0.8)
+              - transform: scale(1)
               - display: flex
               - align-items: center
               - justify-content: center
@@ -1991,23 +1992,23 @@ views:
           - binary_sensor.lg_49nano816na_56ba_power
           styles:
             card:
-            - height: 80.8px
+            - height: 101px
             - padding: '0'
-            - border-radius: 14.4px
-            - margin: 5.6px 3.2px
+            - border-radius: 18px
+            - margin: 7px 4px
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''1px solid #ffd000'' : ''1px solid #445A6E''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''amazon'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
-            - width: 110.4px
+            - width: 138px
             icon:
-            - width: 22.4px
-            - height: 22.4px
+            - width: 28px
+            - height: 28px
             - color: '#f4f7fa'
             name:
-            - font-size: 9.6px
+            - font-size: 12px
             - font-weight: '500'
             - transform: translateY(-1px)
             - color: '#f4f7fa'
@@ -2017,7 +2018,7 @@ views:
             - grid-template-rows: 1fr
             custom_fields:
               brand:
-              - transform: scale(0.8)
+              - transform: scale(1)
               - display: flex
               - align-items: center
               - justify-content: center
@@ -2049,23 +2050,23 @@ views:
           - binary_sensor.lg_49nano816na_56ba_power
           styles:
             card:
-            - height: 80.8px
+            - height: 101px
             - padding: '0'
-            - border-radius: 14.4px
-            - margin: 5.6px 3.2px
+            - border-radius: 18px
+            - margin: 7px 4px
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''1px solid #ffd000'' : ''1px solid #445A6E''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.apple.appletv'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
-            - width: 110.4px
+            - width: 138px
             icon:
-            - width: 25.08px
-            - height: 25.08px
+            - width: 31.35px
+            - height: 31.35px
             - color: '#f4f7fa'
             name:
-            - font-size: 9.6px
+            - font-size: 12px
             - font-weight: '500'
             - transform: translateY(-1px)
             - color: '#f4f7fa'
@@ -2093,23 +2094,23 @@ views:
           - binary_sensor.lg_49nano816na_56ba_power
           styles:
             card:
-            - height: 80.8px
+            - height: 101px
             - padding: '0'
-            - border-radius: 14.4px
-            - margin: 5.6px 3.2px
+            - border-radius: 18px
+            - margin: 7px 4px
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''1px solid #ffd000'' : ''1px solid #445A6E''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''pl.cda'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
-            - width: 110.4px
+            - width: 138px
             icon:
-            - width: 22.4px
-            - height: 22.4px
+            - width: 28px
+            - height: 28px
             - color: '#f4f7fa'
             name:
-            - font-size: 9.6px
+            - font-size: 12px
             - font-weight: '500'
             - transform: translateY(-1px)
             - color: '#f4f7fa'
@@ -2119,7 +2120,7 @@ views:
             - grid-template-rows: 1fr
             custom_fields:
               brand:
-              - transform: scale(0.8)
+              - transform: scale(1)
               - display: flex
               - align-items: center
               - justify-content: center
@@ -2148,23 +2149,23 @@ views:
           - binary_sensor.lg_49nano816na_56ba_power
           styles:
             card:
-            - height: 80.8px
+            - height: 101px
             - padding: '0'
-            - border-radius: 14.4px
-            - margin: 5.6px 3.2px
+            - border-radius: 18px
+            - margin: 7px 4px
             - background: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''linear-gradient(145deg, #312f25 0%, #24251e 57%, #181a16 100%)'' : ''linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)''; ]]]'
             - border: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''1px solid #ffd000'' : ''1px solid #445A6E''; ]]]'
             - box-shadow: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_active_app'']?.attributes?.app_id === ''com.beb.plxnative'' ? ''inset 0 1px 3px rgba(255,238,150,0.30), 0 0 16px rgba(255,208,0,0.576), 0 4px 10px rgba(0,0,0,0.38)'' : ''inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)''; ]]]'
             - box-sizing: border-box
             - overflow: hidden
             - color: '#f4f7fa'
-            - width: 110.4px
+            - width: 138px
             icon:
-            - width: 22.4px
-            - height: 22.4px
+            - width: 28px
+            - height: 28px
             - color: '#f4f7fa'
             name:
-            - font-size: 9.6px
+            - font-size: 12px
             - font-weight: '500'
             - transform: translateY(-1px)
             - color: '#f4f7fa'
@@ -2174,7 +2175,7 @@ views:
             - grid-template-rows: 1fr
             custom_fields:
               brand:
-              - transform: scale(0.8)
+              - transform: scale(1)
               - display: flex
               - align-items: center
               - justify-content: center
@@ -2197,9 +2198,9 @@ views:
             action: none
           styles:
             card:
-            - height: 80.8px
-            - width: 110.4px
-            - margin: 5.6px 3.2px
+            - height: 101px
+            - width: 138px
+            - margin: 7px 4px
             - padding: '0'
             - visibility: hidden
             - background: transparent
@@ -2218,22 +2219,22 @@ views:
               entity_id: button.lg_49nano816na_56ba_remote_up
           styles:
             card:
-            - height: 80.8px
-            - width: 110.4px
+            - height: 101px
+            - width: 138px
             - padding: '0'
-            - border-radius: 14.4px
-            - margin: 5.6px 3.2px
+            - border-radius: 18px
+            - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #445A6E'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
             icon:
-            - width: 18.4px
-            - height: 18.4px
+            - width: 23px
+            - height: 23px
             - color: '#f4f7fa'
             name:
-            - font-size: 11.2px
+            - font-size: 14px
             - font-weight: '700'
             - color: '#f4f7fa'
           extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
@@ -2245,9 +2246,9 @@ views:
             action: none
           styles:
             card:
-            - height: 80.8px
-            - width: 110.4px
-            - margin: 5.6px 3.2px
+            - height: 101px
+            - width: 138px
+            - margin: 7px 4px
             - padding: '0'
             - visibility: hidden
             - background: transparent
@@ -2266,22 +2267,22 @@ views:
               entity_id: button.lg_49nano816na_56ba_remote_left
           styles:
             card:
-            - height: 80.8px
-            - width: 110.4px
+            - height: 101px
+            - width: 138px
             - padding: '0'
-            - border-radius: 14.4px
-            - margin: 5.6px 3.2px
+            - border-radius: 18px
+            - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #445A6E'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
             icon:
-            - width: 18.4px
-            - height: 18.4px
+            - width: 23px
+            - height: 23px
             - color: '#f4f7fa'
             name:
-            - font-size: 11.2px
+            - font-size: 14px
             - font-weight: '700'
             - color: '#f4f7fa'
           extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
@@ -2298,22 +2299,22 @@ views:
               entity_id: button.lg_49nano816na_56ba_remote_ok
           styles:
             card:
-            - height: 80.8px
-            - width: 110.4px
+            - height: 101px
+            - width: 138px
             - padding: '0'
-            - border-radius: 14.4px
-            - margin: 5.6px 3.2px
+            - border-radius: 18px
+            - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #445A6E'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
             icon:
-            - width: 18.4px
-            - height: 18.4px
+            - width: 23px
+            - height: 23px
             - color: '#f4f7fa'
             name:
-            - font-size: 18.4px
+            - font-size: 23px
             - font-weight: '700'
             - color: '#f4f7fa'
           extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
@@ -2330,22 +2331,22 @@ views:
               entity_id: button.lg_49nano816na_56ba_remote_right
           styles:
             card:
-            - height: 80.8px
-            - width: 110.4px
+            - height: 101px
+            - width: 138px
             - padding: '0'
-            - border-radius: 14.4px
-            - margin: 5.6px 3.2px
+            - border-radius: 18px
+            - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #445A6E'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
             icon:
-            - width: 18.4px
-            - height: 18.4px
+            - width: 23px
+            - height: 23px
             - color: '#f4f7fa'
             name:
-            - font-size: 11.2px
+            - font-size: 14px
             - font-weight: '700'
             - color: '#f4f7fa'
           extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
@@ -2357,9 +2358,9 @@ views:
             action: none
           styles:
             card:
-            - height: 80.8px
-            - width: 110.4px
-            - margin: 5.6px 3.2px
+            - height: 101px
+            - width: 138px
+            - margin: 7px 4px
             - padding: '0'
             - visibility: hidden
             - background: transparent
@@ -2378,22 +2379,22 @@ views:
               entity_id: button.lg_49nano816na_56ba_remote_down
           styles:
             card:
-            - height: 80.8px
-            - width: 110.4px
+            - height: 101px
+            - width: 138px
             - padding: '0'
-            - border-radius: 14.4px
-            - margin: 5.6px 3.2px
+            - border-radius: 18px
+            - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #445A6E'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
             icon:
-            - width: 18.4px
-            - height: 18.4px
+            - width: 23px
+            - height: 23px
             - color: '#f4f7fa'
             name:
-            - font-size: 11.2px
+            - font-size: 14px
             - font-weight: '700'
             - color: '#f4f7fa'
           extra_styles: 'ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
@@ -2405,9 +2406,9 @@ views:
             action: none
           styles:
             card:
-            - height: 80.8px
-            - width: 110.4px
-            - margin: 5.6px 3.2px
+            - height: 101px
+            - width: 138px
+            - margin: 7px 4px
             - padding: '0'
             - visibility: hidden
             - background: transparent
@@ -2430,22 +2431,22 @@ views:
           show_state: false
           styles:
             card:
-            - height: 80.8px
+            - height: 101px
             - padding: '0'
-            - border-radius: 14.4px
-            - margin: 5.6px 3.2px
+            - border-radius: 18px
+            - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #445A6E'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
-            - width: 110.4px
+            - width: 138px
             icon:
-            - width: 18.4px
-            - height: 18.4px
+            - width: 23px
+            - height: 23px
             - color: '#f4f7fa'
             name:
-            - font-size: 11.2px
+            - font-size: 14px
             - font-weight: '500'
             grid:
             - grid-template-areas: '"i" "n"'
@@ -2464,22 +2465,22 @@ views:
           show_state: false
           styles:
             card:
-            - height: 80.8px
+            - height: 101px
             - padding: '0'
-            - border-radius: 14.4px
-            - margin: 5.6px 3.2px
+            - border-radius: 18px
+            - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #445A6E'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
-            - width: 110.4px
+            - width: 138px
             icon:
-            - width: 18.4px
-            - height: 18.4px
+            - width: 23px
+            - height: 23px
             - color: '#f4f7fa'
             name:
-            - font-size: 11.2px
+            - font-size: 14px
             - font-weight: '500'
             grid:
             - grid-template-areas: '"i" "n"'
@@ -2502,25 +2503,25 @@ views:
           show_state: false
           styles:
             card:
-            - height: 80.8px
+            - height: 101px
             - padding: '0'
-            - border-radius: 14.4px
-            - margin: 5.6px 3.2px
+            - border-radius: 18px
+            - margin: 7px 4px
             - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
             - border: '1px solid #445A6E'
             - box-shadow: inset 0 1px 2px rgba(230,244,255,0.13), 0 4px 9px rgba(0,0,0,0.38)
             - box-sizing: border-box
             - overflow: hidden
-            - width: 110.4px
+            - width: 138px
             icon:
-            - width: 18.4px
-            - height: 18.4px
+            - width: 23px
+            - height: 23px
             - color: '#f4f7fa'
             - animation: "[[[\n  if (states['binary_sensor.lg_49nano816na_56ba_power']?.state !== 'on') return 'none';\n  const a = states['sensor.lg_49nano816na_56ba_active_app'];\n  const id = String(a?.attributes?.app_id || '');\n  if (!/^com\\.webos\\\
                 .app\\.hdmi[1-9]$/i.test(id) || !a?.last_changed) return 'none';\n  const age = (Date.now() - new Date(a.last_changed).getTime()) / 1000;\n  return\
                 \ age >= 0 && age < 9 ? `tv-input-flash 9s linear ${-age}s 1 both` : 'none';\n]]]"
             name:
-            - font-size: 11.2px
+            - font-size: 14px
             - font-weight: '500'
             grid:
             - grid-template-areas: '"i" "n"'
@@ -2562,10 +2563,10 @@ views:
                 - binary_sensor.lg_49nano816na_56ba_power
                 styles:
                   card:
-                  - height: 80.8px
-                  - padding: 5px
-                  - border-radius: 14.4px
-                  - width: 236.8px
+                  - height: 101px
+                  - padding: 6.25px
+                  - border-radius: 18px
+                  - width: 296px
                   - margin: '0'
                   - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
                   - border: '1px solid #445A6E'
@@ -2573,13 +2574,13 @@ views:
                   - overflow: hidden
                   - box-sizing: border-box
                   icon:
-                  - width: 20px
-                  - height: 20px
+                  - width: 25px
+                  - height: 25px
                   - color: '[[[ const p=states[''sensor.lg_49nano816na_56ba_play_state'']?.state; return (states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && (p===''playing'' || p===''paused'')) ? ''#13cb42'' : ''#f4f7fa''; ]]]'
                   - animation: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''sensor.lg_49nano816na_56ba_play_state'']?.state === ''paused'' ? `tv-pilot-breathe 2500ms ease-in-out -${(document.timeline?.currentTime ?? performance.now())%2500}ms infinite` :
                       ''none''; ]]]'
                   name:
-                  - font-size: 12px
+                  - font-size: 15px
                   - font-weight: '500'
                   grid:
                   - grid-template-areas: '"i" "n"'
@@ -2601,10 +2602,10 @@ views:
                 - binary_sensor.lg_49nano816na_56ba_power
                 styles:
                   card:
-                  - height: 80.8px
-                  - padding: 5px
-                  - border-radius: 14.4px
-                  - width: 110.4px
+                  - height: 101px
+                  - padding: 6.25px
+                  - border-radius: 18px
+                  - width: 138px
                   - margin: '0'
                   - background: 'linear-gradient(145deg, #1b2532 0%, #111820 57%, #0c1219 100%)'
                   - border: '1px solid #445A6E'
@@ -2612,8 +2613,8 @@ views:
                   - overflow: hidden
                   - box-sizing: border-box
                   icon:
-                  - width: 17.48px
-                  - height: 17.48px
+                  - width: 21.85px
+                  - height: 21.85px
                   - color: '[[[ return states[''binary_sensor.lg_49nano816na_56ba_power'']?.state === ''on'' && states[''switch.lg_49nano816na_56ba_display_panel'']?.state === ''off'' ? ''#13cb42'' : ''#f4f7fa''; ]]]'
                   - animation: >-
                       [[[ const pw=states['binary_sensor.lg_49nano816na_56ba_power']?.state;
@@ -2625,24 +2626,24 @@ views:
                           if(pw==='off' && age>=0 && age<6) return `tv-pilot-tail 2500ms ease-in-out -${phase}ms ${(6000-age*1000+phase)/2500}`;
                           return 'none'; ]]]
                   name:
-                  - font-size: 12px
+                  - font-size: 15px
                   - font-weight: '500'
                 extra_styles: '@keyframes tv-pilot-breathe { 0%,100% {opacity:1;} 50% {opacity:0.38;} } @keyframes tv-pilot-tail { 0%,100% {opacity:1;color:#13cb42;} 50% {opacity:0.38;color:#13cb42;} } ha-card { transition:filter 0.72s ease-out,box-shadow 0.72s ease-out,border-color 0.72s ease-out !important; } ha-card:active { filter:brightness(1.32); background:linear-gradient(145deg,#17462b 0%,#102f20 60%,#0b1b15 100%) !important; border-color:#13cb42 !important; box-shadow:inset 0 1px 3px rgba(105,242,137,0.38),0 0 15px rgba(19,203,66,0.8) !important; }'
           styles:
             card:
-            - height: 80.8px
+            - height: 101px
             - padding: '0'
-            - margin: 5.6px 3.2px
+            - margin: 7px 4px
             - background: transparent
             - border: none
             - box-shadow: none
             - border-radius: '0'
-            - width: 365.6px
+            - width: 457px
             grid:
             - grid-template-areas: '"play screen"'
-            - grid-template-columns: 236.8px 110.4px
-            - grid-template-rows: 80.8px
-            - column-gap: 17.6px
+            - grid-template-columns: 296px 138px
+            - grid-template-rows: 101px
+            - column-gap: 22px
             - align-items: stretch
             custom_fields:
               play:
