@@ -6,6 +6,8 @@ Pilot LG dla Home Assistant, wykorzystujący istniejące encje, MQTT i `custom:b
 
 **1.1.1 — zaakceptowany punkt wyjścia do testów funkcjonalnych.**
 
+**1.2.5 — wyśrodkowanie iPadOS i INPUT:** automatyczne wyśrodkowanie stosu tabletowego bez zmiany rozmiaru; wykrywanie zmian identyfikatora HDMI niezależnie od samego `last_changed`, ponowne uruchamianie animacji przy kolejnej zmianie i wygaszanie do koloru białego. Pozostały wygląd i funkcje bez zmian. Wymaga testu na urządzeniach, zwłaszcza Windows/Firefox.
+
 **1.2.4 — korekty geometrii:** iPhone: zmniejszenie odstępu dolnego rzędu o 5 px; iPadOS: przywrócenie pełnych wymiarów przycisków i ustalenie szerokości stosu; Windows/Firefox: ustalenie szerokości stosu przed skalowaniem. Bez zmian akcji i geometrii macOS. Wymaga testu na urządzeniach.
 
 **1.2.3 — osobny widok iPadOS oraz poprawki Windows/Firefox, bez zmian iPhone/macOS:** istniejący układ iPhone pozostaje identyczny (`max-width: 599px`), a komputerowy układ zachowuje geometrię 1.2.2 poza Windows/Firefox. W Windows/Firefox dodano dopasowanie skali całego stosu do wysokości okna i wyrównanie fazy pulsowania przez Web Animations API do zegara dokumentu. Oba mechanizmy wymagają testu w rzeczywistym Home Assistant. Dla urządzeń dotykowych o szerokości od 600 px dodano trzeci wariant z proporcjonalnym zmniejszeniem wszystkich wymiarów, wysokości, marginesów, ikonek i typografii do 80%, aby zapobiec nakładaniu przycisków na tabletowej siatce HA, zachowując proporcje całego pilota. Warianty wybierane za pomocą `screen` media query z `pointer: coarse` (tablet) / `pointer: fine` (komputer). Przetestować rzeczywisty wygląd na iPadOS w pionie i poziomie, zwłaszcza jeśli iPad korzysta z gładzika lub myszy. Bez nowych komponentów, bez zmian działań sterujących. Osobna kopia zatwierdzonej wersji 1.2.2: `archive/dashboard-1.2.2.yaml`.
@@ -30,7 +32,7 @@ Pilot LG dla Home Assistant, wykorzystujący istniejące encje, MQTT i `custom:b
 
 **1.1.2 — testowy układ mobilny:** dla ekranów do 599 px szerokości jeden dashboard wyświetla proporcjonalnie zmniejszoną wersję pilota. Powyżej 599 px pokazuje dokładnie zachowany układ komputerowy 1.1.1. Obie wersje mają te same akcje sterujące. Nie uznawać układu mobilnego za zatwierdzony bez testu na iPhonie.
 
-Plik `dashboard.yaml` zawiera bieżącą wersję projektu (**1.2.4**, test mobilny, tabletowy i funkcjonalny). Wersje sprzed 1.1.1 pozostają wyłącznie w standardowej historii commitów Git; stary osobny plik YAML usunięto z bieżącego drzewa repozytorium.
+Plik `dashboard.yaml` zawiera bieżącą wersję projektu (**1.2.5**, test mobilny, tabletowy i funkcjonalny). Wersje sprzed 1.1.1 pozostają wyłącznie w standardowej historii commitów Git; stary osobny plik YAML usunięto z bieżącego drzewa repozytorium.
 
 ## Zasada zamrożenia wyglądu
 
