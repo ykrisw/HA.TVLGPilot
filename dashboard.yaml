@@ -1,4 +1,4 @@
-# HA.TVLGPilot 1.2.8 — large desktop sizing, Windows and tablet centering, mobile browser bottom-row sizing.
+# HA.TVLGPilot 1.3.3 — test: desktop-mode iPad browser grid width; 1.2.8 baseline.
 views:
 - title: TV Control
   path: overview
@@ -1944,7 +1944,8 @@ views:
                       const card=this; requestAnimationFrame(()=>requestAnimationFrame(()=>{
                         let stack=card; while(stack && stack.localName!=='hui-vertical-stack-card') stack=stack.parentElement || stack.getRootNode()?.host;
                         if(!stack || stack._tvPilotMobileFit) return;
-                        const original={width:stack.style.width,maxWidth:stack.style.maxWidth,zoom:stack.style.zoom,position:stack.style.position,left:stack.style.left};
+                        const desktopIPad=navigator.platform==='MacIntel' && navigator.maxTouchPoints>1 && matchMedia('(pointer: coarse)').matches && /Version\/.*Safari/i.test(ua) && !/Home.?Assistant/i.test(ua);
+                        const original={width:desktopIPad?'465px':stack.style.width,maxWidth:desktopIPad?'none':stack.style.maxWidth,zoom:stack.style.zoom,position:stack.style.position,left:stack.style.left};
                         const viewport=window.visualViewport;
                         let pending=0;
                         const fit=()=>{
