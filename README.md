@@ -2,15 +2,15 @@
 
 Pilot LG dla Home Assistant, wykorzystujący istniejące encje, MQTT i `custom:button-card`.
 
-## Wersja stabilna i wzorcowa: 1.2.8
+## Wersja stabilna i wzorcowa: 1.3.3
 
-Zaakceptowana jako wersja bazowa 26 listopada 2026 r. Wygląd zaakceptowano w 12 z 13 testowanych konfiguracji przy powiększeniu przeglądarki 100%.
+Zaakceptowana 26 listopada 2026 r. Wszystkie 13 testowanych konfiguracji wyglądu zaliczone przy powiększeniu 100%. Poprawka iPada w Firefoxie nie spowodowała zaobserwowanych regresji w pozostałych 12 konfiguracjach.
 
 ## Pliki
 
 - `dashboard.yaml` — aktualna wersja na gałęzi main.
-- `archive/dashboard-1.2.8.yaml` — identyczna kopia wzorcowa.
-- `archive/dashboard-1.2.5.yaml` — poprzednia wersja wzorcowa.
+- `archive/dashboard-1.3.3.yaml` — identyczna kopia wzorcowa.
+- `archive/dashboard-1.2.8.yaml` — poprzednia wersja wzorcowa, kopia awaryjna.
 - `README.md` — dokumentacja.
 - `LICENSE` — licencja MIT.
 
@@ -21,7 +21,7 @@ Zaakceptowana jako wersja bazowa 26 listopada 2026 r. Wygląd zaakceptowano w 12
 | Dell OptiPlex 1440p | Linux Mint / Firefox | OK |
 | Dell OptiPlex 1440p | Windows 11 / Firefox | OK |
 | iPad Air M1 | Aplikacja HA | OK |
-| iPad Air M1 | Firefox | Znany błąd siatki |
+| iPad Air M1 | Firefox | OK (naprawiono) |
 | iPhone 16 Pro Max | Aplikacja HA | OK |
 | iPhone 16 Pro Max | Firefox | OK |
 | iPhone 16 Pro Max | Safari | OK |
@@ -32,11 +32,11 @@ Zaakceptowana jako wersja bazowa 26 listopada 2026 r. Wygląd zaakceptowano w 12
 | Mac mini M1 1440p | Firefox | OK |
 | Mac mini M1 1440p | Safari | OK |
 
-Znany wyjątek: iPad Firefox — przyciski w trzykolumnowych rzędach nachodzą na siebie, a środkowa kolumna jest przesunięta w lewo. POWER i dolny rząd są wyśrodkowane. Tryb komputerowy Firefoxa jest włączony; jego wpływ wymaga diagnostyki.
+Naprawiono iPad Firefox w trybie desktopowym: siatka miała bazową szerokość ok. 342 px zamiast 465 px, co powodowało nakładanie przycisków. W 1.3.3 szerokość 465 px jest ustawiana przed skalowaniem w tabletowym układzie przeglądarki dla MacIntel z wielodotykiem, pointer: coarse i identyfikatorem Version/Safari, z wykluczeniem aplikacji HA. Firefox w tym trybie nie ujawnia FxiOS. Warunek może objąć także Safari na iPadzie, którego nie przetestowano.
 
 iPad Safari: problem z otwarciem strony HA oraz PlexConfigControl; osobny temat, wygląd pilota nieprzetestowany.
 
-Wersje 1.2.9 i 1.3.0 nie rozwiązały problemu iPada. Wersja 1.3.1 DEBUG nie wyświetliła panelu w testowanej konfiguracji. Nie są wersjami wzorcowymi.
+Wersje 1.2.9–1.3.2 były eksperymentalne lub diagnostyczne; nie są wersjami wzorcowymi. Diagnostyka 1.3.2 potwierdziła przyczynę problemu. Finalna wersja 1.3.3 nie zawiera panelu diagnostycznego. Starsze pliki pozostają dostępne w historii Git.
 
 ## Informacje techniczne
 
@@ -49,7 +49,7 @@ Wersje 1.2.9 i 1.3.0 nie rozwiązały problemu iPada. Wersja 1.3.1 DEBUG nie wy�
 
 ## Zasady dalszego rozwoju
 
-- Wersja 1.2.8 jest punktem odniesienia. Kolejne poprawki dotyczące układu mają obejmować wyłącznie iPad Firefox, bez zmian pozostałych 12 konfiguracji.
+- Wersja 1.3.3 jest punktem odniesienia. Wszystkie 13 zaakceptowanych konfiguracji należy chronić przed regresjami; zakres kolejnych zmian wymaga zgody użytkownika.
 - Nie zmieniać proporcji, kolorów, ikon, animacji, encji, tematów MQTT ani akcji bez wyraźnego polecenia użytkownika.
 - Nowe wersje testować na osobnych gałęziach; nie zastępować wersji wzorcowej bez akceptacji.
 - Testy wyglądu nie stanowią pełnej weryfikacji funkcjonalności.
