@@ -1,4 +1,4 @@
-# HA.TVLGPilot 1.3.0 — iPad Firefox explicit three-column grid sizing.
+# HA.TVLGPilot 1.3.1 DEBUG — tablet Firefox diagnostic overlay.
 views:
 - title: TV Control
   path: overview
@@ -1938,6 +1938,25 @@ views:
             - animation: >-
                 [[[ const value=states['binary_sensor.lg_49nano816na_56ba_power']?.state;
                     if(!(/FxiOS|CriOS|EdgiOS|Version\/.*Safari/i.test(navigator.userAgent) && !/Home.?Assistant/i.test(navigator.userAgent))){ const card=this; requestAnimationFrame(()=>{ let node=card; while(node && node.localName!=='hui-vertical-stack-card') node=node.parentElement || node.getRootNode()?.host; if(!node) return; node.style.width='465px'; node.style.maxWidth='none'; if(node._tvPilotCenter) return; const stack=node; let offset=0; const center=()=>{ if(!stack.isConnected) { window.removeEventListener('resize',center); stack._tvPilotCenter=false; return; } const rect=stack.getBoundingClientRect(); if(!rect.width) return; const target=window.innerWidth/2; offset+=target-(rect.left+rect.width/2); stack.style.position='relative'; stack.style.left=`${offset}px`; }; stack._tvPilotCenter=true; window.addEventListener('resize',center); requestAnimationFrame(center); }); }
+                    if(/FxiOS/i.test(navigator.userAgent) && !/Home.?Assistant/i.test(navigator.userAgent)){
+                      const anchor=this;
+                      requestAnimationFrame(()=>requestAnimationFrame(()=>{
+                        let stack=anchor; while(stack && stack.localName!=='hui-vertical-stack-card') stack=stack.parentElement || stack.getRootNode()?.host;
+                        if(!stack || stack._tvPilotDebug) return;
+                        const panel=document.createElement('pre');
+                        panel.style.cssText='position:fixed;bottom:8px;left:8px;right:8px;max-height:48vh;overflow:auto;z-index:2147483647;background:#101820;color:#fff;border:1px solid #8ca3b8;border-radius:8px;padding:10px;margin:0;font:12px/1.35 monospace;white-space:pre-wrap;pointer-events:auto;';
+                        document.body.appendChild(panel); stack._tvPilotDebug=panel;
+                        const measure=(el)=>{const r=el.getBoundingClientRect(),s=getComputedStyle(el);return 'x='+r.x.toFixed(1)+' y='+r.y.toFixed(1)+' w='+r.width.toFixed(1)+' h='+r.height.toFixed(1)+' cssW='+s.width+' zoom='+s.zoom;};
+                        const report=()=>{
+                          if(!stack.isConnected){panel.remove();return;}
+                          const lines=['TV PILOT 1.3.1 DEBUG','UA: '+navigator.userAgent,'platform='+navigator.platform+' touch='+navigator.maxTouchPoints,'window='+innerWidth+'x'+innerHeight+' viewport='+visualViewport?.width+'x'+visualViewport?.height,'stack '+measure(stack),'fit executed='+Boolean(stack._tvPilotMobileFit)+' inline='+stack.getAttribute('style')];
+                          const seen=new Set();
+                          const walk=(root)=>{for(const el of root.querySelectorAll('*')){if(seen.has(el))continue;seen.add(el);if(el.localName==='hui-grid-card'){const sr=el.shadowRoot;lines.push('GRID '+measure(el)+' shadow='+Boolean(sr));if(sr){for(const g of sr.querySelectorAll('*')){const s=getComputedStyle(g);if(s.display==='grid'){lines.push('  '+g.localName+'#'+g.id+' '+measure(g)+' cols='+s.gridTemplateColumns+' gap='+s.columnGap+' inline='+g.getAttribute('style'));for(const child of Array.from(g.children).slice(0,3)){lines.push('    '+child.localName+' '+measure(child));}}}}}if(el.shadowRoot && el.localName!=='button-card')walk(el.shadowRoot);}};
+                          walk(stack);if(stack.shadowRoot)walk(stack.shadowRoot);panel.textContent=lines.join('\n');
+                        };
+                        setTimeout(report,600);setTimeout(report,1800);window.addEventListener('resize',report);
+                      }));
+                    }
                     const ua=navigator.userAgent;
                     const browser=/FxiOS|CriOS|EdgiOS|Version\/.*Safari/i.test(ua) && !/Home.?Assistant/i.test(ua);
                     if(browser){
