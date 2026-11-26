@@ -1,4 +1,4 @@
-# HA.TVLGPilot 1.2.8 — large desktop sizing, Windows and tablet centering, mobile browser bottom-row sizing.
+# HA.TVLGPilot 1.2.9 — iPad Firefox grid width correction only.
 views:
 - title: TV Control
   path: overview
@@ -1951,6 +1951,7 @@ views:
                           pending=0;
                           if(!stack.isConnected){window.removeEventListener('resize',schedule); viewport?.removeEventListener('resize',schedule); return;}
                           Object.assign(stack.style,original);
+                          if(/FxiOS/i.test(ua) && (/iPad/i.test(ua) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1))){ stack.style.width='465px'; stack.style.maxWidth='none'; }
                           const rect=stack.getBoundingClientRect();
                           if(!rect.width || !rect.height) return;
                           let top=rect.top,bottom=viewport ? viewport.offsetTop+viewport.height : window.innerHeight;
